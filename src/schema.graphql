@@ -1,0 +1,42 @@
+type Query {
+  description: String!
+  header: String!
+  script(fragments: [Fragment]): [String!]!
+}
+
+input Fragment{
+  type: FragmentType!
+  name: String!  #url
+  args: String
+  value: String  #body
+  target: Target
+}
+
+enum FragmentType {
+  ArchPackage
+  YayPackage
+  BrewPackage
+  CaskPackage
+  NpmPackage
+  VsCodeExtension
+  HaskellStackInstall
+  BashFunction
+  FishFunction
+  ZshFunction
+  GitGlobal
+  GitClone
+  Curl
+  Printf
+}
+
+input Target {
+  operator: TargetOperator!
+  path: String!
+}
+
+enum TargetOperator {
+  None
+  Pipe
+  RedirectOutput
+  RedirectOutputAppend
+}
