@@ -1,6 +1,14 @@
 import { GraphQLServer } from '../node_modules/graphql-yoga'
 import Query from './resolvers/query'
 
+// Wire and Start
+const server = new GraphQLServer({
+  typeDefs: './src/schemas/schema.graphql',
+  resolvers: { Query }
+})
+server.start(() => console.log(`Server is running on http://localhost:4000`))
+
+
 
 // ? Can save custom "recipes" for later under "TBD" package type. Like Install shell as default 
 // may be too specific for this area and defined by prior query that creates input
@@ -19,11 +27,3 @@ import Query from './resolvers/query'
 // ? TODO: see if i can reduce to name instead of these repeated function calls
 // call resolver function dynamically
 // load resolvers by folder dynamically
-
-// Wire and Start
-const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
-  resolvers: { Query }
-})
-server.start(() => console.log(`Server is running on http://localhost:4000`))
-
