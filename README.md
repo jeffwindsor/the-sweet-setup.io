@@ -57,5 +57,5 @@ server.start(() => console.log(`Server is running on http://localhost:4000`));
 |---|---|
 |`graphql-yoga` |  [github](https://github.com/prisma/graphql-yoga)|
 |`esm` | [github](https://github.com/standard-things/esm)|
-|`jest` | [github](https://github.com/standard-things/esm)|
+|`jest` | [github](https://github.com/facebook/jest)|
 |`gitignore.io` |[gitignore.io](https://www.gitignore.io/)|
