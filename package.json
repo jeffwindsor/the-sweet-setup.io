@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "esm": "^3.0.84",
-    "graphql-yoga": "^1.16.2"
+    "graphql-yoga": "^1.16.2",
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "jest": "^23.6.0"
