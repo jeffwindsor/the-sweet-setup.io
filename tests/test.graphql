@@ -2,15 +2,15 @@
   description,
   header,
   script(fragments: [
-    {type: Arch, name:"arch"},
-    {type: AUR, name:"aur"},
-    {type: Brew, name:"brew"},
-    {type: Cask, name:"cask"},
-    {type: Npm, name:"npm"},
-    {type: VsCodeExt, name:"vsc"},
-    {type: HaskellStack, name:"stack"},
-    {type: BashFunction, name:"myfunction", value:"somestuff"},
-    {type: FishFunction, name:"myfunction", value:"somestuff"},
+    {type: ArchPackage, name:"arch"},
+    {type: YayPackage, name:"aur"},
+    {type: BrewPackage, name:"brew"},
+    {type: CaskPackage, name:"cask"},
+    {type: NpmPackage, name:"npm"},
+    {type: VsCodeExtension, name:"vsc"},
+    {type: HaskellStackInstall, name:"stack"},
+    {type: BashFunction, name:"myfunction", value:"somestuff", target:{operator:RedirectOutputAppend, path:"/user/home/.bashrc"}},
+    {type: FishFunction, name:"myfunction", value:"somestuff", target:{operator:RedirectOutput, path:"/user/home/.config/fish/functions"}},
     {type: GitGlobal, name:"alias ga", value:"git action"},
     {type: GitGlobal, name:"user.name", value:"yahoo serious"},
     {type: GitClone, name:"http://url.git"},
@@ -19,44 +19,8 @@
     {type: GitClone, name:"http://url-args.git", args:"--depth=1"},
     {type: Curl, name:"http://url.git"},
     {type: Curl, name:"http://url-args.git", args:"-L"},
-    {type: Curl, name:"http://url-args-target.git", args:"-L", target:{operator:Pipe, name:"sh"}}
-    {type: Curl, name:"http://url-target.git", target:{operator:Pipe, name:"sh"}}
+    {type: Curl, name:"http://url-args-target.git", args:"-L", target:{operator:Pipe, path:"sh"}},
+    {type: Curl, name:"http://url-target.git", target:{operator:Pipe, path:"sh"}},
+    {type: Section, name:"Test Section"}
   ])
 }
-
-
-# {
-#   "data": {
-#     "description": "The Sweet Setup's Queryable Graph",
-#     "header": "#!/bin/sh",
-#     "install": [
-#       "sudo pacman -S --noconfirm arch",
-#       "yay -S --noconfirm aur",
-#       "brew install brew",
-#       "brew cask install cask",
-#       "npm install npm",
-#       "code --install-extension vsc",
-#       "stack install stack"
-#     ],
-#     "addToShell": [
-#       "function myfunction(){ somestuff }",
-#       "function myfunction\nsomestuff\nend"
-#     ],
-#     "addToGitGlobal": [
-#       "git config --global alias ga \"git action\"",
-#       "git config --global user.name \"yahoo serious\""
-#     ],
-#     "gitClone": [
-#       "git clone http://url.git",
-#       "git clone http://url-target.git \"/user/home/two-x\"",
-#       "git clone http://url-target-args.git \"/user/home/two-x\" --depth=1",
-#       "git clone http://url-args.git --depth=1"
-#     ],
-#     "curl": [
-#       "curl http://url.git",
-#       "curl -L http://url-args.git",
-#       "curl -L http://url-args-target.git | sh",
-#       "curl http://url-target.git | sh"
-#     ]
-#   }
-# }

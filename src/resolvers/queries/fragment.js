@@ -2,6 +2,7 @@ import gitCloneResolver from './gitClone'
 import curlResolver from './curl'
 import bashFunctionResolver from './bashfunction'
 import fishFunctionResolver from './fishfunction'
+import sectionResolver from './section'
 
 // ? make output language specific
 //Parses fragment object by type into sh sting
@@ -19,7 +20,7 @@ export default function(o){
    case 'GitGlobal': return `git config --global ${o.name} "${o.value}"`;
    case 'GitClone': return gitCloneResolver(o);
    case 'Curl': return curlResolver(o);
-   //case 'Printf': return outputResolver
+   case 'Section': return sectionResolver(o);
    default: return "";
  }
 }

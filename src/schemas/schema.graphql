@@ -26,7 +26,7 @@ enum FragmentType {
   GitGlobal
   GitClone
   Curl
-  Printf
+  Section
 }
 
 input Target {

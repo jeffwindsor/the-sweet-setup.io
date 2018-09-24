@@ -18,9 +18,6 @@ server.start(() => console.log(`Server is running on http://localhost:4000`))
 
 //AST FOR FUNCTIONS needs to be more complete: loops, multi args etc
 
-
-// ? TODO: change to string interpolation
-// ? TODO function wirte out to path
 // ? output pretty info
 // ? args to [String] so we can cycle over them
 // ? Custom package type for things like haskell stack or haskell_ide_server that have multiple custom steps
