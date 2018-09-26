@@ -4,10 +4,9 @@ const _flatMap = require('lodash/flatMap');
 const _filter = require('lodash/filter');
 
 function script(fs){ 
-  let expandedfs = _flatMap(fs, expand);
-  return expandedfs.map(scriptFragment);
+  return _flatMap(fs, expand).map(generateSH);
 }
-function scriptFragment(f){
+function generateSH(f){
   switch (f.type) {
     case 'Info':                 return `echo -e '==> ${f.name}'`;
     case 'Variable':             return joinEqualed(f.name, f.value)
@@ -25,7 +24,6 @@ function scriptFragment(f){
     default: return "";
  }
 }
-
 function joinSpace(...fragments)     { return joinNotNull(fragments, ' '); }
 function joinNewLine(...fragments)  { return joinNotNull(fragments, '\n'); }
 function joinEqualed(...fragments)    { return joinNotNull(fragments, '='); }
@@ -43,6 +41,6 @@ function targetOperatorResolver(operator){
   }
 }
 
-export {script, scriptFragment}
+export {script}
 
 //     {type: WriteToFile, name:":set prompt \"\\ESC[38;5;242m\\STX%s\n\\ESC[38;5;161m❯\\ESC[1;34mλ= \\ESC[0m\"", target:{operator:RedirectOutput, path:"~/.ghci"}}

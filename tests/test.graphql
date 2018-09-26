@@ -2,6 +2,8 @@
   description,
   header,
   script(fragments: [
+    {type: Info, name:"Test Section"},
+    {type: Variable, name:"name", value:"value"},
     {type: ArchPackage, name:"arch"},
     {type: YayPackage, name:"aur"},
     {type: BrewPackage, name:"brew"},
@@ -21,6 +23,9 @@
     {type: Curl, name:"http://url-args.git", args:"-L"},
     {type: Curl, name:"http://url-args-target.git", args:"-L", target:{operator:Pipe, path:"sh"}},
     {type: Curl, name:"http://url-target.git", target:{operator:Pipe, path:"sh"}},
-    {type: Section, name:"Test Section"}
+    {type: WriteToFile, name:"", value:":set prompt '\\ESC[38;5;242m\\STX%s\n\\ESC[38;5;161m❯\\ESC[1;34mλ= \\ESC[0m'", target:{operator:RedirectOutput, path:"~/.ghci"}},
+    {type: Script, name:"GitAliases"},
+    {type: Script, name:"BashGitAliases", target:{operator:RedirectOutputAppend, path:"/user/home/.bashrc"}},
+    {type: Script, name:"FishGitAliases" target:{operator:RedirectOutput, path:"/user/home/.config/fish/functions"} }
   ])
 }
