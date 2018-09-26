@@ -1,13 +1,7 @@
-import gitCloneResolver from './gitClone'
-import curlResolver from './curl'
-import bashFunctionResolver from './bashfunction'
-import fishFunctionResolver from './fishfunction'
-import sectionResolver from './section'
 var _join = require('lodash/join');
 var _flatMap = require('lodash/flatMap');
+var _filter = require('lodash/filter');
 
-// ? make output language specific
-//Parses fragment object by type into shell language
 function script(fs){
   return _flatMap(fs, expandFragment)
              .map(scriptFragment);
@@ -18,28 +12,42 @@ function expandFragment(f){
 }
 function scriptFragment(f){
   switch (f.type) {
-   case 'ArchPackage': return spaced('sudo pacman','-S --noconfirm', f.name);
-   case 'YayPackage': return spaced('yay', '-S --noconfirm', f.name);
-   case 'BrewPackage': return spaced('brew install', f.name);
-   case 'CaskPackage': return spaced('brew cask install', f.name);
-   case 'NpmPackage': return spaced('npm install', f.name);
-   case 'VsCodeExtension': return spaced('code', '--install-extension', f.name);
-   case 'HaskellStackInstall': return spaced('stack install', f.name);
-   case 'BashFunction': return bashFunctionResolver(f);
-   case 'FishFunction': return fishFunctionResolver(f);
-   case 'GitGlobal': return spaced('git config', '--global', f.name, `'${f.value}'`);
-   case 'GitClone': return gitCloneResolver(f);
-   case 'Curl': return curlResolver(f);
-   case 'Section': return sectionResolver(f);
-   default: return "";
+    case 'Info':                 return `echo -e '==> ${f.name}'`;
+    case 'Variable':             return joinEqualed(f.name, f.value)
+    case 'ArchPackage':          return joinSpace('sudo pacman','-S --noconfirm', f.name);
+    case 'YayPackage':           return joinSpace('yay', '-S --noconfirm', f.name);
+    case 'BrewPackage':          return joinSpace('brew install', f.name);
+    case 'CaskPackage':          return joinSpace('brew cask install', f.name);
+    case 'NpmPackage':           return joinSpace('npm install', f.name);
+    case 'VsCodeExtension':      return joinSpace('code', '--install-extension', f.name);
+    case 'HaskellStackInstall':  return joinSpace('stack install', f.name);
+    case 'WriteToFile':          return joinSpace(f.value, getTargetOperator(f.target), getTargetPath(f.target));
+    case 'GitGlobal':            return joinSpace('git config', '--global', f.name, `'${f.value}'`);
+    case 'GitClone':             return joinSpace('git clone', f.name, getTargetPath(f.target), f.args);
+    case 'Curl':                 return joinSpace('curl', f.args, f.name, getTargetOperator(f.target), getTargetPath(f.target));
+    case 'BashFunction':         return joinNewLine(`echo -e "function ${f.name}(){`, f.value, '}');
+    case 'FishFunction':         return joinNewLine(`echo -e "function ${f.name}`, f.value, 'end');
+    default: return "";
  }
 }
 
-function spaced(...fragments){
-  return _join(fragments, ' ');
-}
-function equaled(...fragments){
-  return _join(fragments, ' ');
+function joinSpace(...fragments)     { return joinNotNull(fragments, ' '); }
+function joinNewLine(...fragments)  { return joinNotNull(fragments, '\n'); }
+function joinEqualed(...fragments)    { return joinNotNull(fragments, '='); }
+function joinNotNull(xs, sep)     { return _join(_filter(xs, (f) => f != null), sep); }
+
+function getTargetPath(target)    { return (target == null) ? null : target.path; }
+function getTargetOperator(target){ return (target == null) ? null : targetOperatorResolver(target.operator); }
+function targetOperatorResolver(operator){
+  switch (operator) {
+    case "None" : return ""
+    case "Pipe": return "|"
+    case "RedirectOutput": return ">"
+    case "RedirectOutputAppend": return ">>"
+    default: return "???"
+  }
 }
 
 export {script, scriptFragment}
+
+//     {type: WriteToFile, name:":set prompt \"\\ESC[38;5;242m\\STX%s\n\\ESC[38;5;161m❯\\ESC[1;34mλ= \\ESC[0m\"", target:{operator:RedirectOutput, path:"~/.ghci"}}
