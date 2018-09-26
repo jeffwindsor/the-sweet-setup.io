@@ -1,12 +1,12 @@
-import { expand } from './expand'; 
+import { traverse } from './traverse';
 const _join = require('lodash/join');
 const _flatMap = require('lodash/flatMap');
 const _filter = require('lodash/filter');
 
-function script(fs){ 
-  return _flatMap(fs, expand).map(generateSH);
+function script(fragments){
+  return _flatMap(fragments, traverse).map(generate);
 }
-function generateSH(f){
+function generate(f){
   switch (f.type) {
     case 'Info':                 return `echo -e '==> ${f.name}'`;
     case 'Variable':             return joinEqualed(f.name, f.value)
@@ -24,9 +24,8 @@ function generateSH(f){
     default: return "";
  }
 }
-function joinSpace(...fragments)     { return joinNotNull(fragments, ' '); }
-function joinNewLine(...fragments)  { return joinNotNull(fragments, '\n'); }
-function joinEqualed(...fragments)    { return joinNotNull(fragments, '='); }
+function joinSpace(...fragments)  { return joinNotNull(fragments, ' '); }
+function joinEqualed(...fragments){ return joinNotNull(fragments, '='); }
 function joinNotNull(xs, sep)     { return _join(_filter(xs, (f) => f != null), sep); }
 
 function getTargetPath(target)    { return (target == null) ? null : target.path; }
@@ -42,5 +41,3 @@ function targetOperatorResolver(operator){
 }
 
 export {script}
-
-//     {type: WriteToFile, name:":set prompt \"\\ESC[38;5;242m\\STX%s\n\\ESC[38;5;161m❯\\ESC[1;34mλ= \\ESC[0m\"", target:{operator:RedirectOutput, path:"~/.ghci"}}
