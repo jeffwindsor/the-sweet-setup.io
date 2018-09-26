@@ -1,7 +1,7 @@
-import fragmentResolver from './queries/fragment'
+import { script } from './queries/script'
 
 export default {
     description: () => `The Sweet Setup's Queryable Graph`,
     header: () => "#!/bin/sh",
-    script: (obj, { fragments }, context, info) => fragments.map(o => fragmentResolver(o))
+    script: (obj, { fragments }, context, info) => script(fragments)
 }
