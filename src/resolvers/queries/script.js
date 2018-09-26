@@ -1,14 +1,10 @@
-var _join = require('lodash/join');
-var _flatMap = require('lodash/flatMap');
-var _filter = require('lodash/filter');
+import { expand } from './expand'; 
+const _join = require('lodash/join');
+const _flatMap = require('lodash/flatMap');
+const _filter = require('lodash/filter');
 
-function script(fs){
-  return _flatMap(fs, expandFragment)
-             .map(scriptFragment);
-}
-
-function expandFragment(f){
-  return f;
+function script(fs){ 
+  return _flatMap(fs, expand).map(scriptFragment);
 }
 function scriptFragment(f){
   switch (f.type) {
@@ -21,12 +17,10 @@ function scriptFragment(f){
     case 'NpmPackage':           return joinSpace('npm install', f.name);
     case 'VsCodeExtension':      return joinSpace('code', '--install-extension', f.name);
     case 'HaskellStackInstall':  return joinSpace('stack install', f.name);
-    case 'WriteToFile':          return joinSpace(f.value, getTargetOperator(f.target), getTargetPath(f.target));
+    case 'WriteToFile':          return joinSpace('echo -e',`'${f.value}'`, getTargetOperator(f.target), getTargetPath(f.target));
     case 'GitGlobal':            return joinSpace('git config', '--global', f.name, `'${f.value}'`);
     case 'GitClone':             return joinSpace('git clone', f.name, getTargetPath(f.target), f.args);
     case 'Curl':                 return joinSpace('curl', f.args, f.name, getTargetOperator(f.target), getTargetPath(f.target));
-    case 'BashFunction':         return joinNewLine(`echo -e "function ${f.name}(){`, f.value, '}');
-    case 'FishFunction':         return joinNewLine(`echo -e "function ${f.name}`, f.value, 'end');
     default: return "";
  }
 }
