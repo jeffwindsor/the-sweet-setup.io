@@ -1,0 +1,15 @@
+[
+  {"type":"GitGlobal", "name":"s", "value":"status -sb --ignore-submodules"},
+  {"type":"GitGlobal", "name":"d", "value":"diff"},
+  {"type":"GitGlobal", "name":"aa", "value":"add --all"},
+  {"type":"GitGlobal", "name":"cm", "value":"commit -m"},
+  {"type":"GitGlobal", "name":"cma", "value":"commit -a -m"},
+  {"type":"GitGlobal", "name":"b", "value":"branch"},
+  {"type":"GitGlobal", "name":"co", "value":"checkout"},
+  {"type":"GitGlobal", "name":"cob", "value":"checkout -b"},
+  {"type":"GitGlobal", "name":"pff", "value":"pull --ff-only"},
+  {"type":"GitGlobal", "name":"mff", "value":"merge --ff-only"},
+  {"type":"GitGlobal", "name":"size", "value":"count-objects -vH"},
+  {"type":"GitGlobal", "name":"remove", "value":"rm -r --cached ."},
+  {"type":"GitGlobal", "name":"hist", "value":"log --graph --max-count=100 --pretty=format:\\\"%C(green)%h%C(reset) | %C(yellow)%d%C(reset) %s %C(cyan)%an : %C(dim)%cr%C(reset)\\\" --abbrev-commit"}
+]

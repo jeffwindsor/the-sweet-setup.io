@@ -4,7 +4,8 @@ const _flatMap = require('lodash/flatMap');
 const _filter = require('lodash/filter');
 
 function script(fs){ 
-  return _flatMap(fs, expand).map(scriptFragment);
+  let expandedfs = _flatMap(fs, expand);
+  return expandedfs.map(scriptFragment);
 }
 function scriptFragment(f){
   switch (f.type) {

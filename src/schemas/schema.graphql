@@ -13,7 +13,7 @@ input Fragment{
 }
 
 enum FragmentType {
-  ScriptPackage
+  Script
   ArchPackage
   YayPackage
   BrewPackage
