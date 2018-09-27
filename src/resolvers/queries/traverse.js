@@ -3,7 +3,6 @@ const _flatMap = require('lodash/flatMap');
 
 // Function to expand, convert, modify and populate new fragments based on input
 function traverse(fragment) {
-  console.log(fragment);
   switch (fragment.type) {
     case 'BashFunction':
       // Add function syntax and convert to WriteToFile type

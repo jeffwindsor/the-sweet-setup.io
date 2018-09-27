@@ -3,11 +3,16 @@ const _join = require('lodash/join');
 const _flatMap = require('lodash/flatMap');
 const _filter = require('lodash/filter');
 
-function script(fragments){
-  return _flatMap(fragments, traverse).map(generate);
+function script(shell, fragments){
+  let fs = [scriptShell(shell)].concat(fragments)
+  return _flatMap(fs, traverse).map(generate);
+}
+function scriptShell(shell){
+  return {type:'Comment', name:'!/bin/sh'}
 }
 function generate(f){
   switch (f.type) {
+    case 'Comment':              return `#${f.name}`;
     case 'Info':                 return `echo -e '==> ${f.name}'`;
     case 'Variable':             return joinEqualed(f.name, f.value)
     case 'ArchPackage':          return joinSpace('sudo pacman','-S --noconfirm', f.name);

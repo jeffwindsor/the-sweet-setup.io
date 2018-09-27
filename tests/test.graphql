@@ -1,6 +1,5 @@
 {
   description,
-  header,
   script(fragments: [
     {type: Info, name:"Test Section"},
     {type: Variable, name:"name", value:"value"},

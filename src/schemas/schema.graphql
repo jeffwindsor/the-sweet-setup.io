@@ -1,6 +1,5 @@
 type Query {
   description: String!
-  header: String!
   script(fragments: [Fragment]): [String!]!
 }
 
@@ -28,6 +27,7 @@ enum FragmentType {
   GitClone
   Curl
   Info
+  Comment
   Variable
   WriteToFile
 }
