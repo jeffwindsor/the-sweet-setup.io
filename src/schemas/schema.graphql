@@ -1,17 +1,26 @@
 type Query {
   description: String!
-  script(fragments: [Fragment]): [String!]!
+  script(os:OperatingSystem, language: Language, tokens: [Token]): [String!]!
 }
 
-input Fragment{
-  type: FragmentType!
+enum Language{
+  Shell
+}
+
+enum OperatingSystem{
+  MacOs
+  Manjaro
+}
+
+input Token{
+  type: TokenType!
   name: String!  #url
   args: String
   value: String  #body
   target: Target
 }
 
-enum FragmentType {
+enum TokenType {
   List
   ArchPackage
   YayPackage
