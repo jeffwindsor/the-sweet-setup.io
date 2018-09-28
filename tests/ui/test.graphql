@@ -23,7 +23,7 @@
     {type: Curl, name:"http://url-args-target.git", args:"-L", target:{operator:Pipe, path:"sh"}},
     {type: Curl, name:"http://url-target.git", target:{operator:Pipe, path:"sh"}},
     {type: WriteToFile, name:"", value:":set prompt '\\ESC[38;5;242m\\STX%s\n\\ESC[38;5;161m❯\\ESC[1;34mλ= \\ESC[0m'", target:{operator:RedirectOutput, path:"~/.ghci"}},
-    {type: Script, name:"GitAliases"},
+    {type: List, name:"GitAliases"},
     {type: List, name:"BashGitAliases", target:{operator:RedirectOutputAppend, path:"/user/home/.bash_git_aliases"}},
     {type: List, name:"FishGitAliases" target:{operator:RedirectOutput, path:"/user/home/.fish_git_aliases"} }
   ])

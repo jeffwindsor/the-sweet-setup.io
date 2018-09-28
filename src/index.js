@@ -1,16 +1,21 @@
 import { GraphQLServer } from '../node_modules/graphql-yoga'
-import Query from './resolvers/query'
+import { script } from './resolvers/script'
 
 // Wire and Start
 const server = new GraphQLServer({
   typeDefs: './src/schemas/schema.graphql',
-  resolvers: { Query }
+  resolvers: {
+    query: {
+      description: () => `The Sweet Setup's Queryable Graph`,
+      script: (obj, { os, language, tokens }, context, info) => script(os, language, tokens)
+    }
+  }
 })
 server.start(() => console.log(`Server is running on http://localhost:4000`))
 
 
 
-// ? Can save custom "recipes" for later under "TBD" package type. Like Install shell as default 
+// ? Can save custom "recipes" for later under "TBD" package type. Like Install shell as default
 // may be too specific for this area and defined by prior query that creates input
 //    package manager update
 //    prompts: fish, bash git
