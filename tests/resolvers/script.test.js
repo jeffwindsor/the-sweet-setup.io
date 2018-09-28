@@ -1,6 +1,6 @@
-import { script } from '../../src/resolvers'
+import { script } from '../../src/resolvers/script'
 
-test('scripting a ', () => {
+test('scripting a comment', () => {
   let actual = script('MacOs','Shell',[{type:'Comment', name:'name', value:'value'}])
-  expect(actual).toBe('#value');
+  expect(actual).toBe(['#value']);
 });

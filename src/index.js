@@ -1,11 +1,11 @@
 import { GraphQLServer } from '../node_modules/graphql-yoga'
-import { script } from './resolvers/script'
+import { script } from './resolvers/script';
 
 // Wire and Start
 const server = new GraphQLServer({
   typeDefs: './src/schemas/schema.graphql',
   resolvers: {
-    query: {
+    Query: {
       description: () => `The Sweet Setup's Queryable Graph`,
       script: (obj, { os, language, tokens }, context, info) => script(os, language, tokens)
     }

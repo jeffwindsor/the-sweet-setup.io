@@ -1,10 +1,15 @@
-import { traverse } from './scripts/traverse'
-import { generate } from './scripts/generate';
+import { traverse } from './traverse';
+import { generate } from './generate';
+import { tokenizeShellHeader } from './tokenize'
 const _flatMap = require('lodash/flatMap');
 
-function script(os, language, tokens){
-  let nodes = [{type:'ShellHeader', name:os, value:language}].concat(tokens);
-  return _flatMap(nodes, traverse).map( token => generate(language,token));
+export function script(os, language, tokens){
+  //Add Header to list
+  let header = tokenizeShellHeader(os, language);
+  let requestList = [header].concat(tokens);
+  //Traverse and Transform List
+  let scriptList  = _flatMap(requestList, token => traverse(os, language, token));
+  //Generate Script
+  return scriptList.map( token => generate(os, language, token) );
 }
 
-export { script }
