@@ -1,10 +1,10 @@
 const _join = require('lodash/join');
 const _filter = require('lodash/filter');
 
-function generate(language, token){
+function generate(os, language, token){
   switch(language){
     case 'Shell': return generateShell(token);
-    default: `language ${language} unknown`;
+    default:      return `language ${language} unknown`;
   }
 }
 
