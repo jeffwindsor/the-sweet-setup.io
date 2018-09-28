@@ -7,7 +7,7 @@ const server = new GraphQLServer({
   resolvers: {
     Query: {
       description: () => `The Sweet Setup's Queryable Graph`,
-      script: (obj, { os, language, tokens }, context, info) => script(os, language, tokens)
+      script: (obj, {addHeader, os, language, requests }, context, info) => script(addHeader, os, language, requests)
     }
   }
 })

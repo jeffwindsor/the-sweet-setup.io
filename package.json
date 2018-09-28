@@ -10,7 +10,7 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.js": "babel-jest"
     }
   },
   "keywords": [],

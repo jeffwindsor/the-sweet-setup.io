@@ -3,12 +3,12 @@ const _filter = require('lodash/filter');
 
 function generate(os, language, token){
   switch(language){
-    case 'Shell': return generateShell(token);
+    case 'Shell': return generateShell(os, token);
     default:      return `language ${language} unknown`;
   }
 }
 
-function generateShell(token){
+function generateShell(os, token){
   switch (token.type) {
     case 'Comment':              return `#${token.name}`;
     case 'Info':                 return `echo -e '==> ${token.name}'`;
@@ -24,7 +24,7 @@ function generateShell(token){
     case 'GitGlobal':            return joinSpace('git config', '--global', token.name, `'${token.value}'`);
     case 'GitClone':             return joinSpace('git clone', token.name, getTargetPath(token.target), token.args);
     case 'Curl':                 return joinSpace('curl', token.args, token.name, getTargetOperator(token.target), getTargetPath(token.target));
-    default: return "";
+    default: return "# ? TYPE UNKNOWN " + token;
  }
 }
 

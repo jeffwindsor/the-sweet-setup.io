@@ -1,27 +1,38 @@
 type Query {
   description: String!
-  script(os:OperatingSystem, language: Language, tokens: [Token]): [String!]!
+  script(header: Boolean, os:OperatingSystem, language: Language, requests: [ScriptRequest]): [String!]!
 }
 
 enum Language{
   Shell
+  #Bash
+  #Fish
 }
 
 enum OperatingSystem{
   MacOs
-  Manjaro
+  #Manjaro
+  #Ubuntu
+  #Windows
 }
 
-input Token{
-  type: TokenType!
+input ScriptRequest{
+  type: ScriptRequestType!
   name: String!  #url
   args: String
   value: String  #body
   target: Target
 }
 
-enum TokenType {
+enum ScriptRequestType {
+  # expands to other types
   List
+  # expands to Write to File
+  BashFunction
+  FishFunction
+  #ZshFunction
+
+  # both request and token
   ArchPackage
   YayPackage
   BrewPackage
@@ -29,9 +40,6 @@ enum TokenType {
   NpmPackage
   VsCodeExtension
   HaskellStackInstall
-  BashFunction
-  FishFunction
-  ZshFunction
   GitGlobal
   GitClone
   Curl
