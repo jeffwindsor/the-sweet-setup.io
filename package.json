@@ -8,11 +8,6 @@
     "dev": "node bin/dev",
     "test": "jest"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.js": "babel-jest"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
