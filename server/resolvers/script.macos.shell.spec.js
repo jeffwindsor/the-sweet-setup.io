@@ -1,13 +1,4 @@
 import { script } from './script'
-
-function run(request, expected, addHeader=false){
-  expect(executeScript(request, addHeader)).toEqual(expected);
-}
-
-function executeScript(request, addHeader){
-  return script(addHeader,'MacOs','Shell', request);
-}
-
 describe('Given a request for MacOS and SH when scripted', () => {
 
   test('Comment', () => run(
@@ -123,3 +114,11 @@ describe('Given a transformable request when scripted', () => {
   test('FunctionPackageAsFish returns multiple lines', () => runPackage(
     [{type: "FunctionPackageAsFish", name:"gitaliases", target:{operator:"RedirectOutputAppend", path:"/user/home/.fish_git_aliases"} }]));
 });
+
+function run(request, expected, addHeader=false){
+  expect(executeScript(request, addHeader)).toEqual(expected);
+}
+
+function executeScript(request, addHeader){
+  return script(addHeader,'MacOs','Shell', request);
+}

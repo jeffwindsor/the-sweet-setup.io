@@ -19,8 +19,8 @@ enum OperatingSystem{
 input ScriptRequest{
   type: ScriptRequestType!
   name: String!  #url
-  args: String
   value: String  #body
+  args: String
   target: Target
 }
 

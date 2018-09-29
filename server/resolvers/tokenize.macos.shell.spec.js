@@ -10,7 +10,12 @@ function runPackage(request, type){
 
 describe('Given a transformable request for MacOS and SH when scripted', () => {
   //ScriptPackage
- 
+
+    test('Header are tokenized properly', () => run(
+      {type: "Header",  os:'MacOs', language:'Shell'},
+      {type: "Comment", name:"!/bin/sh"}
+      ));
+
     test('BashFunctions are tokenized properly', () => run(
       {type: "BashFunction", name:"myfunction", value:"somestuff", target:{operator:'RedirectOutputAppend', path:"/user/home/.bashrc"}},
       {type: "WriteToFile", name:"myfunction", value:"function myfunction(){\nsomestuff\n}", target:{operator:'RedirectOutputAppend', path:"/user/home/.bashrc"}}

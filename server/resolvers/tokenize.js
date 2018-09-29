@@ -57,7 +57,7 @@ function addTarget(target, tokens){
   return tokens;
 }
 function loadFileTokens(fileName){
-  return require(`../../data/lists/${fileName.toLowerCase()}`);
+  return require(`../../data/${fileName.toLowerCase()}`);
 }
 function newToken(type, name, value, target) {
   return { type: type, name: name, value: value, target: copyTarget(target) };
