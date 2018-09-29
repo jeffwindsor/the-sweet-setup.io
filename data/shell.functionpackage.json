@@ -1,0 +1,12 @@
+[
+  {"name":"l", "value":"builtin ls -CF"},
+  {"name":"ll", "value":"builtin ls -lhA"},
+  {"name":"lll", "value":"builtin ls -lhFA | less"},
+  {"name":"o", "value":"builtin open ."},
+  {"name":"c", "value":"code ."},
+  {"name":"cd..", "value":"cd .."},
+  {"name":"...", "value":"cd ../../"},
+  {"name":"....", "value":"cd ../../../"},
+  {"name":".....", "value":"cd ../../../../"},
+  {"name":"evalinsubs", "value":"for d in (ls -d */ | cut -f1 -d'/')\n    cd $d\n    echo '==> $d'\n    eval ${@}\n    cd ..\n  end"}
+]
