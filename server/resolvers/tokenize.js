@@ -1,16 +1,18 @@
 const _join = require('lodash/join');
 const _flatMap = require('lodash/flatMap');
-const list_directory = "../../data/lists"
 
 export function tokenize(request) {
   switch (request.type) {
-    case 'Header':       return tokenizeShellHeader(request);   //Special type not implemented for outside use
-    case 'BashFunction': return tokenizeBashFunction(request);
-    case 'FishFunction': return tokenizeFishFunction(request);
-    case 'List':         return tokenizeList(request);
-    default:             return request;
+    case 'Header':                return tokenizeShellHeader(request);   //Special type not implemented for outside use
+    case 'BashFunction':          return tokenizeBashFunction(request);
+    case 'FishFunction':          return tokenizeFishFunction(request);
+    case 'FunctionPackageAsBash': return tokenizeFunctionPackage('BashFunction', request.target, request.name + '.functionpackage.json');
+    case 'FunctionPackageAsFish': return tokenizeFunctionPackage('FishFunction', request.target, request.name + '.functionpackage.json');
+    case 'GitAliasPackage':       return tokenizeFunctionPackage('GitGlobal', request.target, request.name + '.gitglobal.json');
+    case 'ScriptPackage':         return tokenizeScriptPackage(request.name);
+    default:                      return request;
   }
-}
+} 
 
 function tokenizeShellHeader(request){
   return {type:'Comment', name:resolveShellHeader(request.os, request.language)}
@@ -35,17 +37,28 @@ function tokenizeFishFunction(token){
   let fish = joinNewLine(`function ${token.name}`, token.value, `end`);
   return newToken('WriteToFile', token.name, fish, token.target);
 }
-
-function tokenizeList(token){
+function tokenizeFunctionPackage(type, target, packageName){
+  return addTarget(target, setType(type, tokenizeScriptPackage(packageName)));
+}
+function tokenizeScriptPackage(packageName){
   // Lookup tokens and transfer target if it exists
-  let tokens = require(`${list_directory}/${token.name.toLowerCase()}.json`);
-  if(tokens.target != null){
-    tokens.forEach(f => f.target = target);
-  }
+  let tokens = loadFileTokens(packageName);
   // Traverse new tokens prior to returning
   return _flatMap(tokens, tokenize);
 }
-
+function setType(type, tokens){
+  tokens.forEach(t => t.type = type);
+  return tokens;
+}
+function addTarget(target, tokens){
+  if(target != null){
+    tokens.forEach(t => t.target = target);
+  }
+  return tokens;
+}
+function loadFileTokens(fileName){
+  return require(`../../data/${fileName.toLowerCase()}`);
+}
 function newToken(type, name, value, target) {
   return { type: type, name: name, value: value, target: copyTarget(target) };
 }
