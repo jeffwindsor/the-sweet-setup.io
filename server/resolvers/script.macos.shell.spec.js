@@ -1,13 +1,12 @@
 import { script } from './script'
 
-function run(requests, expected, addHeader=false){
-  expect(script(addHeader,'MacOs','Shell', requests)).toEqual(expected);
-};
-function runCheckMultipleResults(requests, addHeader=false){
-  let actuals = script(addHeader,'MacOs','Shell', requests);
-  expect(actuals.length).toBeGreaterThan(1);
-};
+function run(request, expected, addHeader=false){
+  expect(executeScript(request, addHeader)).toEqual(expected);
+}
 
+function executeScript(request, addHeader){
+  return script(addHeader,'MacOs','Shell', request);
+}
 
 describe('Given a request for MacOS and SH when scripted', () => {
 
@@ -100,7 +99,12 @@ describe('Given a request for MacOS and SH when scripted', () => {
   });
 
 
-describe('Given a transformable request for MacOS and SH when scripted', () => {
+describe('Given a transformable request when scripted', () => {
+//ScriptPackage
+  function runPackage(requests, addHeader=false){
+    let tokens = executeScript(requests, addHeader);
+    expect(tokens.length).toBeGreaterThan(1);
+  }
 
   test('BashFunctions are wrapped properly', () => run(
     [{type: "BashFunction", name:"myfunction", value:"somestuff", target:{operator:'RedirectOutputAppend', path:"/user/home/.bashrc"}}],
@@ -110,14 +114,12 @@ describe('Given a transformable request for MacOS and SH when scripted', () => {
     [{type: "FishFunction", name:"myfunction", value:"somestuff", target:{operator:'RedirectOutputAppend', path:"/user/home/.fishrc"}}],
     ["echo -e 'function myfunction\nsomestuff\nend' >> /user/home/.fishrc"]));
 
-  test('List of GitGlobalAliases returns multiple lines', () => runCheckMultipleResults(
-    [{type: "List", name:"GitGlobalAliases"}]));
+  test('GitAliasPackage returns multiple lines', () => runPackage(
+    [{type: "GitAliasPackage", name:"gitaliases"}] )  );
 
-  test('List of BashGitAliases returns multiple lines', () => runCheckMultipleResults(
-    [{type: "List", name:"BashGitAliases", target:{operator:"RedirectOutputAppend", path:"/user/home/.bash_git_aliases"}}],
-    ));
+  test('FunctionPackageAsBash returns multiple lines', () => runPackage(
+    [{type: "FunctionPackageAsBash", name:"gitaliases", target:{operator:"RedirectOutputAppend", path:"/user/home/.bash_git_aliases"}}]));
 
-  test('List of FishGitAliases returns multiple lines', () => runCheckMultipleResults(
-    [{type: "List", name:"FishGitAliases",target:{operator:"RedirectOutput", path:"/user/home/.fish_git_aliases"} }],
-    ));
+  test('FunctionPackageAsFish returns multiple lines', () => runPackage(
+    [{type: "FunctionPackageAsFish", name:"gitaliases", target:{operator:"RedirectOutputAppend", path:"/user/home/.fish_git_aliases"} }]));
 });
