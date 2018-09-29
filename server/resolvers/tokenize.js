@@ -33,8 +33,12 @@ function tokenizeBashFunction(token){
 }
 
 function tokenizeFishFunction(token){
+  //replace the ${@} and ${#}
+  var value = token.value.replace(/\{@\}/gim, "argv");
+  value = value.replace(/\{(\d+)\}/gim, "argv[$1]");
+  //Make a fish function
+  let fish = joinNewLine(`function ${token.name}`, value, `end`);
   // Add function syntax and convert to WriteToFile type
-  let fish = joinNewLine(`function ${token.name}`, token.value, `end`);
   return newToken('WriteToFile', token.name, fish, token.target);
 }
 function tokenizeFunctionPackage(type, target, packageName){
@@ -46,6 +50,7 @@ function tokenizeScriptPackage(packageName){
   // Traverse new tokens prior to returning
   return _flatMap(tokens, tokenize);
 }
+
 function setType(type, tokens){
   tokens.forEach(t => t.type = type);
   return tokens;
@@ -60,7 +65,11 @@ function loadFileTokens(fileName){
   return require(`../../data/${fileName.toLowerCase()}`);
 }
 function newToken(type, name, value, target) {
-  return { type: type, name: name, value: value, target: copyTarget(target) };
+  let result = { type: type, name: name};
+  if(value != null ){ result.value = value; }
+  let ct = copyTarget(target);
+  if(ct != null ){ result.target = ct; }
+  return result;
 }
 function isNullOrEmptyTarget(target){
   return (target == null) || target.operator == null || target.path == null;
