@@ -1,8 +1,10 @@
-# The Sweet Setup IO
+<a href="https://github.com/jeffwindsor/the-sweet-setup.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 
-A queryable and compose-able setup script generator
+[Home](https://jeffwindsor.carrd.co/) > [Projects](https://github.com/jeffwindsor/jeffwindsor.github.io) > The Sweet Setup IO
 
-## Api
+A queryable and compose-able setup script generator.  A conversion of [the sweet setup](https://github.com/jeffwindsor/the-sweet-setup) into web based solution, while learning graphql.
+
+## Api (documentation incomplete)
 
 ### Request Object Examples
 ```json
