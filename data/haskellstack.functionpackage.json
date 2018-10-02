@@ -1,6 +1,6 @@
 [
   {"name":"sb","value":"stack clean\n  stack build"},
-  {"name":"st","value":"stack test"},
-  {"name":"sr","value":"stack ghci"},
-  {"name":"sdepend","value":"stack list-dependencies"}
+  {"name":"st","value":"stack test --file-watch"},
+  {"name":"sr","value":"stack repl"},
+  {"name":"sd","value":"stack list-dependencies"}
 ]
