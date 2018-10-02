@@ -2,13 +2,10 @@
   {"name":"gpush", "value":"git push"},
   {"name":"gpull", "value":"git pull --rebase --prune git submodule update --init --recursive"},
   {"name":"gundo", "value":"git reset HEAD~1 --mixed"},
-  {"name":"ghub", "value":"git clone git clone https://github.com/${@}.git"},
   {"name":"greset", "value":"git add -A\n  git commit -qm 'CLEAN POINT'\n  git reset HEAD~1 --hard\n  git clean -f -d"},
   {"name":"ginit", "value":"git init\n  gi osx >> .gitignore\n  echo 'READ.ME' >> README.md\n  gcommit 'Initial'\n  if test -n ${@}\n    gconnect $repo_uri\n    git push -u origin master\n  end"},
-  {"name":"gconnect", "value":"git remote add origin ${@}\n  git remote -v"},
   {"name":"gbranch", "value":"git checkout -b ${@}"},
   {"name":"gcommit", "value":"git add -A\n  if test -n '${@}'\n        git commit -m '${@}'\n    else\n        git commit -m 'WIP'\n    end"},
   {"name":"gmerge", "value":"set merge_branch (git symbolic-ref HEAD | sed -e 's,.*/\\(.*\\),\\1,')\n  git checkout master\n  gpull\n  git rebase -i master\n  git merge $merge_branch"},
-  {"name":"gtrack", "value":"git checkout --track origin/${@}"},
-  {"name":"gi", "value":"curl -L -s https://www.gitignore.io/api/${1}"}
+  {"name":"gtrack", "value":"git checkout --track origin/${@}"}
 ]
