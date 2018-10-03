@@ -1,0 +1,19 @@
+[
+  {"type":"VsCodeExtension", "name":"aaron-bond.better-comments"},
+  {"type":"VsCodeExtension", "name":"andys8.jest-snippets"},
+  {"type":"VsCodeExtension", "name":"dcasella.monokai-plusplus"},
+  {"type":"VsCodeExtension", "name":"dracula-theme.theme-dracula"},
+  {"type":"VsCodeExtension", "name":"eamodio.gitlens"},
+  {"type":"VsCodeExtension", "name":"file-icons.file-icons"},
+  {"type":"VsCodeExtension", "name":"ginfuru.ginfuru-better-solarized-dark-theme"},
+  {"type":"VsCodeExtension", "name":"justusadam.language-haskell"},
+  {"type":"VsCodeExtension", "name":"ms-python.python"},
+  {"type":"VsCodeExtension", "name":"nwolverson.language-purescript"},
+  {"type":"VsCodeExtension", "name":"Orta.vscode-jest"},
+  {"type":"VsCodeExtension", "name":"PKief.material-icon-theme"},
+  {"type":"VsCodeExtension", "name":"Prisma.vscode-graphql"},
+  {"type":"VsCodeExtension", "name":"skyapps.fish-vscode"},
+  {"type":"VsCodeExtension", "name":"streetsidesoftware.code-spell-checker"},
+  {"type":"VsCodeExtension", "name":"tomoki1207.pdf"},
+  {"type":"VsCodeExtension", "name":"wmaurer.change-case"}
+]

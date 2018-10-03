@@ -18,7 +18,7 @@ describe('Given a Fish Shell Function when scripted', () => {
     {type: "FishFunction", name:"myfunction", value:"somestuff with ${1} ${2} ${999}"},
     {type: "WriteToFile", name:"myfunction", value:"function myfunction\nsomestuff with $argv[1] $argv[2] $argv[999]\nend"}
     ));
-    
+
 });
 
 describe('Given a transformable request for MacOS and SH when scripted', () => {
@@ -40,14 +40,14 @@ describe('Given a transformable request for MacOS and SH when scripted', () => {
     ));
 
   test('GitAliasPackage returns multiple lines', () => runPackage(
-    {type: "GitAliasPackage", name:"gitaliases"}, 
+    {type: "GitAliasPackage", name:"gitglobal"},
     'GitGlobal'));
 
   test('FunctionPackageAsBash returns multiple lines', () => runPackage(
-    {type: "FunctionPackageAsBash", name:"gitaliases", target:{operator:"RedirectOutputAppend", path:"/user/home/.bash_git_aliases"}},
+    {type: "FunctionPackageAsBash", name:"git-alias", target:{operator:"RedirectOutputAppend", path:"/user/home/.bash_git_aliases"}},
     'BashFunction'));
 
   test('FunctionPackageAsFish returns multiple lines', () => runPackage(
-    {type: "FunctionPackageAsFish", name:"gitaliases", target:{operator:"RedirectOutputAppend", path:"/user/home/.fish_git_aliases"}},
+    {type: "FunctionPackageAsFish", name:"git-alias", target:{operator:"RedirectOutputAppend", path:"/user/home/.fish_git_aliases"}},
     'FishFunction'));
   });

@@ -106,13 +106,13 @@ describe('Given a transformable request when scripted', () => {
     ["echo -e 'function myfunction\nsomestuff\nend' >> /user/home/.fishrc"]));
 
   test('GitAliasPackage returns multiple lines', () => runPackage(
-    [{type: "GitAliasPackage", name:"gitaliases"}] )  );
+    [{type: "GitAliasPackage", name:"gitglobal"}] )  );
 
   test('FunctionPackageAsBash returns multiple lines', () => runPackage(
-    [{type: "FunctionPackageAsBash", name:"gitaliases", target:{operator:"RedirectOutputAppend", path:"/user/home/.bash_git_aliases"}}]));
+    [{type: "FunctionPackageAsBash", name:"git-alias", target:{operator:"RedirectOutputAppend", path:"/user/home/.bash_git_aliases"}}]));
 
   test('FunctionPackageAsFish returns multiple lines', () => runPackage(
-    [{type: "FunctionPackageAsFish", name:"gitaliases", target:{operator:"RedirectOutputAppend", path:"/user/home/.fish_git_aliases"} }]));
+    [{type: "FunctionPackageAsFish", name:"git-alias", target:{operator:"RedirectOutputAppend", path:"/user/home/.fish_git_aliases"} }]));
 });
 
 function run(request, expected, addHeader=false){
