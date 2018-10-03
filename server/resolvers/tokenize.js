@@ -3,9 +3,9 @@ const _flatMap = require('lodash/flatMap');
 
 export function tokenize(request) {
   switch (request.type) {
-    case 'Header': return tokenizeShellHeader(request);   //Special type not implemented for outside use
-    case 'BashFunction': return tokenizeBashFunction(request);
-    case 'FishFunction': return tokenizeFishFunction(request);
+    case 'Header': return convertToCommentToken(request);   //Special type not implemented for outside use
+    case 'BashFunction': return convertToBashFunctionToWriteToFile(request);
+    case 'FishFunction': return convertToFishFunctionToWriteToFile(request);
     case 'FunctionPackageAsBash': return addTypeTargetToPackageTokens('BashFunction', request.target, request.name);
     case 'FunctionPackageAsFish': return addTypeTargetToPackageTokens('FishFunction', request.target, request.name);
     case 'GitAliasPackage': return addTypeTargetToPackageTokens('GitGlobal', request.target, request.name);
@@ -15,11 +15,12 @@ export function tokenize(request) {
   }
 }
 
-function tokenizeShellHeader(request) {
-  return { type: 'Comment', name: resolveShellHeader(request.os, request.language) }
+function convertToCommentToken(request) {
+  let comment =  convertToOsLanguageComment(request.os, request.language);
+  return { type: 'Comment', name: comment }
 }
 
-function resolveShellHeader(os, language) {
+function convertToOsLanguageComment(os, language) {
   switch (os + language) {
     case 'MacOsShell': return "!/bin/sh"
     case 'ManjaroShell': return "!/bin/sh"
@@ -27,13 +28,13 @@ function resolveShellHeader(os, language) {
   }
 }
 
-function tokenizeBashFunction(token) {
+function convertToBashFunctionToWriteToFile(token) {
   // Add function syntax and convert to WriteToFile type
   let bash = joinNewLine(`function ${token.name}(){`, token.value, `}`)
   return newToken('WriteToFile', token.name, bash, token.target);
 }
 
-function tokenizeFishFunction(token) {
+function convertToFishFunctionToWriteToFile(token) {
   //replace the ${@} and ${#}
   var value = token.value.replace(/\{@\}/gim, "argv");
   value = value.replace(/\{(\d+)\}/gim, "argv[$1]");
