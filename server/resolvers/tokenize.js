@@ -9,8 +9,9 @@ export function tokenize(request) {
     case 'FunctionPackageAsBash': return addTypeTargetToPackageTokens('BashFunction', request.target, request.name);
     case 'FunctionPackageAsFish': return addTypeTargetToPackageTokens('FishFunction', request.target, request.name);
     case 'GitAliasPackage': return addTypeTargetToPackageTokens('GitGlobal', request.target, request.name);
-    case 'ScriptPackage': return tokenizeScriptPackage(request.name);
-    case 'VSCodeExtensionPackage': return tokenizeScriptPackage(req.name);
+    // case 'RequestPackage': return tokenizeScriptPackage(request.name);
+    case 'WritePackageToFile': return newToken('WriteToFile',request.name, serializePackage(request.name), request.target)
+    case 'VSCodeExtensionPackage': return tokenizeScriptPackage(request.name);
     default: return request;
   }
 }
@@ -57,8 +58,12 @@ function tokenizeScriptPackage(packageName) {
   // Traverse new tokens prior to returning
   return _flatMap(tokens, tokenize);
 }
-function loadFileTokens(fileName) {
-  return require(`../../data/${fileName.toLowerCase()}.package.json`);
+function serializePackage(packageName){
+  return JSON.stringify(loadFileTokens(packageName));
+}
+function loadFileTokens(packageName) {
+  // * Currently file based
+  return require(`../../data/${packageName.toLowerCase()}.package.json`);
 }
 function newToken(type, name, value, target) {
   let result = { type: type, name: name };
