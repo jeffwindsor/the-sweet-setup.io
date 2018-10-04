@@ -1,4 +1,4 @@
-[Home](https://jeffwindsor.carrd.co/) > [Projects](https://jeffwindsor.github.com) > The Sweet Setup IO
+[Home](https://jeffwindsor.carrd.co/) > [Github](https://jeffwindsor.github.com) > [Projects](https://jeffwindsor.github.com/projects) > The Sweet Setup IO
 
 A queryable and compose-able setup script generator.  A conversion of [the sweet setup](https://github.com/jeffwindsor/the-sweet-setup) into web based solution, while learning graphql.
 
