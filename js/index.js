@@ -3,7 +3,8 @@
 ***************************************************/
 document.getElementById("scriptButton").onclick = scriptMyStuff;
 function scriptMyStuff() {
-  let reqs = JSON.parse(document.getElementById("source").value);
+  let values = "[" + document.getElementById("source").value + "]";
+  let reqs = JSON.parse(values);
 	let results = script("MacOs","Shell", reqs);
   document.getElementById("target").innerHTML = _.join(results, "\n");
 }
