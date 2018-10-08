@@ -1,4 +1,4 @@
-import { script } from '../server/resolvers/script'
+import { script } from './index'
 
 describe('Given a request for MacOS and SH when scripted', () => {
 

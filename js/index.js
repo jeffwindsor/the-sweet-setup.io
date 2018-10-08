@@ -1,13 +1,5 @@
-/***************************************************
-	PAGE
-***************************************************/
-document.getElementById("scriptButton").onclick = scriptMyStuff;
-function scriptMyStuff() {
-  let values = "[" + document.getElementById("source").value + "]";
-  let reqs = JSON.parse(values);
-	let results = script("MacOs","Shell", reqs);
-  document.getElementById("target").innerHTML = _.join(results, "\n");
-}
+// IF NODE
+//const _ = require('lodash');
 
 /***************************************************
 	SCRIPT
@@ -71,7 +63,7 @@ function tokenizePackageWithTypeAndTarget(type, target, packageName) {
 }
 
 function tokenizePackage(packageName) {
-  let tokens = require(`../../data/${packageName.toLowerCase()}.package.json`);
+  let tokens = require(`./data/${packageName.toLowerCase()}.package.json`);
   return _.flatMap(tokens, tokenize);
 }
 function newToken(type, name, value, target) {
@@ -124,3 +116,5 @@ function generateTargetOperatorSH(operator){
     default: return "???";
   }
 }
+
+//export {tokenize, script}

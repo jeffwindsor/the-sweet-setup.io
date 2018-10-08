@@ -1,4 +1,4 @@
-import { tokenize } from '../server/resolvers/script'
+import { tokenize } from './index'
 
 function tokenizeIsExpected(request, expected){
   expect(tokenize(request)).toEqual(expected);
