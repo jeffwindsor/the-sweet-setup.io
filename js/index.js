@@ -1,17 +1,29 @@
-function scriptSource() {
-  //put input into an array
-  let values = "[" + document.getElementById("source").value + "]";
-  //call scripting function
-  let results = script("MacOs","Shell", JSON.parse(values));
-  //jon array of results with carrage return and place in target area
-  document.getElementById("target").value = _.join(results, "\n");
+function addLineToSource(type, name, value, targetOperator, targetPath){
+  var text = `{"type":"${type}", "name":"${name}"`;
+  if(value != null){ text += `, "value":"${value}"`; }
+  if(targetOperator != null && targetPath != null){ text += `, target:{"operator": "${targetOperator}", "path":"${targetPath}"`; }
+  text += "},\n"
+  document.getElementById("source").value += text;
+}
+function addFunctionPackage(name){ addLineToSource("FunctionPackageAsFish", name, null, "RedirectOutputAppend", "/user/home/.fishrc"); }
+function add(type){
+  switch (type) {
+    case 'Comment': addLineToSource("Comment", "comment"); break;
+    case 'Info': addLineToSource("Info", "text"); break;
+    case 'Variable': addLineToSource("Variable", "varName", "varValue"); break;
+    case 'ArchPackage': addLineToSource("ArchPackage", "packageName"); break;
+  
+    default:
+      break;
+  }
 }
 
-// function downloadTarget(){
-//   let data = document.getElementById("target").value;
-//   function dataUrl(data) {return "data:x-application/text," + escape(data);}
-//   window.open(dataUrl(data));
-// }
+function scriptSource() {
+  let input = document.getElementById("source").value.trim();
+  let values = "[" + ( (input.slice(-1)==',') ? input.slice(0,-1) : input) + "]";
+  let results = script("MacOs","Shell", JSON.parse(values));
+  document.getElementById("target").value = _.join(results, "\n");
+}
 
 function downloadTarget() {
   let data = document.getElementById("target").value;
