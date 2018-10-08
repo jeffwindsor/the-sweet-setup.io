@@ -35,19 +35,39 @@
     </nav>
   </header>
 
-  <!-- Begin page content -->
-  <main role="main" class="container">
-    <h1 class="mt-5">Sticky footer with fixed navbar</h1>
-    <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt; .container</code>.</p>
-    <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <span class="text-muted">Place sticky footer content here.</span>
+  <main class="container-fluid h-100" id="script-container">
+    <div class="row h-100">
+      <div class="col">
+        <textarea autofocus id="source">
+          [
+          {"type": "Variable", "name":"name", "value":"value"},
+          {"type": "ArchPackage", "name":"arch"},
+          {"type": "YayPackage", "name":"aur"},
+          {"type": "BrewPackage", "name":"brew"},
+          {"type": "CaskPackage", "name":"cask"},
+          {"type": "NpmPackage", "name":"npm"},
+          {"type": "VsCodeExtension", "name":"vsc"},
+          {"type": "HaskellStackInstall", "name":"stack"},
+          {"type": "BashFunction", "name":"myfunction", "value":"somestuff", "target":{"operator":"RedirectOutputAppend", "path":"/user/home/.bashrc"}},
+          {"type": "FishFunction", "name":"myfunction", "value":"somestuff", "target":{"operator":"RedirectOutput", "path":"/user/home/.config/fish/functions"}},
+          {"type": "GitGlobal", "name":"alias ga", "value":"git action"},
+          {"type": "GitGlobal", "name":"user.name", "value":"yahoo serious"},
+          {"type": "GitClone", "name":"http://url.git"},
+          {"type": "GitClone", "name":"http://url-target.git", "target":{"operator":"None", "path":"/user/home/two-x"}},
+          {"type": "GitClone", "name":"http://url-target-args.git", "target":{"operator":"None", "path":"/user/home/two-x"}, "args":"--depth=1"},
+          {"type": "GitClone", "name":"http://url-args.git", "args":"--depth=1"},
+          {"type": "Curl", "name":"http://url.git"},
+          {"type": "Curl", "name":"http://url-args.git", "args":"-L"},
+          {"type": "Curl", "name":"http://url-args-target.git", "args":"-L", "target":{"operator":"Pipe", "path":"sh"}},
+          {"type": "Curl", "name":"http://url-target.git", "target":{"operator":"Pipe", "path":"sh"}}
+        ]
+        </textarea>
+      </div>
+      <div class="col">
+        <textarea readonly id="target"></textarea>
+      </div>
     </div>
-  </footer>
-  
+  </main>
 
 </body>
 
