@@ -1,4 +1,5 @@
-import { script } from './script'
+import { script } from '../server/resolvers/script'
+
 describe('Given a request for MacOS and SH when scripted', () => {
 
   test('Comment', () => run(
@@ -92,11 +93,6 @@ describe('Given a request for MacOS and SH when scripted', () => {
 
 describe('Given a transformable request when scripted', () => {
 //ScriptPackage
-  function runPackage(requests, addHeader=false){
-    let tokens = executeScript(requests, addHeader);
-    expect(tokens.length).toBeGreaterThan(1);
-  }
-
   test('BashFunctions are wrapped properly', () => run(
     [{type: "BashFunction", name:"myfunction", value:"somestuff", target:{operator:'RedirectOutputAppend', path:"/user/home/.bashrc"}}],
     ["echo -e 'function myfunction(){\nsomestuff\n}' >> /user/home/.bashrc"]));
@@ -115,10 +111,16 @@ describe('Given a transformable request when scripted', () => {
     [{type: "FunctionPackageAsFish", name:"git-alias", target:{operator:"RedirectOutputAppend", path:"/user/home/.fish_git_aliases"} }]));
 });
 
-function run(request, expected, addHeader=false){
-  expect(executeScript(request, addHeader)).toEqual(expected);
+function runPackage(requests){
+  let tokens = executeScript(requests);
+  expect(tokens.length).toBeGreaterThan(2);
+  expect(tokens[0]).toEqual("#!/bin/sh");
 }
 
-function executeScript(request, addHeader){
-  return script(addHeader,'MacOs','Shell', request);
+function run(request, expected){
+  expect(executeScript(request)).toEqual(["#!/bin/sh"].concat(expected));
+}
+
+function executeScript(request){
+  return script('MacOs','Shell', request);
 }
