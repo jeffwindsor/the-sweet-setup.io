@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>The Sweet Setup</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -11,59 +12,26 @@
   <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Fixed navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <a class="navbar-brand" href="#">The Sweet Setup</a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
+          
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <button class="btn btn-primary my-2 my-sm-0" id="scriptButton">Script</button>
       </div>
     </nav>
   </header>
 
   <main class="container-fluid h-100" id="script-container">
     <div class="row h-100">
-      <div class="col">
+      <div class="col nopadding">
         <textarea autofocus id="source">
-          [
-          {"type": "Variable", "name":"name", "value":"value"},
-          {"type": "ArchPackage", "name":"arch"},
-          {"type": "YayPackage", "name":"aur"},
-          {"type": "BrewPackage", "name":"brew"},
-          {"type": "CaskPackage", "name":"cask"},
-          {"type": "NpmPackage", "name":"npm"},
-          {"type": "VsCodeExtension", "name":"vsc"},
-          {"type": "HaskellStackInstall", "name":"stack"},
-          {"type": "BashFunction", "name":"myfunction", "value":"somestuff", "target":{"operator":"RedirectOutputAppend", "path":"/user/home/.bashrc"}},
-          {"type": "FishFunction", "name":"myfunction", "value":"somestuff", "target":{"operator":"RedirectOutput", "path":"/user/home/.config/fish/functions"}},
-          {"type": "GitGlobal", "name":"alias ga", "value":"git action"},
-          {"type": "GitGlobal", "name":"user.name", "value":"yahoo serious"},
-          {"type": "GitClone", "name":"http://url.git"},
-          {"type": "GitClone", "name":"http://url-target.git", "target":{"operator":"None", "path":"/user/home/two-x"}},
-          {"type": "GitClone", "name":"http://url-target-args.git", "target":{"operator":"None", "path":"/user/home/two-x"}, "args":"--depth=1"},
-          {"type": "GitClone", "name":"http://url-args.git", "args":"--depth=1"},
-          {"type": "Curl", "name":"http://url.git"},
-          {"type": "Curl", "name":"http://url-args.git", "args":"-L"},
-          {"type": "Curl", "name":"http://url-args-target.git", "args":"-L", "target":{"operator":"Pipe", "path":"sh"}},
-          {"type": "Curl", "name":"http://url-target.git", "target":{"operator":"Pipe", "path":"sh"}}
-        ]
+[
+
+]
         </textarea>
       </div>
-      <div class="col">
+      <div class="col nopadding">
         <textarea readonly id="target"></textarea>
       </div>
     </div>

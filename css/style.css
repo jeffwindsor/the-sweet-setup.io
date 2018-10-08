@@ -3,10 +3,19 @@ html {
     height: 100%;
 }
 body {
-    margin-top: 56px;
+    font-family: 'Roboto Mono', sans-serif !important;
+    margin-top: 54px;
     height: 94%;
 }
 textarea {
+    box-sizing: border-box;
+    font-size: 80%; 
     height: 100%;
     width: 100%;
+    padding: 15px;
 }
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
