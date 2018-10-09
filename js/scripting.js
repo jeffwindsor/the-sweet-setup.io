@@ -1,120 +1,122 @@
 // IF NODE
-//const _ = require('lodash');
+const _ = require('lodash');
 
 /***************************************************
 	SCRIPT
 ***************************************************/
-function script(os, language, requests){
-  // Add Header to requests and tokenize tree
-  let tokens  = _.flatMap([{type:"Header", os:os, language:language}].concat(requests), request => tokenize(request));
-  // Generate tokens in order
-  return tokens.map( token => generate(os, language, token) );
+function script(os, language, requests) {
+  let header = [{ type: 'header', value:'#!/bin/sh' }];
+  let list = header.concat(requests);
+  let tokens = _.flatMap(list, request => tokenize(request));
+  let outputs = tokens.map(token => generate(os, language, token));
+  return outputs;
 }
 
 /***************************************************
 	TOKENIZE
 ***************************************************/
 function tokenize(request) {
-  switch (request.type) {
-    case 'Header': return tokenizeHeaderComment(request);   //Special type not implemented for outside use
-    case 'BashFunction': return tokenizeBashFunction(request);
-    case 'FishFunction': return tokenizeFishFunction(request);
-    case 'FunctionPackageAsBash': return tokenizePackageWithTypeAndTarget('BashFunction', request.target, request.name);
-    case 'FunctionPackageAsFish': return tokenizePackageWithTypeAndTarget('FishFunction', request.target, request.name);
-    case 'GitAliasPackage': return tokenizePackageWithTypeAndTarget('GitGlobal', request.target, request.name);
-    case 'VSCodeExtensionPackage': return tokenizePackage(request.name);
-    default: return request;
+  switch (request.type.toLowerCase()) {
+
+    case 'header': // ? does not consider language or OS
+      return { type:'comment', name:'!/bin/sh'};
+    case 'vscodeextension':
+      return { type:'codeinstallextension', name:request.name};
+    case 'fish':
+      return copyTargetTo( request.target, { type:'writetofile', name:request.name, value:buildFishFunction(request)});
+    case 'bash':
+      return copyTargetTo( request.target, { type:'writetofile', name:request.name, value:buildBashFunction(request)});
+    case 'gitglobal':
+      return copyTargetTo( request.target, { type:'gitconfigglobal', name:request.name});
+
+
+    case 'package':
+      console.log(request);
+      return tokenizePackage(request.name, request.value, request.target);
+
+    default:
+      return request;
   }
 }
 
-function tokenizeHeaderComment(request) {
-  let comment =  getHeaderComment(request.os, request.language);
-  return { type: 'Comment', name: comment }
-}
-function getHeaderComment(os, language) {
-  switch (os + language) {
-    case 'MacOsShell': return "!/bin/sh";
-    case 'ManjaroShell': return "!/bin/sh";
-    default: return ""
-  }
+function buildBashFunction(request) {
+  return _.join([`function ${request.name}(){`, request.value, `}`], '\n');
 }
 
-function tokenizeBashFunction(token) {
-  let f = joinNewLine(`function ${token.name}(){`, token.value, `}`)
-  return newToken('WriteToFile', token.name, f, token.target);
-}
-function tokenizeFishFunction(token) {
+function buildFishFunction(request) {
   // replace arg syntax for fish
-  var value = token.value
-                .replace(/\{@\}/gim, "argv")
-                .replace(/\{(\d+)\}/gim, "argv[$1]");
-  let f = joinNewLine(`function ${token.name}`, value, `end`);
-  return newToken('WriteToFile', token.name, f, token.target);
+  var value = request.value
+    .replace(/\{@\}/gim, "argv")
+    .replace(/\{(\d+)\}/gim, "argv[$1]");
+    return _.join([`function ${request.name}`, value, `end`], '\n');
 }
-function joinNewLine(...fragments) { return _.join(fragments, '\n'); }
 
-function tokenizePackageWithTypeAndTarget(type, target, packageName) {
-  let tokens = tokenizePackage(packageName);
-  tokens.forEach(t => {
-    t.type = type;
-    t.target = target;
+function tokenizePackage(packageName, defaultType, defaultTarget) {
+  let packageTokens = loadPackage(packageName);
+  packageTokens.forEach(t => {
+    if(defaultType != null && !existNotNull(t,'type'))     {t.type = defaultType;}
+    if(defaultTarget != null && !existNotNull(t,'target')) {copyTargetTo(defaultTarget, t);}
   });
+  let tokens = packageTokens.map(tokenize);
   return tokens;
 }
-
-function tokenizePackage(packageName) {
-  let tokens = require(`./data/${packageName.toLowerCase()}.package.json`);
-  return _.flatMap(tokens, tokenize);
+function existNotNull(o, property){ return o.hasOwnProperty(property) && o[property]; }
+function loadPackage(packageName) {
+  return require(`./data/${packageName.toLowerCase()}.package.json`);
 }
-function newToken(type, name, value, target) {
-  return { type: type, name: name, value: value, target: target };
+
+function copyTargetTo(target, token) {
+  if(target != null) {
+    token.target = {operator:target.operator, path:target.path}
+  }
+  return token;
 }
 
 
 /***************************************************
 	GENERATE
 ***************************************************/
-function generate(os, language, token){
-  switch(language){
+function generate(os, language, token) {
+  switch (language) {
     case 'Shell': return generateSH(token);
-    default:      return `language ${language} unknown`;
+    default: return `language ${language} unknown`;
   }
 }
-function joinNotNull(...xs)     { return _.join(_.filter(xs, (f) => f != null), " "); }
-function generateTargetPath(target)    { return (target == null) ? null : target.path; }
-function generateTargetOperator(target, f){ return (target == null) ? null : f(target.operator); }
+function joinNotNull(...xs) { return _.join(_.filter(xs, (f) => f != null), " "); }
+function generateTargetPath(target) { return (target == null) ? null : target.path; }
+function generateTargetOperator(target, f) { return (target == null) ? null : f(target.operator); }
 
 /***************************************************
 	GENERATE - SH
 ***************************************************/
-function generateSH(token){
-  switch (token.type) {
-    case 'Comment':              return `#${token.name}`;
-    case 'Info':                 return `echo -e '==> ${token.name}'`;
-    case 'Variable':             return `${token.name}=${token.value}`
-    case 'ArchPackage':          return `sudo pacman -S --noconfirm ${token.name}`;
-    case 'YayPackage':           return `yay -S --noconfirm ${token.name}`;
-    case 'BrewPackage':          return `brew install ${token.name}`;
-    case 'CaskPackage':          return `brew cask install ${token.name}`;
-    case 'NpmPackage':           return `npm install ${token.name}`;
-    case 'VsCodeExtension':      return `code --install-extension ${token.name}`;
-    case 'HaskellStackInstall':  return `stack install ${token.name}`;
-    case 'WriteToFile':          return joinNotNull(`echo -e '${token.value}'`, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
-    case 'GitGlobal':            return `git config --global ${token.name} '${token.value}'`;
-    case 'GitClone':             return joinNotNull(`git clone ${token.name}`, generateTargetPath(token.target), token.args);
-    case 'Curl':                 return joinNotNull(`curl`, token.args, token.name, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
+function generateSH(token) {
+  switch (token.type.toLowerCase()) {
+    case 'comment': return `#${token.name}`;
+    case 'info': return `echo -e '==> ${token.name}'`;
+    case 'variable': return `${token.name}=${token.value}`
+    case 'archpackage': return `sudo pacman -S --noconfirm ${token.name}`;
+    case 'yaypackage': return `yay -S --noconfirm ${token.name}`;
+    case 'brewpackage': return `brew install ${token.name}`;
+    case 'caskpackage': return `brew cask install ${token.name}`;
+    case 'npmpackage': return `npm install ${token.name}`;
+    case 'codeinstallextension': return `code --install-extension ${token.name}`;
+    case 'haskellstackinstall': return `stack install ${token.name}`;
+    case 'writetofile': return joinNotNull(`echo -e '${token.value}'`, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
+    case 'gitconfigglobal': return `git config --global ${token.name} '${token.value}'`;
+    case 'gitclone': return joinNotNull(`git clone ${token.name}`, generateTargetPath(token.target), token.args);
+    case 'curl': return joinNotNull(`curl`, token.args, token.name, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
     default: return "# ? TYPE UNKNOWN " + token;
- }
+  }
 }
-function generateTargetOperatorSH(operator){
-  switch (operator) {
-    case null : return "";
-    case "None" : return "";
-    case "Pipe": return "|";
-    case "RedirectOutput": return ">";
-    case "RedirectOutputAppend": return ">>";
+function generateTargetOperatorSH(operator) {
+  switch (operator.toLowerCase()) {
+    case null: return "";
+    case "none": return "";
+    case "pipe": return "|";
+    case "redirectoutput": return ">";
+    case "redirectoutputappend": return ">>";
     default: return "???";
   }
 }
 
-//export {tokenize, script}
+export {tokenize, script, tokenizePackage, loadPackage}
