@@ -35,7 +35,7 @@ function tokenize(request) {
     case 'fish-package':
       return _.map(request.functions, i => {
         let target = (request.target == null)
-          ? {operator:'redirect', path:`/user/home/.config/fish/functions/${i.function_name}.fish`}
+          ? {operator:'redirect', path:`~/.config/fish/functions/${i.function_name}.fish`}
           : request.target;
         return { type: 'file', content: buildFishFunction(i), target: target};
       });
@@ -56,14 +56,14 @@ function tokenize(request) {
 }
 
 function buildBashFunction(request) {
-  return _.join([`function ${request.function_name}(){`, request.function_body, `}`], '\n');
+  return `function ${request.function_name}(){\n\t${request.function_body}\n}`;
 }
 
 function buildFishFunction(request) {
   var body = request.function_body
-                    .replace(/\{@\}/gim, "argv")
-                    .replace(/\{(\d+)\}/gim, "argv[$1]");
-  return _.join([`function ${request.function_name}`, body, `end`], '\n');
+                    .replace(/\{@\}/gim, 'argv')
+                    .replace(/\{(\d+)\}/gim, 'argv[$1]');
+  return `function ${request.function_name}\n\t${body}\nend`;
 }
 
 /***************************************************
@@ -75,7 +75,7 @@ function generate(os, language, token) {
     default: return `language ${language} unknown`;
   }
 }
-function joinNotNull(...xs) { return _.join(_.filter(xs, (f) => f != null), " "); }
+function joinNotNull(...xs) { return _.join(_.filter(xs, (f) => f != null), ' '); }
 function generateTargetPath(target) { return (target == null) ? null : target.path; }
 function generateTargetOperator(target, f) { return (target == null) ? null : f(target.operator); }
 
@@ -94,21 +94,21 @@ function generateSH(token) {
     case 'npm': return `npm install ${token.package_name}`;
     case 'code': return `code --install-extension ${token.extension_name}`;
     case 'stack': return `stack install ${token.package_name}`;
-    case 'file': return joinNotNull(`echo -e '${token.content}'`, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
+    case 'file': return joinNotNull(`echo '${token.content}'`, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
     case 'gitconfig': return `git config --global ${token.name} '${token.value}'`;
     case 'gitclone': return joinNotNull(`git clone ${token.uri}`, token.output_dir, token.args);
     case 'curl': return joinNotNull(`curl`, token.args, token.uri, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
-    default: return "# ? TYPE UNKNOWN " + token;
+    default: return '# ? TYPE UNKNOWN ' + token;
   }
 }
 function generateTargetOperatorSH(operator) {
   switch (operator.toLowerCase()) {
-    case null: return "";
-    case "none": return "";
-    case "pipe": return "|";
-    case "redirect": return ">";
-    case "redirectappend": return ">>";
-    default: return "???";
+    case null: return '';
+    case 'none': return '';
+    case 'pipe': return '|';
+    case 'redirect': return '>';
+    case 'redirectappend': return '>>';
+    default: return '???';
   }
 }
 

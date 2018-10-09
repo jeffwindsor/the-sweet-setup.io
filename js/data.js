@@ -15,7 +15,7 @@ const shell_aliases = {
     { function_name: "...", function_body: "cd ../../" },
     { function_name: "....", function_body: "cd ../../../" },
     { function_name: ".....", function_body: "cd ../../../../" },
-    { function_name: "evalinsubs", function_body: "for d in (ls -d */ | cut -f1 -d'/')\n    cd $d\n    echo '==> $d'\n    eval ${@}\n    cd ..\n  end" }
+    { function_name: "evalinsubs", function_body: "for d in (ls -d */ | cut -f1 -d\"/\")\n    cd $d\n    echo \"==> $d\"\n    eval ${@}\n    cd ..\n  end" }
   ]
 }
 
@@ -54,14 +54,14 @@ const git_workflow = {
     { function_name: "gpush", function_body: "git push" },
     { function_name: "gpull", function_body: "git pull --rebase --prune git submodule update --init --recursive" },
     { function_name: "gundo", function_body: "git reset HEAD~1 --mixed" },
-    { function_name: "greset", function_body: "git add -A\n  git commit -qm 'CLEAN POINT'\n  git reset HEAD~1 --hard\n  git clean -f -d" },
-    { function_name: "ginit", function_body: "git init\n  gi osx >> .gitignore\n  echo 'READ.ME' >> README.md\n  gcommit 'Initial'\n  if test -n ${@}\n    gconnect $repo_uri\n    git push -u origin master\n  end" },
+    { function_name: "greset", function_body: "git add -A\n  git commit -qm \"CLEAN POINT\"\n  git reset HEAD~1 --hard\n  git clean -f -d" },
+    { function_name: "ginit", function_body: "git init\n  gi osx >> .gitignore\n  echo \"READ.ME\" >> README.md\n  gcommit \"Initial\"\n  if test -n ${@}\n    gconnect $repo_uri\n    git push -u origin master\n  end" },
     { function_name: "gbranch", function_body: "git checkout -b ${@}" },
-    { function_name: "gcommit", function_body: "git add -A\n  if test -n '${@}'\n        git commit -m '${@}'\n    else\n        git commit -m 'WIP'\n    end" },
-    { function_name: "gmerge", function_body: "set merge_branch (git symbolic-ref HEAD | sed -e 's,.*/\\(.*\\),\\1,')\n  git checkout master\n  gpull\n  git rebase -i master\n  git merge $merge_branch" },
+    { function_name: "gcommit", function_body: "git add -A\n  if test -n \"${@}\"\n        git commit -m \"${@}\"\n    else\n        git commit -m \"WIP\"\n    end" },
+    { function_name: "gmerge", function_body: "set merge_branch (git symbolic-ref HEAD | sed -e \"s,.*/\\(.*\\),\\1,\")\n  git checkout master\n  gpull\n  git rebase -i master\n  git merge $merge_branch" },
     { function_name: "gtrack", function_body: "git checkout --track origin/${@}" },
-    { function_name: "gforget", function_body: "git rm -r --cached .\n  git add .\n  git commit -am 'Remove ignored files'" },
-    { function_name: "gmerge-ours", function_body: "set merge_branch (git symbolic-ref HEAD | sed -e 's,.*/\\(.*\\),\\1,')\n git merge -s ours master\n  git checkout master\n  git merge $merge_branch" },
+    { function_name: "gforget", function_body: "git rm -r --cached .\n  git add .\n  git commit -am \"Remove ignored files\"" },
+    { function_name: "gmerge-ours", function_body: "set merge_branch (git symbolic-ref HEAD | sed -e \"s,.*/\\(.*\\),\\1,\")\n git merge -s ours master\n  git checkout master\n  git merge $merge_branch" },
     { function_name: "gi", function_body: "curl -L -s https://www.gitignore.io/api/${1}" }
   ]
 }
@@ -85,26 +85,26 @@ const git_aliases = {
     { function_name: "gi", function_body: "curl -L -s https://www.gitignore.io/api/${1}" },
     { function_name: "gh", function_body: "git clone git clone https://github.com/${@}.git" },
     { function_name: "ghp", function_body: "git clone git clone https://github.com/jeffwindsor/${@}.git" },
-    { function_name: "ghist", function_body: "git log --graph --max-count=100 --pretty=format:\\\"%C(green)%h%C(reset) | %C(yellow)%d%C(reset) %s %C(cyan)%an : %C(dim)%cr%C(reset)\\\" --abbrev-commit" }
+    { function_name: "ghist", function_body: "git log --graph --max-count=100 --pretty=format:\"%C(green)%h%C(reset) | %C(yellow)%d%C(reset) %s %C(cyan)%an : %C(dim)%cr%C(reset)\" --abbrev-commit" }
   ]
 }
 
 const git_globals = {
   type:"gitconfig-package",
   globals: [
-    { name: "s", value: "status -sb --ignore-submodules" },
-    { name: "d", value: "diff" },
-    { name: "aa", value: "add --all" },
-    { name: "cm", value: "commit -m" },
-    { name: "cma", value: "commit -a -m" },
-    { name: "b", value: "branch" },
-    { name: "co", value: "checkout" },
-    { name: "cob", value: "checkout -b" },
-    { name: "pff", value: "pull --ff-only" },
-    { name: "mff", value: "merge --ff-only" },
-    { name: "size", value: "count-objects -vH" },
-    { name: "remove", value: "rm -r --cached ." },
-    { name: "hist", value: "log --graph --max-count=100 --pretty=format:\\\"%C(green)%h%C(reset) | %C(yellow)%d%C(reset) %s %C(cyan)%an : %C(dim)%cr%C(reset)\\\" --abbrev-commit" }
+    { name: "alias.s", value: "status -sb --ignore-submodules" },
+    { name: "alias.d", value: "diff" },
+    { name: "alias.aa", value: "add --all" },
+    { name: "alias.cm", value: "commit -m" },
+    { name: "alias.cma", value: "commit -a -m" },
+    { name: "alias.b", value: "branch" },
+    { name: "alias.co", value: "checkout" },
+    { name: "alias.cob", value: "checkout -b" },
+    { name: "alias.pff", value: "pull --ff-only" },
+    { name: "alias.mff", value: "merge --ff-only" },
+    { name: "alias.size", value: "count-objects -vH" },
+    { name: "alias.remove", value: "rm -r --cached ." },
+    { name: "alias.hist", value: "log --graph --max-count=100 --pretty=format:\"%C(green)%h%C(reset) | %C(yellow)%d%C(reset) %s %C(cyan)%an : %C(dim)%cr%C(reset)\" --abbrev-commit" }
   ]
 }
 
