@@ -8,7 +8,8 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono"> -->
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
   <link rel="stylesheet" href="css/index.css">
   <script src="js/scripting.js"></script>
   <script src="js/data.js"></script>
@@ -28,8 +29,8 @@
       </a>
       <div class="collapse navbar-collapse" id="spanner">
         <div class="btn-group ml-2">
-          <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Add Template</button>
+          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Add</button>
           <div class="dropdown-menu">
             <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases Package</a>
             <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases Package</a>
@@ -58,10 +59,10 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-danger ml-2" onclick="clearSourceTarget()">Clear<i class="fas fa-times-circle ml-2"></i></button>
+        <button type="button" class="btn btn-danger ml-2" onclick="clearSourceTarget()"><i class="fas fa-trash-alt"></i></button>
       </div>
-      <button type="button" class="btn btn-dark ml-2" onclick="scriptSource()"><i class="fas fa-chevron-circle-down mr-2"></i>Script</button>
-      <button type="button" class="btn btn-dark ml-2" onclick="downloadTarget()"><i class="fas fa-download mr-2"></i>Download</button>
+      <!-- <button type="button" class="btn btn-dark ml-2" onclick="scriptSource()"><i class="fas fa-chevron-circle-down mr-2"></i>Script</button> -->
+      <button type="button" class="btn btn-dark ml-2" onclick="downloadTarget()"><i class="fas fa-download"></i></button>
     </nav>
   </header>
   <!-- CONTENTS -->
