@@ -1,4 +1,21 @@
 /**************************************************************
+  EVENT HANDLERS
+**************************************************************/
+var timeout = null;
+function sourceOnKeyUp(e) {
+  clearTimeout(timeout);
+  timeout = setTimeout(function () {
+    scriptSource();
+  }, 500);
+};
+function sourceOnKeyUp(e) {
+  clearTimeout(timeout);
+  timeout = setTimeout(function () {
+    scriptSource();
+  }, 500);
+};
+
+/**************************************************************
   SCRIPTING HELPERS
 **************************************************************/
 function scriptSource() {
@@ -33,6 +50,7 @@ function downloadTarget() {
 function addToSource(addition) {
   let add = JSON.stringify(addition, undefined, 2) + ',\n';
   document.getElementById('source').value += add;
+  scriptSource();
 }
 
 function add(type) {

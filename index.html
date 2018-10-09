@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
   <link rel="stylesheet" href="css/index.css">
   <script src="js/scripting.js"></script>
-  <script src="js/index.js"></script>
   <script src="js/data.js"></script>
 </head>
 
@@ -28,23 +27,23 @@
       </a>
       <div class="collapse navbar-collapse" id="spanner">
         <div class="btn-group ml-2">
-          <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Add Package</button>
+          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Add Template</button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases</a>
-            <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases</a>
-            <a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases</a>
-            <a class="dropdown-item" onclick="addPackage('haskell_stack_aliases')">Stack Aliases</a>
-            <a class="dropdown-item" onclick="addPackage('git_workflow')">Git Workflow</a>
-            <a class="dropdown-item" onclick="addPackage('git_aliases')">Git Aliases</a>
-            <a class="dropdown-item" onclick="addPackage('git_globals')">Git Globals</a>
-            <a class="dropdown-item" onclick="addPackage('vscode_extensions')">VSCode Extensions</a>
-          </div>
-        </div>
-        <div class="btn-group ml-2">
-          <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Add Item</button>
-          <div class="dropdown-menu">
+            <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases Package</a>
+            <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases Package</a>
+            <a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases Package</a>
+            <a class="dropdown-item" onclick="addPackage('haskell_stack_aliases')">Stack Aliases Package</a>
+            <a class="dropdown-item" onclick="addPackage('git_workflow')">Git Workflow Package</a>
+            <a class="dropdown-item" onclick="addPackage('git_aliases')">Git Aliases Package</a>
+            <a class="dropdown-item" onclick="addPackage('git_globals')">Git Globals Package</a>
+            <a class="dropdown-item" onclick="addPackage('vscode_extensions')">VSCode Extensions Package</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" onclick="add('pacman')">Pacman</a>
+            <a class="dropdown-item" onclick="add('yay')">Yay</a>
+            <a class="dropdown-item" onclick="add('brew')">Brew</a>
+            <a class="dropdown-item" onclick="add('cask')">Cask</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" onclick="add('comment')">Comment</a>
             <a class="dropdown-item" onclick="add('echo')">Echo</a>
             <a class="dropdown-item" onclick="add('variable')">Variable</a>
@@ -55,26 +54,20 @@
             <a class="dropdown-item" onclick="add('gitconfig')">Git Config</a>
             <a class="dropdown-item" onclick="add('gitclone')">Git Clone</a>
             <a class="dropdown-item" onclick="add('curl')">Curl</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onclick="add('pacman')">Pacman</a>
-            <a class="dropdown-item" onclick="add('yay')">Yay</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onclick="add('brew')">Brew</a>
-            <a class="dropdown-item" onclick="add('cask')">Cask</a>
           </div>
         </div>
-        <button type="button" class="btn btn-primary ml-2" onclick="scriptSource()">Script<i class="fas fa-chevron-circle-right ml-2"></i></button>
+
+        <button type="button" class="btn btn-dark ml-2" onclick="clearSourceTarget()"><i class="fas fa-times-circle"></i></button>
       </div>
-      <button type="button" class="btn btn-danger ml-2" onclick="clearSourceTarget()"><i class="fas fa-times-circle mr-2"></i>Clear</button>
-      <button type="button" class="btn btn-dark ml-2" onclick="downloadTarget()"><i class="fas fa-download mr-2"></i>Download
-        Script</button>
+      <!-- <button type="button" class="btn btn-dark ml-2" onclick="scriptSource()"><i class="fas fa-chevron-circle-right"></i></button> -->
+      <button type="button" class="btn btn-dark ml-2" onclick="downloadTarget()"><i class="fas fa-download"></i></button>
     </nav>
   </header>
   <!-- CONTENTS -->
   <main class="container-fluid h-100" id="script-container">
     <div class="row h-100">
       <div class="col nopadding">
-        <textarea autofocus id="source"></textarea>
+        <textarea autofocus id="source" onkeyup="sourceOnKeyUp()"></textarea>
       </div>
       <div class="col nopadding">
         <textarea readonly id="target"></textarea>
@@ -82,6 +75,8 @@
     </div>
   </main>
 </body>
+
+<script src="js/index.js"></script>
 <!-- lodash -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js'></script>
 <!-- bootstrap -->
