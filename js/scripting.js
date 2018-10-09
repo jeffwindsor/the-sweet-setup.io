@@ -34,7 +34,10 @@ function tokenize(request) {
 
     case 'fish-package':
       return _.map(request.functions, i => {
-        return { type: 'file', content: buildFishFunction(i), target: request.target};
+        let target = (request.target == null)
+          ? {operator:'redirect', path:`/user/home/.config/fish/functions/${i.function_name}.fish`}
+          : request.target;
+        return { type: 'file', content: buildFishFunction(i), target: target};
       });
 
     case 'bash-package':
