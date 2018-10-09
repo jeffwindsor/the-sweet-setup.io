@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/index.css">
   <script src="js/scripting.js"></script>
   <script src="js/index.js"></script>
+  <script src="js/data.js"></script>
 </head>
 
 <body>
@@ -30,25 +31,41 @@
           <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">Add Package</button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" onclick="addFunctionPackage('gitworkflow-alias')">Git Workflow</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases</a>
+            <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases</a>
+            <a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases</a>
+            <a class="dropdown-item" onclick="addPackage('haskell_stack_aliases')">Stack Aliases</a>
+            <a class="dropdown-item" onclick="addPackage('git_workflow')">Git Workflow</a>
+            <a class="dropdown-item" onclick="addPackage('git_aliases')">Git Aliases</a>
+            <a class="dropdown-item" onclick="addPackage('git_globals')">Git Globals</a>
+            <a class="dropdown-item" onclick="addPackage('vscode_extensions')">VSCode Extensions</a>
           </div>
         </div>
         <div class="btn-group ml-2">
           <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">Add Item</button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" onclick="add('Comment')">Comment</a>
-            <a class="dropdown-item" onclick="add('Info')">Echo</a>
-            <a class="dropdown-item" onclick="add('Variable')">Variable</a>
+            <a class="dropdown-item" onclick="add('comment')">Comment</a>
+            <a class="dropdown-item" onclick="add('echo')">Echo</a>
+            <a class="dropdown-item" onclick="add('variable')">Variable</a>
+            <a class="dropdown-item" onclick="add('npm')">Npm</a>
+            <a class="dropdown-item" onclick="add('code')">Code</a>
+            <a class="dropdown-item" onclick="add('stack')">Stack</a>
+            <a class="dropdown-item" onclick="add('file')">File</a>
+            <a class="dropdown-item" onclick="add('gitconfig')">Git Config</a>
+            <a class="dropdown-item" onclick="add('gitclone')">Git Clone</a>
+            <a class="dropdown-item" onclick="add('curl')">Curl</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item" onclick="add('pacman')">Pacman</a>
+            <a class="dropdown-item" onclick="add('yay')">Yay</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" onclick="add('brew')">Brew</a>
+            <a class="dropdown-item" onclick="add('cask')">Cask</a>
           </div>
         </div>
         <button type="button" class="btn btn-primary ml-2" onclick="scriptSource()">Script<i class="fas fa-chevron-circle-right ml-2"></i></button>
       </div>
-      <button type="button" class="btn btn-danger ml-2" onclick="clearSourceTarget()"><i class="fas fa-times-circle mr-2"></i></button>
+      <button type="button" class="btn btn-danger ml-2" onclick="clearSourceTarget()"><i class="fas fa-times-circle mr-2"></i>Clear</button>
       <button type="button" class="btn btn-dark ml-2" onclick="downloadTarget()"><i class="fas fa-download mr-2"></i>Download
         Script</button>
     </nav>

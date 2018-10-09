@@ -1,118 +1,103 @@
-// import { script } from './scripting'
+import { script } from './scripting'
 
-// function run(request, expected){
-//   expect(executeScript(request)).toEqual(["#!/bin/sh"].concat(expected));
-// }
+function run(request, expected) {
+  expect(executeScript(request)).toEqual(["#!/bin/sh"].concat(expected));
+}
 
-// function executeScript(request){
-//   return script('MacOs','Shell', request);
-// }
+function executeScript(request) {
+  return script('MacOs', 'Shell', request);
+}
 
-// describe('Given a request for MacOS and SH when scripted', () => {
+describe('Given a request when scripted for MacOS and SH ', () => {
 
-//   test('Comment', () => run(
-//     [{type: "Comment", name: "comment"}],
-//     ["#comment"]));
+  test('Header gives she-bang bin sh', () => run(
+    [{ type: "Header" }],
+    ["#!/bin/sh"]));
 
-//   test('Info', () => run(
-//     [{type: "Info", name:"Test Section"}],
-//     ["echo -e '==> Test Section'"]));
+  test('Comment gives a # comment', () => run(
+    [{ type: "Comment", comment: "comment" }],
+    ["#comment"]));
 
-//   test('Variable', () => run(
-//     [{type: "Variable", name:"name", value:"value"}],
-//     ["name=value"]));
+  test('Echo gives a ==> message', () => run(
+    [{ type: "Echo", message: "Test Section" }],
+    ["echo -e '==> Test Section'"]));
 
-//   test('ArchPackage', () => run(
-//     [{type: "ArchPackage", name:"arch"}],
-//     ["sudo pacman -S --noconfirm arch"]));
+  test('Variable gives a name=value', () => run(
+    [{ type: "Variable", name: "name", value: "value" }],
+    ["name=value"]));
 
-//   test('YayPackage', () => run(
-//     [{type: "YayPackage", name:"aur"}],
-//     ["yay -S --noconfirm aur"]));
+  test('Arch Package gives a pacman call', () => run(
+    [{ type: "pacman", package_name: "arch" }],
+    ["sudo pacman -S --noconfirm arch"]));
 
-//   test('BrewPackage', () => run(
-//     [{type: "BrewPackage", name:"brew"}],
-//     ["brew install brew"]));
+  test('Yay Package gives a yay call', () => run(
+    [{ type: "Yay", package_name: "aur" }],
+    ["yay -S --noconfirm aur"]));
 
-//   test('CaskPackage', () => run(
-//     [{type: "CaskPackage", name:"cask"}],
-//     ["brew cask install cask"]));
+  test('Brew Package', () => run(
+    [{ type: "Brew", package_name: "brew" }],
+    ["brew install brew"]));
 
-//   test('NpmPackage', () => run(
-//     [{type: "NpmPackage", name:"npm"}],
-//     ["npm install npm"]));
+  test('Cask Package', () => run(
+    [{ type: "Cask", package_name: "cask" }],
+    ["brew cask install cask"]));
 
-//   test('VsCodeExtension', () => run(
-//     [{type: "VsCodeExtension", name:"vsc"}],
-//     ["code --install-extension vsc"]));
+  test('Npm Package', () => run(
+    [{ type: "Npm", package_name: "npm" }],
+    ["npm install npm"]));
 
-//   test('HaskellStackInstall', () => run(
-//     [{type: "HaskellStackInstall", name:"package"}],
-//     ["stack install package"]));
+  test('VS code install extension', () => run(
+    [{ type: "code", extension_name: "vsc" }],
+    ["code --install-extension vsc"]));
 
-//   test('gitconfigglobal', () => run(
-//     [{type: "gitconfigglobal", name:"alias ga", value:"git action"}],
-//     ["git config --global alias ga 'git action'"]));
+  test('Haskell Stack Install', () => run(
+    [{ type: "Stack", package_name: "package" }],
+    ["stack install package"]));
 
-//   test('GitClone', () => run(
-//     [{type: "GitClone", name:"http://url.git"}],
-//     ["git clone http://url.git"]));
+  test('git config global', () => run(
+    [{ type: "gitconfig", name: "alias ga", value: "git action" }],
+    ["git config --global alias ga 'git action'"]));
 
-//   test('GitClone to target', () => run(
-//     [{type: "GitClone", name:"http://url-target.git", target:{operator:"None", path:"/user/home/two-x"}}],
-//     ["git clone http://url-target.git /user/home/two-x"]
-//     ));
+  test('Git Clone', () => run(
+    [{ type: "GitClone", uri: "http://url.git" }],
+    ["git clone http://url.git"]));
 
-//   test('GitClone with args to target ', () => run(
-//     [{type: "GitClone", name:"http://url-target-args.git", target:{operator:"None", path:"/user/home/two-x"}, args:"--depth=1"}],
-//     ["git clone http://url-target-args.git /user/home/two-x --depth=1"]
-//     ));
+  test('Git Clone to target', () => run(
+    [{ type: "GitClone", uri: "http://url-target.git", output_dir: "/user/home/two-x" }],
+    ["git clone http://url-target.git /user/home/two-x"]
+  ));
 
-//   test('GitClone with args', () => run(
-//     [{type: "GitClone", name:"http://url-target-args.git", args:"--depth=1"}],
-//     ["git clone http://url-target-args.git --depth=1"]
-//     ));
+  test('Git Clone with args to target ', () => run(
+    [{ type: "GitClone", uri: "http://url-target-args.git", output_dir: "/user/home/two-x", args: "--depth=1" }],
+    ["git clone http://url-target-args.git /user/home/two-x --depth=1"]
+  ));
 
-//   test('Curl', () => run(
-//     [{type: "Curl", name:"http://url.git"}],
-//     ["curl http://url.git"]
-//     ));
+  test('Git Clone with args', () => run(
+    [{ type: "GitClone", uri: "http://url-target-args.git", args: "--depth=1" }],
+    ["git clone http://url-target-args.git --depth=1"]
+  ));
 
-//   test('Curl with args', () => run(
-//     [{type: "Curl", name:"http://url-args.git", args:"-L"}],
-//     ["curl -L http://url-args.git"]
-//     ));
+  test('Curl', () => run(
+    [{ type: "Curl", uri: "http://url.git" }],
+    ["curl http://url.git"]
+  ));
 
-//   test('Curl with args to target', () => run(
-//     [{type: "Curl", name:"http://url-args-target.git", args:"-L", target:{operator:"Pipe", path:"sh"}}],
-//     ["curl -L http://url-args-target.git | sh"]
-//     ));
+  test('Curl with args', () => run(
+    [{ type: "Curl", uri: "http://url-args.git", args: "-L" }],
+    ["curl -L http://url-args.git"]
+  ));
 
-//   test('Curl to target', () => run(
-//     [{type: "Curl", name:"http://url-target.git", target:{operator:"Pipe", path:"sh"}}],
-//     ["curl http://url-target.git | sh"]
-//     ));
+  test('Curl with args to target', () => run(
+    [{ type: "Curl", uri: "http://url-args-target.git", args: "-L", target: { operator: "Pipe", path: "sh" } }],
+    ["curl -L http://url-args-target.git | sh"]
+  ));
 
-//   test('WriteToFile', () => run(
-//     [{type: "WriteToFile", name:"", value:":set prompt \"\\ESC[38;5;242m\\STX%s\n\\ESC[38;5;161m❯\\ESC[1;34mλ= \\ESC[0m\"", target:{operator:'RedirectOutput', path:"~/.ghci"}}],
-//     ["echo -e ':set prompt \"\\ESC[38;5;242m\\STX%s\n\\ESC[38;5;161m❯\\ESC[1;34mλ= \\ESC[0m\"' > ~/.ghci"]));
-//   });
+  test('Curl to target', () => run(
+    [{ type: "Curl", uri: "http://url-target.git", target: { operator: "Pipe", path: "sh" } }],
+    ["curl http://url-target.git | sh"]
+  ));
 
-
-// function runPackage(requests){
-//   let tokens = executeScript(requests);
-//   expect(tokens.length).toBeGreaterThan(2);
-//   expect(tokens[0]).toEqual("#!/bin/sh");
-// }
-
-// describe('Given a transformable request when scripted', () => {
-//   test('GitAliasPackage returns multiple lines', () => runPackage(
-//     [{type: "package", name:"gitglobal", value:"gitglobal"}] )  );
-
-//   test('FunctionPackageAsBash returns multiple lines', () => runPackage(
-//     [{type: "package", name:"git-alias", value:"bash", target:{operator:"RedirectOutputAppend", path:"/user/home/.bash_git_aliases"}}]));
-
-//   test('FunctionPackageAsFish returns multiple lines', () => runPackage(
-//     [{type: "package", name:"git-alias", value:"fish", target:{operator:"RedirectOutputAppend", path:"/user/home/.fish_git_aliases"} }]));
-// });
-
+  test('File', () => run(
+    [{ type: "File", content: "some content for a file", target: { operator: 'RedirectOutput', path: "~/.ghci" } }],
+    ["echo -e 'some content for a file' > ~/.ghci"]));
+});

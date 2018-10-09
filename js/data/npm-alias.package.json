@@ -1,5 +1,0 @@
-[
-  {"name":"ni", "value":"npm install ${@}"},
-  {"name":"ns", "value":"npm run start"},
-  {"name":"nt", "value":"npm run test"}
-]

@@ -1,6 +1,0 @@
-[
-  {"name":"pi", "value":"pulp init"},
-  {"name":"pb", "value":"pulp build"},
-  {"name":"pt", "value":"pulp test"},
-  {"name":"padd", "value":"bower install ${1} --save"}
-]

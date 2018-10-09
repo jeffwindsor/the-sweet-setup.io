@@ -1,42 +1,3 @@
-
-/**************************************************************
-  SOURCE HELPERS
-**************************************************************/
-// ?  ADD ABILITY TO PULL IN PACKAGE FILE FROM LOCAL OR URI
-
-function addFunctionPackage(name) {
-  addLineToSource("FunctionPackageAsFish", name, null, "RedirectOutputAppend", "/user/home/.fishrc");
-}
-function add(type) {
-  switch (type) {
-    case 'Comment': addLineToSource("Comment", "comment"); break;
-    case 'Info': addLineToSource("Info", "text"); break;
-    case 'Variable': addLineToSource("Variable", "var_name", "var_value"); break;
-    case 'ArchPackage': addLineToSource("ArchPackage", "packageName"); break;
-    case 'YayPackage': addLineToSource("YayPackage", "packageName"); break;
-    case 'BrewPackage': addLineToSource("BrewPackage", "packageName"); break;
-    case 'CaskPackage': addLineToSource("CaskPackage", "packageName"); break;
-    case 'NpmPackage': addLineToSource("NpmPackage", "packageName"); break;
-    case 'VsCodeExtension': addLineToSource("VsCodeExtension", "ext.name"); break;
-    case 'HaskellStackInstall': addLineToSource("HaskellStackInstall", "packageName"); break;
-
-    case 'WriteToFile': addLineToSource("WriteToFile", "comment", "content_to_write", "Write", ""); break;
-    case 'GitGlobal': addLineToSource("GitGlobal", "packageName"); break;
-    case 'GitClone': addLineToSource("GitClone", "packageName"); break;
-    case 'Curl': addLineToSource("Curl", "packageName"); break;
-
-    default:
-      break;
-  }
-}
-function addLineToSource(type, name, value, targetOperator, targetPath) {
-  var text = `{"type":"${type}", "name":"${name}"`;
-  if (value != null) { text += `, "value":"${value}"`; }
-  if (targetOperator != null && targetPath != null) { text += `, target:{"operator": "${targetOperator}", "path":"${targetPath}"`; }
-  text += "},\n"
-  document.getElementById("source").value += text;
-}
-
 /**************************************************************
   SCRIPTING HELPERS
 **************************************************************/
@@ -45,6 +6,11 @@ function scriptSource() {
   let values = "[" + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + "]";
   let results = script("MacOs", "Shell", JSON.parse(values));
   document.getElementById("target").value = _.join(results, "\n");
+}
+
+function clearSourceTarget() {
+  document.getElementById("source").value = "";
+  document.getElementById("target").value = "";
 }
 
 function downloadTarget() {
@@ -58,4 +24,35 @@ function downloadTarget() {
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
+}
+
+/**************************************************************
+  SOURCE HELPERS
+**************************************************************/
+// ?  ADD ABILITY TO PULL IN PACKAGE FILE FROM LOCAL OR URI
+function addToSource(addition) {
+  let add = JSON.stringify(addition, undefined, 2) + ",\n";
+  document.getElementById("source").value += add;
+}
+
+function add(type) {
+  switch (type) {
+    case 'comment': addToSource({ type: "comment", comment: "comment" }); break;
+    case 'echo': addToSource({ type: "echo", message: "message" }); break;
+    case 'variable': addToSource({ type: "variable", name: "name", value: "variable" }); break;
+    case 'pacman': addToSource({ type: "pacman", package_name: "package" }); break;
+    case 'yay': addToSource({ type: "yay", package_name: "package" }); break;
+    case 'brew': addToSource({ type: "brew", package_name: "package" }); break;
+    case 'cask': addToSource({ type: "cask", package_name: "package" }); break;
+    case 'npm': addToSource({ type: "npm", package_name: "package" }); break;
+    case 'code': addToSource({ type: "code", extension_name: "extension" }); break;
+    case 'stack': addToSource({ type: "stack", package_name: "package" }); break;
+    case 'file': addToSource({ type: "file", content: "content", target: { operator: "redirect", path: "path" } }); break;
+    case 'gitconfig': addToSource({ type: "gitconfig", name: "name", value: "value" }); break;
+    case 'gitclone': addToSource({ type: "gitclone", uri: "uri", args: "args", output_dir: "dir" }); break;
+    case 'curl': addToSource({ type: "curl", uri: "uri", args: "args", target: { operator: "redirect", path: "path" } }); break;
+
+    default:
+      break;
+  }
 }
