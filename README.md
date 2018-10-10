@@ -2,6 +2,7 @@
 
 A queryable and compose-able setup script generator.  A conversion of [the sweet setup](https://github.com/jeffwindsor/the-sweet-setup) into web based solution, while learning graphql.
 
+<a href="https://codeclimate.com/github/jeffwindsor/the-sweet-setup.io/maintainability"><img src="https://api.codeclimate.com/v1/badges/ab3d23ae4d50118d95ac/maintainability" /></a> <a href="https://codeclimate.com/github/jeffwindsor/the-sweet-setup.io/test_coverage"><img src="https://api.codeclimate.com/v1/badges/ab3d23ae4d50118d95ac/test_coverage" /></a>
 
 ## Dependencies
 
