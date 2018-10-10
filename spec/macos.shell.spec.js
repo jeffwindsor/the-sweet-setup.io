@@ -2,7 +2,7 @@
 //REWIRE PAGE JS TO ACT LIKE NODE MODULE
 const _ = require('lodash');
 const rewire = require('rewire');
-const scripting = rewire("../scripting.js");
+const scripting = rewire("../js/scripting.js");
 const script = scripting.__get__('script');
 const tokenize = scripting.__get__('tokenize');
 scripting.__set__("_", _);
