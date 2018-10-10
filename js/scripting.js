@@ -1,10 +1,8 @@
-// const _ = require('lodash');
-
 /***************************************************
 	SCRIPT
 ***************************************************/
 function script(os, language, requests) {
-  let header = [{ type: 'header', value:'#!/bin/sh' }];
+  let header = [{ type: 'header', value: '#!/bin/sh' }];
   let list = header.concat(requests);
   let tokens = _.flatMap(list, request => tokenize(request));
   let outputs = tokens.map(token => generate(os, language, token));
@@ -16,54 +14,37 @@ function script(os, language, requests) {
 ***************************************************/
 function tokenize(request) {
   switch (request.type.toLowerCase()) {
-
-    case 'header':
-      // ? does not consider language or OS
-      return { type:'comment', comment:'!/bin/sh'};
-
-    case 'fish':
-      return { type: 'file', content: buildFishFunction(request), target: request.target};
-
-    case 'bash':
-      return { type: 'file', content: buildBashFunction(request), target: request.target};
-
-    case 'vscode-package':
-      return _.map(request.extensions, i => {
-        return {type: 'code', extension_name: i.extension_name};
-      });
-
+    case 'header': return { type: 'comment', comment: '!/bin/sh' };
+    case 'fish': return { type: 'file', content: buildFishFunction(request), target: request.target };
+    case 'bash': return { type: 'file', content: buildBashFunction(request), target: request.target };
+    case 'vscode-package': return _.map(request.extensions, i => { 
+      return { type: 'code', extension_name: i.extension_name }; });
     case 'fish-package':
       return _.map(request.functions, i => {
-        let target = (request.target == null)
-          ? {operator:'redirect', path:`~/.config/fish/functions/${i.function_name}.fish`}
-          : request.target;
-        return { type: 'file', content: buildFishFunction(i), target: target};
+        return { type: 'file', content: buildFishFunction(i), target: buidlFishTarget(request.target) };
       });
-
-    case 'bash-package':
-      return _.map(request.functions, i => {
-        return { type: 'file', content: buildBashFunction(i), target: request.target};
-      });
-
-    case 'gitconfig-package':
-      return _.map(request.globals, i => {
-        return { type: 'gitconfig', name: i.name, value: i.value};
-      });
-
-    default:
-      return request;
+    case 'bash-package': return _.map(request.functions, i => { 
+      return { type: 'file', content: buildBashFunction(i), target: request.target }; });
+    case 'gitconfig-package': return _.map(request.globals, i => { 
+      return { type: 'gitconfig', name: i.name, value: i.value }; });
+    default: return request;
   }
 }
 
+function buidlFishTarget(target){
+  return (target == null)
+    ? { operator: 'redirect', path: `~/.config/fish/functions/${i.function_name}.fish` }
+    : target;
+}
 function buildBashFunction(request) {
-  return `function ${request.function_name}(){\n\t${request.function_body}\n}`;
+  return `function ${request.function_name}(){\n  ${request.function_body}\n}`;
 }
 
 function buildFishFunction(request) {
   var body = request.function_body
-                    .replace(/\{@\}/gim, 'argv')
-                    .replace(/\{(\d+)\}/gim, 'argv[$1]');
-  return `function ${request.function_name}\n\t${body}\nend`;
+    .replace(/\{@\}/gim, 'argv')
+    .replace(/\{(\d+)\}/gim, 'argv[$1]');
+  return `function ${request.function_name}\n  ${body}\nend`;
 }
 
 /***************************************************
@@ -85,7 +66,7 @@ function generateTargetOperator(target, f) { return (target == null) ? null : f(
 function generateSH(token) {
   switch (token.type.toLowerCase()) {
     case 'comment': return `#${token.comment}`;
-    case 'echo': return `echo -e '==> ${token.message}'`;
+    case 'echo': return `echo '==> ${token.message}'`;
     case 'variable': return `${token.name}=${token.value}`
     case 'pacman': return `sudo pacman -S --noconfirm ${token.package_name}`;
     case 'yay': return `yay -S --noconfirm ${token.package_name}`;
@@ -111,5 +92,3 @@ function generateTargetOperatorSH(operator) {
     default: return '???';
   }
 }
-
-// export {tokenize, script}

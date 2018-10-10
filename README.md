@@ -1,7 +1,10 @@
+# THE SWEET SETUP IO
+
 [Home](https://jeffwindsor.carrd.co/) > [Github](https://jeffwindsor.github.com) > [Projects](https://jeffwindsor.github.com/projects) > The Sweet Setup IO
 
 A queryable and compose-able setup script generator.  A conversion of [the sweet setup](https://github.com/jeffwindsor/the-sweet-setup) into web based solution, while learning graphql.
 
+<a href="https://codeclimate.com/github/jeffwindsor/the-sweet-setup.io/maintainability"><img src="https://api.codeclimate.com/v1/badges/ab3d23ae4d50118d95ac/maintainability" /></a> <a href="https://codeclimate.com/github/jeffwindsor/the-sweet-setup.io/test_coverage"><img src="https://api.codeclimate.com/v1/badges/ab3d23ae4d50118d95ac/test_coverage" /></a>
 
 ## Dependencies
 
@@ -31,7 +34,6 @@ echo "require('babel-register');\nrequire('./../src/index');" > ./bin/dev
 #Directories and Files
 mkdir server
 touch server/index.js
-touch server/schema.graphql
 
 #Git
 curl -L -s https://www.gitignore.io/api/node >> .gitignore
@@ -42,11 +44,15 @@ git commit -m 'Initial'
 `package.json` add the following for `npm run`:
 
 ```json
-"scripts": {
-    "start": "node src/index.js",
-    "dev":   "node bin/dev",
-    "test":  "jest"
-  }
+  "scripts": {
+    "test": "jest --coverage --colors --watchAll"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters":["lcov"],
+    "coverageDirectory":"spec",
+    "collectCoverageFrom": ["js/*.js"]
+  },
 ```
 
 `LICENSE` : [GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/#license-text)
