@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --colors --watchAll"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": ["js/*.js"]
   },
   "keywords": [],
   "author": "",
