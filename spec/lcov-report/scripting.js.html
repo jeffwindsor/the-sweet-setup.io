@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for scripting.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="index.html">All files</a> scripting.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/56</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/37</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/51</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/***************************************************
+	SCRIPT
+***************************************************/
+function <span class="fstat-no" title="function not covered" >script(os, language, requests) {</span>
+  let header = <span class="cstat-no" title="statement not covered" >[{ type: 'header', value: '#!/bin/sh' }];</span>
+  let list = <span class="cstat-no" title="statement not covered" >header.concat(requests);</span>
+  let tokens = <span class="cstat-no" title="statement not covered" >_.flatMap(list, <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >request =&gt; tokenize(request));</span></span></span>
+  let outputs = <span class="cstat-no" title="statement not covered" >tokens.map(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >token =&gt; generate(os, language, token));</span></span></span>
+<span class="cstat-no" title="statement not covered" >  return outputs;</span>
+}
+&nbsp;
+/***************************************************
+	TOKENIZE
+***************************************************/
+function <span class="fstat-no" title="function not covered" >tokenize(request) {</span>
+<span class="cstat-no" title="statement not covered" >  switch (request.type.toLowerCase()) {</span>
+    case 'header': <span class="cstat-no" title="statement not covered" >return { type: 'comment', comment: '!/bin/sh' };</span>
+    case 'fish': <span class="cstat-no" title="statement not covered" >return { type: 'file', content: buildFishFunction(request), target: request.target };</span>
+    case 'bash': <span class="cstat-no" title="statement not covered" >return { type: 'file', content: buildBashFunction(request), target: request.target };</span>
+    case 'vscode-package': <span class="cstat-no" title="statement not covered" >return _.map(request.extensions, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
+<span class="cstat-no" title="statement not covered" >      return { type: 'code', extension_name: i.extension_name }; });</span>
+    case 'fish-package':
+<span class="cstat-no" title="statement not covered" >      return _.map(request.functions, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
+<span class="cstat-no" title="statement not covered" >        return { type: 'file', content: buildFishFunction(i), target: buildFishTarget(i) };</span>
+      });
+    case 'bash-package': <span class="cstat-no" title="statement not covered" >return _.map(request.functions, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
+<span class="cstat-no" title="statement not covered" >      return { type: 'file', content: buildBashFunction(i), target: request.target }; });</span>
+    case 'gitconfig-package': <span class="cstat-no" title="statement not covered" >return _.map(request.globals, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
+<span class="cstat-no" title="statement not covered" >      return { type: 'gitconfig', name: i.name, value: i.value }; });</span>
+    default: <span class="cstat-no" title="statement not covered" >return request;</span>
+  }
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >buildFishTarget(request){</span>
+<span class="cstat-no" title="statement not covered" >  return (request.target == null)</span>
+    ? { operator: 'redirect', path: `~/.config/fish/functions/${request.function_name}.fish` }
+    : target;
+}
+function <span class="fstat-no" title="function not covered" >buildBashFunction(request) {</span>
+<span class="cstat-no" title="statement not covered" >  return `function ${request.function_name}(){\n  ${request.function_body}\n}`;</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >buildFishFunction(request) {</span>
+  var body = <span class="cstat-no" title="statement not covered" >request.function_body</span>
+    .replace(/\{@\}/gim, 'argv')
+    .replace(/\{(\d+)\}/gim, 'argv[$1]');
+<span class="cstat-no" title="statement not covered" >  return `function ${request.function_name}\n  ${body}\nend`;</span>
+}
+&nbsp;
+/***************************************************
+	GENERATE
+***************************************************/
+function <span class="fstat-no" title="function not covered" >generate(os, language, token) {</span>
+<span class="cstat-no" title="statement not covered" >  switch (language) {</span>
+    case 'Shell': <span class="cstat-no" title="statement not covered" >return generateSH(token);</span>
+    default: <span class="cstat-no" title="statement not covered" >return `language ${language} unknown`;</span>
+  }
+}
+function <span class="fstat-no" title="function not covered" >joinNotNull(...<span class="cstat-no" title="statement not covered" >xs) <span class="cstat-no" title="statement not covered" >{</span> <span class="cstat-no" title="statement not covered" >return _.join(_.filter(xs, <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>f) =&gt; f != null), ' '); }</span></span></span></span>
+function <span class="fstat-no" title="function not covered" >generateTargetPath(target) { <span class="cstat-no" title="statement not covered" >return (target == null) ? null : target.path; }</span></span>
+function <span class="fstat-no" title="function not covered" >generateTargetOperator(target, f) { <span class="cstat-no" title="statement not covered" >return (target == null) ? null : f(target.operator); }</span></span>
+&nbsp;
+/***************************************************
+	GENERATE - SH
+***************************************************/
+function <span class="fstat-no" title="function not covered" >generateSH(token) {</span>
+<span class="cstat-no" title="statement not covered" >  switch (token.type.toLowerCase()) {</span>
+    case 'comment': <span class="cstat-no" title="statement not covered" >return `#${token.comment}`;</span>
+    case 'echo': <span class="cstat-no" title="statement not covered" >return `echo '==&gt; ${token.message}'`;</span>
+    case 'variable': <span class="cstat-no" title="statement not covered" >return `${token.name}=${token.value}`</span>
+    case 'pacman': <span class="cstat-no" title="statement not covered" >return `sudo pacman -S --noconfirm ${token.package_name}`;</span>
+    case 'yay': <span class="cstat-no" title="statement not covered" >return `yay -S --noconfirm ${token.package_name}`;</span>
+    case 'brew': <span class="cstat-no" title="statement not covered" >return `brew install ${token.package_name}`;</span>
+    case 'cask': <span class="cstat-no" title="statement not covered" >return `brew cask install ${token.package_name}`;</span>
+    case 'npm': <span class="cstat-no" title="statement not covered" >return `npm install ${token.package_name}`;</span>
+    case 'code': <span class="cstat-no" title="statement not covered" >return `code --install-extension ${token.extension_name}`;</span>
+    case 'stack': <span class="cstat-no" title="statement not covered" >return `stack install ${token.package_name}`;</span>
+    case 'file': <span class="cstat-no" title="statement not covered" >return joinNotNull(`echo '${token.content}'`, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));</span>
+    case 'gitconfig': <span class="cstat-no" title="statement not covered" >return `git config --global ${token.name} '${token.value}'`;</span>
+    case 'gitclone': <span class="cstat-no" title="statement not covered" >return joinNotNull(`git clone ${token.uri}`, token.output_dir, token.args);</span>
+    case 'curl': <span class="cstat-no" title="statement not covered" >return joinNotNull(`curl`, token.args, token.uri, generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));</span>
+    default: <span class="cstat-no" title="statement not covered" >return '# ? TYPE UNKNOWN ' + token;</span>
+  }
+}
+function <span class="fstat-no" title="function not covered" >generateTargetOperatorSH(operator) {</span>
+<span class="cstat-no" title="statement not covered" >  switch (operator.toLowerCase()) {</span>
+    case null: <span class="cstat-no" title="statement not covered" >return '';</span>
+    case 'none': <span class="cstat-no" title="statement not covered" >return '';</span>
+    case 'pipe': <span class="cstat-no" title="statement not covered" >return '|';</span>
+    case 'redirect': <span class="cstat-no" title="statement not covered" >return '&gt;';</span>
+    case 'redirectappend': <span class="cstat-no" title="statement not covered" >return '&gt;&gt;';</span>
+    default: <span class="cstat-no" title="statement not covered" >return '???';</span>
+  }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 10 2018 13:19:18 GMT-0700 (Pacific Daylight Time)
+</div>
+</div>
+<script src="prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="sorter.js"></script>
+</body>
+</html>

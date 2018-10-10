@@ -6,6 +6,7 @@ function addPackage(name) {
 const shell_aliases = {
   type:"fish-package",
   functions: [
+    { function_name: "f", function_body: "functions ${1}" },
     { function_name: "l", function_body: "builtin ls -CF" },
     { function_name: "ll", function_body: "builtin ls -lhA" },
     { function_name: "lll", function_body: "builtin ls -lhFA | less" },

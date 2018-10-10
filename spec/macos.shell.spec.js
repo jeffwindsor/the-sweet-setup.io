@@ -2,7 +2,7 @@
 //REWIRE PAGE JS TO ACT LIKE NODE MODULE
 const _ = require('lodash');
 const rewire = require('rewire');
-const scripting = rewire("../js/scripting.js");
+const scripting = rewire("../src/scripting.js");
 const script = scripting.__get__('script');
 const tokenize = scripting.__get__('tokenize');
 scripting.__set__("_", _);
@@ -135,11 +135,11 @@ describe('Given a package request when scripted', () => {
       {function_name:"three", function_body:"body body body body body body"}
     ];
     let expected = [
-      {type:'file', content:"function one\n  body body\nend", target:{operator:"RedirectAppend", path:"/user/home/.fish_git_aliases"}},
-      {type:'file', content:"function two\n  body body body body\nend", target:{operator:"RedirectAppend", path:"/user/home/.fish_git_aliases"}},
-      {type:'file', content:"function three\n  body body body body body body\nend", target:{operator:"RedirectAppend", path:"/user/home/.fish_git_aliases"}}
+      {type:'file', content:"function one\n  body body\nend", target:{"operator": "redirect", "path": "~/.config/fish/functions/one.fish"}},
+      {type:'file', content:"function two\n  body body body body\nend", target:{"operator": "redirect", "path": "~/.config/fish/functions/two.fish"}},
+      {type:'file', content:"function three\n  body body body body body body\nend", target:{"operator": "redirect", "path": "~/.config/fish/functions/three.fish"}}
     ]
-    let actual = tokenize({type: "fish-package", functions: items, target:{operator:"RedirectAppend", path:"/user/home/.fish_git_aliases"}});
+    let actual = tokenize({type: "fish-package", functions: items});
 
     expect(actual).toEqual(expected);
   });

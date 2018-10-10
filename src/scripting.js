@@ -17,23 +17,23 @@ function tokenize(request) {
     case 'header': return { type: 'comment', comment: '!/bin/sh' };
     case 'fish': return { type: 'file', content: buildFishFunction(request), target: request.target };
     case 'bash': return { type: 'file', content: buildBashFunction(request), target: request.target };
-    case 'vscode-package': return _.map(request.extensions, i => { 
+    case 'vscode-package': return _.map(request.extensions, i => {
       return { type: 'code', extension_name: i.extension_name }; });
     case 'fish-package':
       return _.map(request.functions, i => {
-        return { type: 'file', content: buildFishFunction(i), target: buidlFishTarget(request.target) };
+        return { type: 'file', content: buildFishFunction(i), target: buildFishTarget(i) };
       });
-    case 'bash-package': return _.map(request.functions, i => { 
+    case 'bash-package': return _.map(request.functions, i => {
       return { type: 'file', content: buildBashFunction(i), target: request.target }; });
-    case 'gitconfig-package': return _.map(request.globals, i => { 
+    case 'gitconfig-package': return _.map(request.globals, i => {
       return { type: 'gitconfig', name: i.name, value: i.value }; });
     default: return request;
   }
 }
 
-function buidlFishTarget(target){
-  return (target == null)
-    ? { operator: 'redirect', path: `~/.config/fish/functions/${i.function_name}.fish` }
+function buildFishTarget(request){
+  return (request.target == null)
+    ? { operator: 'redirect', path: `~/.config/fish/functions/${request.function_name}.fish` }
     : target;
 }
 function buildBashFunction(request) {

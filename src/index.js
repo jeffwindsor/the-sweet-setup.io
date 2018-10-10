@@ -2,30 +2,32 @@
   EVENT HANDLERS
 **************************************************************/
 var timeout = null;
-function sourceOnKeyUp(e) {
+function checkEditCompleteThenScript() {
   clearTimeout(timeout);
   timeout = setTimeout(function () {
     scriptSource();
   }, 500);
 };
 
-/**************************************************************
-  SCRIPTING HELPERS
-**************************************************************/
 function scriptSource() {
   let input = document.getElementById('source').value.trim();
   let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
   let results = script('MacOs', 'Shell', JSON.parse(values));
   document.getElementById('target').value = _.join(results, '\n');
-  enableDownloadButton(true);
-}
+  isTargetEmpty(false);
+};
 
 function clearSourceAndTarget() {
   document.getElementById('source').value = '';
   document.getElementById('target').value = '';
-  enableDownloadButton(false);
-}
-function enableDownloadButton(isEnabled){document.getElementById('downloadButton').disabled = !isEnabled;}
+  isTargetEmpty(true);
+};
+
+function copyTargetContent() {
+  var copyText = document.getElementById("target");
+  copyText.select();
+  document.execCommand("copy");
+};
 
 function downloadTarget() {
   let data = document.getElementById('target').value;
@@ -40,9 +42,6 @@ function downloadTarget() {
   document.body.removeChild(element);
 }
 
-/**************************************************************
-  SOURCE HELPERS
-**************************************************************/
 // ?  ADD ABILITY TO PULL IN PACKAGE FILE FROM LOCAL OR URI
 function addToSource(addition) {
   let add = JSON.stringify(addition, undefined, 2) + ',\n';
@@ -70,4 +69,9 @@ function add(type) {
     default:
       break;
   }
+}
+
+function isTargetEmpty(bool){
+  document.getElementById('downloadButton').disabled = bool;
+  document.getElementById('copyButton').disabled = bool;
 }
