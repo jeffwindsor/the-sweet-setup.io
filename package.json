@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "jest --colors --watchAll"
+    "test": "jest --coverage --colors --watchAll"
   },
   "jest": {
     "collectCoverage": true,
+    "coverageReporters":["lcov"],
+    "coverageDirectory":"spec",
     "collectCoverageFrom": ["js/*.js"]
   },
   "keywords": [],
