@@ -52,7 +52,7 @@ const git_workflow = {
   type:"fish-package",
   functions: [
     { function_name: "gpush", function_body: "git push" },
-    { function_name: "gpull", function_body: "git pull --rebase --prune git submodule update --init --recursive" },
+    { function_name: "gpull", function_body: "git pull --rebase --prune\n  git submodule update --init --recursive" },
     { function_name: "gundo", function_body: "git reset HEAD~1 --mixed" },
     { function_name: "greset", function_body: "git add -A\n  git commit -qm \"CLEAN POINT\"\n  git reset HEAD~1 --hard\n  git clean -f -d" },
     { function_name: "ginit", function_body: "git init\n  gi osx >> .gitignore\n  echo \"READ.ME\" >> README.md\n  gcommit \"Initial\"\n  if test -n ${@}\n    gconnect $repo_uri\n    git push -u origin master\n  end" },
