@@ -1,5 +1,3 @@
-// const _ = require('lodash');
-
 /***************************************************
 	SCRIPT
 ***************************************************/
@@ -56,14 +54,14 @@ function tokenize(request) {
 }
 
 function buildBashFunction(request) {
-  return `function ${request.function_name}(){\n\t${request.function_body}\n}`;
+  return `function ${request.function_name}(){\n  ${request.function_body}\n}`;
 }
 
 function buildFishFunction(request) {
   var body = request.function_body
                     .replace(/\{@\}/gim, 'argv')
                     .replace(/\{(\d+)\}/gim, 'argv[$1]');
-  return `function ${request.function_name}\n\t${body}\nend`;
+  return `function ${request.function_name}\n  ${body}\nend`;
 }
 
 /***************************************************
@@ -85,7 +83,7 @@ function generateTargetOperator(target, f) { return (target == null) ? null : f(
 function generateSH(token) {
   switch (token.type.toLowerCase()) {
     case 'comment': return `#${token.comment}`;
-    case 'echo': return `echo -e '==> ${token.message}'`;
+    case 'echo': return `echo '==> ${token.message}'`;
     case 'variable': return `${token.name}=${token.value}`
     case 'pacman': return `sudo pacman -S --noconfirm ${token.package_name}`;
     case 'yay': return `yay -S --noconfirm ${token.package_name}`;
@@ -111,5 +109,3 @@ function generateTargetOperatorSH(operator) {
     default: return '???';
   }
 }
-
-// export {tokenize, script}
