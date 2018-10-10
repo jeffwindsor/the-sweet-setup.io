@@ -8,12 +8,6 @@ function sourceOnKeyUp(e) {
     scriptSource();
   }, 500);
 };
-function sourceOnKeyUp(e) {
-  clearTimeout(timeout);
-  timeout = setTimeout(function () {
-    scriptSource();
-  }, 500);
-};
 
 /**************************************************************
   SCRIPTING HELPERS
@@ -23,12 +17,15 @@ function scriptSource() {
   let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
   let results = script('MacOs', 'Shell', JSON.parse(values));
   document.getElementById('target').value = _.join(results, '\n');
+  enableDownloadButton(true);
 }
 
-function clearSourceTarget() {
+function clearSourceAndTarget() {
   document.getElementById('source').value = '';
   document.getElementById('target').value = '';
+  enableDownloadButton(false);
 }
+function enableDownloadButton(isEnabled){document.getElementById('downloadButton').disabled = !isEnabled;}
 
 function downloadTarget() {
   let data = document.getElementById('target').value;

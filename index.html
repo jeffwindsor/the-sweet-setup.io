@@ -59,23 +59,30 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-danger ml-2" onclick="clearSourceTarget()"><i class="fas fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-danger ml-2" onclick="clearSourceAndTarget()"><i class="fas fa-trash-alt"></i></button>
       </div>
       <!-- <button type="button" class="btn btn-dark ml-2" onclick="scriptSource()"><i class="fas fa-chevron-circle-down mr-2"></i>Script</button> -->
-      <button type="button" class="btn btn-dark ml-2" onclick="downloadTarget()"><i class="fas fa-download"></i></button>
+      <button type="button" id="downloadButton" class="btn btn-dark ml-2" onclick="downloadTarget()" disabled><i class="fas fa-download"></i></button>
     </nav>
   </header>
   <!-- CONTENTS -->
   <main class="container-fluid h-100" id="script-container">
     <div class="row h-100">
       <div class="col nopadding">
-        <textarea autofocus id="source" onkeyup="sourceOnKeyUp()"></textarea>
+        <textarea autofocus id="source" class="md-textarea form-control" onkeyup="sourceOnKeyUp()"></textarea>
       </div>
       <div class="col nopadding">
-        <textarea readonly id="target"></textarea>
+        <textarea readonly id="target" class="md-textarea form-control"></textarea>
       </div>
     </div>
   </main>
+
+  <!-- FOOTER -->
+  <nav class="navbar fixed-bottom navbar-expand-sm navbar-light bg-light">
+    <a class="nav-link" href="https://github.com/jeffwindsor/the-sweet-setup.io">View on<i class="fab fa-github ml-2"></i></a>
+    <div class="collapse navbar-collapse" id="navbarCollapse"></div>
+    <a class="nav-link" href="/help.html">Help<i class="fas fa-question-circle ml-2"></i></a>
+  </nav>
 </body>
 
 <!-- lodash -->
