@@ -34,7 +34,6 @@ echo "require('babel-register');\nrequire('./../src/index');" > ./bin/dev
 #Directories and Files
 mkdir server
 touch server/index.js
-touch server/schema.graphql
 
 #Git
 curl -L -s https://www.gitignore.io/api/node >> .gitignore
@@ -45,11 +44,15 @@ git commit -m 'Initial'
 `package.json` add the following for `npm run`:
 
 ```json
-"scripts": {
-    "start": "node src/index.js",
-    "dev":   "node bin/dev",
-    "test":  "jest"
-  }
+  "scripts": {
+    "test": "jest --coverage --colors --watchAll"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters":["lcov"],
+    "coverageDirectory":"spec",
+    "collectCoverageFrom": ["js/*.js"]
+  },
 ```
 
 `LICENSE` : [GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/#license-text)
