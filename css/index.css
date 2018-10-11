@@ -15,12 +15,11 @@ textarea.form-control {
     width: 100%;
     padding: 15px;
 }
+.nav-item a:hover { 
+    color: #CFB53B !important; 
+}
 
 .nopadding {
     padding: 0 !important;
     margin: 0 !important;
- }
-
- .white {
-   color: #FFFFFF;
  }

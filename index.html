@@ -25,53 +25,66 @@
 <body>
   <!-- NAVBAR -->
   <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#spanner" aria-controls="spanner"
-        aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><i class="fas fa-desktop mr-2"></i></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#" style="margin-right: 40px">
-        The Sweet Setup
-      </a>
-      <div class="collapse navbar-collapse" id="spanner">
-        <div class="btn-group ml-2">
-          <button type="button" class="btn btn-dark sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false"><i class="fas fa-plus-square mr-2"></i></button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases Package</a>
-            <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases Package</a>
-            <a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases Package</a>
-            <a class="dropdown-item" onclick="addPackage('haskell_stack_aliases')">Stack Aliases Package</a>
-            <a class="dropdown-item" onclick="addPackage('git_workflow')">Git Workflow Package</a>
-            <a class="dropdown-item" onclick="addPackage('git_aliases')">Git Aliases Package</a>
-            <a class="dropdown-item" onclick="addPackage('git_globals')">Git Globals Package</a>
-            <a class="dropdown-item" onclick="addPackage('vscode_extensions')">VSCode Extensions Package</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onclick="add('pacman')">Pacman</a>
-            <a class="dropdown-item" onclick="add('yay')">Yay</a>
-            <a class="dropdown-item" onclick="add('brew')">Brew</a>
-            <a class="dropdown-item" onclick="add('cask')">Cask</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onclick="add('comment')">Comment</a>
-            <a class="dropdown-item" onclick="add('echo')">Echo</a>
-            <a class="dropdown-item" onclick="add('variable')">Variable</a>
-            <a class="dropdown-item" onclick="add('npm')">Npm</a>
-            <a class="dropdown-item" onclick="add('code')">Code</a>
-            <a class="dropdown-item" onclick="add('stack')">Stack</a>
-            <a class="dropdown-item" onclick="add('file')">File</a>
-            <a class="dropdown-item" onclick="add('gitconfig')">Git Config</a>
-            <a class="dropdown-item" onclick="add('gitclone')">Git Clone</a>
-            <a class="dropdown-item" onclick="add('curl')">Curl</a>
-          </div>
-        </div>
-        <button type="button" class="btn btn-dark" onclick="clearSourceAndTarget()"><i class="fas fa-trash-alt"></i></button>
-        <button type="button" id="copyButton" class="btn btn-dark" onclick="copyTargetContent()" disabled><i class="fas fa-copy"></i></button>
-        <button type="button" id="downloadButton" class="btn btn-dark" onclick="downloadTarget()" disabled><i class="fas fa-download"></i></button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              add
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases Package</a>
+              <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases Package</a>
+              <a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases Package</a>
+              <a class="dropdown-item" onclick="addPackage('haskell_stack_aliases')">Stack Aliases Package</a>
+              <a class="dropdown-item" onclick="addPackage('git_workflow')">Git Workflow Package</a>
+              <a class="dropdown-item" onclick="addPackage('git_aliases')">Git Aliases Package</a>
+              <a class="dropdown-item" onclick="addPackage('git_globals')">Git Globals Package</a>
+              <a class="dropdown-item" onclick="addPackage('vscode_extensions')">VSCode Extensions Package</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" onclick="add('pacman')">Pacman</a>
+              <a class="dropdown-item" onclick="add('yay')">Yay</a>
+              <a class="dropdown-item" onclick="add('brew')">Brew</a>
+              <a class="dropdown-item" onclick="add('cask')">Cask</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" onclick="add('comment')">Comment</a>
+              <a class="dropdown-item" onclick="add('echo')">Echo</a>
+              <a class="dropdown-item" onclick="add('variable')">Variable</a>
+              <a class="dropdown-item" onclick="add('npm')">Npm</a>
+              <a class="dropdown-item" onclick="add('code')">Code</a>
+              <a class="dropdown-item" onclick="add('stack')">Stack</a>
+              <a class="dropdown-item" onclick="add('file')">File</a>
+              <a class="dropdown-item" onclick="add('gitconfig')">Git Config</a>
+              <a class="dropdown-item" onclick="add('gitclone')">Git Clone</a>
+              <a class="dropdown-item" onclick="add('curl')">Curl</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="clearSourceAndTarget()" href="#">reset</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" id="copy" onclick="copyTargetContent()" href="#">copy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" id="download" onclick="downloadTarget()" href="#">download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="help.html">docs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/jeffwindsor/the-sweet-setup.io">github</a>
+          </li>
+        </ul>
       </div>
-      <a class="nav-link" ref="https://github.com/jeffwindsor/the-sweet-setup.io"><i class="fab fa-github"></i></a>
-      <a class="nav-link" ref="help.html"><i class="fas fa-question-circle"></i></a>
-      </nav>
+    </nav>
   </header>
+
   <!-- CONTENTS -->
   <main class="container-fluid h-100" id="script-container">
     <div class="row h-100">
@@ -94,4 +107,5 @@
   crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
   crossorigin="anonymous"></script>
+
 </html>

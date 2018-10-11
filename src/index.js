@@ -72,6 +72,16 @@ function add(type) {
 }
 
 function isTargetEmpty(bool){
-  document.getElementById('downloadButton').disabled = bool;
-  document.getElementById('copyButton').disabled = bool;
+  let d = document.getElementById('download').classList;
+  let c = document.getElementById('copy').classList;
+  if(bool)
+  {
+    d.add('disabled');
+    c.add('disabled');
+  }
+  else
+  {
+    d.remove('disabled');
+    c.remove('disabled');
+  }
 }
