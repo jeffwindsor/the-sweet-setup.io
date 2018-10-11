@@ -23,35 +23,35 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <header>
-    <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><i class="fas fa-desktop mr-3"></i>The Sweet Setup</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" onclick="resetAreas()" href="#">reset</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="help.html">docs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/jeffwindsor/the-sweet-setup.io">github</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
   <!-- CONTENTS -->
   <main class="container-fluid h-100" id="script-container">
+    <div class="row">
+        <div class="col nopadding">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <a class="navbar-brand" href="#"><i class="fas fa-desktop mr-3"></i>The Sweet Setup</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="resetAreas()" href="#">reset</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="help.html">docs</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="https://github.com/jeffwindsor/the-sweet-setup.io">github</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+        </div>
+    </div>
     <div class="row h-100">
       <div class="col nopadding">
-        <ul class="nav">
+        <ul class="nav border">
           <li class="nav-item active dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">add</a>
             <div class="dropdown-menu">
@@ -91,7 +91,7 @@
         <textarea autofocus id="source" class="md-textarea form-control" onkeyup="checkEditCompleteThenScript()"></textarea>
       </div>
       <div class="col nopadding">
-          <ul class="nav">
+          <ul class="nav border">
               <li class="nav-item">
                 <a class="nav-link disabled" id="copytarget" onclick="copyArea('target')">copy</a>
               </li>
