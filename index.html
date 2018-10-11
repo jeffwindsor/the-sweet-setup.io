@@ -26,19 +26,35 @@
   <!-- NAVBAR -->
   <header>
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><i class="fas fa-desktop mr-2"></i></a>
+      <a class="navbar-brand" href="#"><i class="fas fa-desktop mr-3"></i>The Sweet Setup</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              add
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li class="nav-item">
+            <a class="nav-link" onclick="resetAreas()" href="#">reset</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="help.html">docs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/jeffwindsor/the-sweet-setup.io">github</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- CONTENTS -->
+  <main class="container-fluid h-100" id="script-container">
+    <div class="row h-100">
+      <div class="col nopadding">
+        <ul class="nav">
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">add</a>
+            <div class="dropdown-menu">
               <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases Package</a>
               <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases Package</a>
               <a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases Package</a>
@@ -66,32 +82,23 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" onclick="clearSourceAndTarget()" href="#">reset</a>
+            <a class="nav-link disabled" id="copysource" onclick="copyArea('source')">copy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" id="copy" onclick="copyTargetContent()" href="#">copy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" id="download" onclick="downloadTarget()" href="#">download</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="help.html">docs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/jeffwindsor/the-sweet-setup.io">github</a>
+            <a class="nav-link disabled" id="downloadsource" onclick="downloadArea('source')">download</a>
           </li>
         </ul>
-      </div>
-    </nav>
-  </header>
-
-  <!-- CONTENTS -->
-  <main class="container-fluid h-100" id="script-container">
-    <div class="row h-100">
-      <div class="col nopadding">
         <textarea autofocus id="source" class="md-textarea form-control" onkeyup="checkEditCompleteThenScript()"></textarea>
       </div>
       <div class="col nopadding">
+          <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link disabled" id="copytarget" onclick="copyArea('target')">copy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" id="downloadtarget" onclick="downloadArea('target')">download</a>
+              </li>
+            </ul>
         <textarea readonly id="target" class="md-textarea form-control"></textarea>
       </div>
     </div>

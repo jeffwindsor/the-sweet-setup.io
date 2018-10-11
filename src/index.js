@@ -5,48 +5,52 @@ var timeout = null;
 function checkEditCompleteThenScript() {
   clearTimeout(timeout);
   timeout = setTimeout(function () {
-    scriptSource();
+    scriptSourceToTarget();
   }, 500);
 };
 
-function scriptSource() {
+function scriptSourceToTarget() {
   let input = document.getElementById('source').value.trim();
   let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
   let results = script('MacOs', 'Shell', JSON.parse(values));
   document.getElementById('target').value = _.join(results, '\n');
-  isTargetEmpty(false);
 };
 
-function clearSourceAndTarget() {
+function resetAreas() {
   document.getElementById('source').value = '';
   document.getElementById('target').value = '';
-  isTargetEmpty(true);
 };
 
-function copyTargetContent() {
-  var copyText = document.getElementById("target");
+function copyArea(elemId) {
+  var copyText = document.getElementById(elemId);
   copyText.select();
   document.execCommand("copy");
 };
 
-function downloadTarget() {
-  let data = document.getElementById('target').value;
-
-  var element = document.createElement('a');
+function downloadArea(elemId) {
+  let data = document.getElementById(elemId).value;
+  let element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
-  element.setAttribute('download', 'yourSweetSetup.sh');
+  element.setAttribute('download', downloadFileName(elemId));
   element.style.display = 'none';
 
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
 }
+function downloadFileName(elemId){
+  switch (elemId) {
+    case 'target': return 'setup.sh';
+    case 'source': return 'source.json';
+    default: return '';
+  }
+}
 
 // ?  ADD ABILITY TO PULL IN PACKAGE FILE FROM LOCAL OR URI
 function addToSource(addition) {
   let add = JSON.stringify(addition, undefined, 2) + ',\n';
   document.getElementById('source').value += add;
-  scriptSource();
+  scriptSourceToTarget();
 }
 
 function add(type) {
@@ -68,20 +72,5 @@ function add(type) {
 
     default:
       break;
-  }
-}
-
-function isTargetEmpty(bool){
-  let d = document.getElementById('download').classList;
-  let c = document.getElementById('copy').classList;
-  if(bool)
-  {
-    d.add('disabled');
-    c.add('disabled');
-  }
-  else
-  {
-    d.remove('disabled');
-    c.remove('disabled');
   }
 }
