@@ -10,9 +10,9 @@ A queryable and compose-able setup script generator.  A conversion of [the sweet
 
 |Name|Notes|
 |---|---|
-|`babel` | [github](https://github.com/babel/babel)|
-|`jest` | [github](https://github.com/facebook/jest)|
-|`gitignore.io` |[gitignore.io](https://www.gitignore.io/)|
+|`babel` | for testing [github](https://github.com/babel/babel)|
+|`jest` | for testing [github](https://github.com/facebook/jest)|
+|`gitignore.io` | [gitignore.io](https://www.gitignore.io/)|
 
 <hr/>
 
