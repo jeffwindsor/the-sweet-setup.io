@@ -42,9 +42,11 @@ const npm_aliases = {
 const haskell_stack_aliases = {
   type:"fish-package",
   functions: [
-    { function_name: "sb", function_body: "stack clean\n  stack build" },
-    { function_name: "st", function_body: "stack test --file-watch" },
-    { function_name: "sr", function_body: "stack repl" },
+    { function_name: "s", function_body: "stack repl" },
+    { function_name: "sb", function_body: "stack build" },
+    { function_name: "sbc", function_body: "stack clean\n  stack build" },
+    { function_name: "st", function_body: "stack test" },
+    { function_name: "stf", function_body: "stack test --file-watch" },
     { function_name: "sd", function_body: "stack list-dependencies" }
   ]
 }
