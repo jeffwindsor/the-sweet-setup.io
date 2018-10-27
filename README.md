@@ -41,17 +41,20 @@ git init
 git commit -m 'Initial'
 ```
 
-`package.json` add the following for `npm run`:
+`package.json` adds:
 
 ```json
   "scripts": {
-    "test": "jest --coverage --colors --watchAll"
+    "test": "jest --coverage"
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters":["lcov"],
-    "coverageDirectory":"spec",
-    "collectCoverageFrom": ["js/*.js"]
+    "coverageReporters": [
+      "lcov"
+    ],
+    "collectCoverageFrom": [
+      "src/*.js"
+    ]
   },
 ```
 
