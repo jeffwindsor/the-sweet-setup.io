@@ -96,7 +96,7 @@ function addToSource(addition) {
 function loadJSON(jsonFile, callback) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
-  xobj.open('GET', `${jsonFile}.json`, true); // Replace 'my_data' with the path to your file
+  xobj.open('GET', `https://jeffwindsor.github.io/the-sweet-setup.io/data/${jsonFile}.json`, true); // Replace 'my_data' with the path to your file
   xobj.onreadystatechange = function () {
         alert(xobj.readyState + " " + xobj.status )
         if (xobj.readyState == 4 && xobj.status == "200") {
