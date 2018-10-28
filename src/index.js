@@ -38,20 +38,6 @@ function downloadArea(elemId) {
   element.click();
   document.body.removeChild(element);
 }
-function downloadFileName(elemId){
-  switch (elemId) {
-    case 'target': return 'setup.sh';
-    case 'source': return 'source.json';
-    default: return '';
-  }
-}
-
-// ?  ADD ABILITY TO PULL IN PACKAGE FILE FROM LOCAL OR URI
-function addToSource(addition) {
-  let add = JSON.stringify(addition, undefined, 2) + ',\n';
-  document.getElementById('source').value += add;
-  scriptSourceToTarget();
-}
 
 function add(type) {
   switch (type) {
@@ -73,4 +59,51 @@ function add(type) {
     default:
       break;
   }
+}
+
+function addPackage(name) {
+  addToSource(eval(name));
+}
+
+function addPackageFromFile(jsonFile) {
+  loadJSON(function(response) {
+   // Parse JSON string into object
+    alert(response);
+    var json = JSON.parse(response);
+    alert(json);
+    addToSource(json);
+  });
+ }
+
+/**************************************************************
+  HELPERS
+**************************************************************/
+function downloadFileName(elemId){
+  switch (elemId) {
+    case 'target': return 'setup.sh';
+    case 'source': return 'source.json';
+    default: return '';
+  }
+}
+
+// ?  ADD ABILITY TO PULL IN PACKAGE FILE FROM LOCAL OR URI
+function addToSource(addition) {
+  let add = JSON.stringify(addition, undefined, 2) + ',\n';
+  document.getElementById('source').value += add;
+  scriptSourceToTarget();
+}
+
+function loadJSON(callback) {
+  var xobj = new XMLHttpRequest();
+  xobj.overrideMimeType("application/json");
+  xobj.open('GET', `./shell_aliases.json`, false); // Replace 'my_data' with the path to your file
+  xobj.onreadystatechange = function () {
+        alert(xobj.readyState + " " + xobj.status )
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+          callback(xobj.responseText);
+        }
+  };
+  xobj.send(null); 
+  alert(complete); 
 }

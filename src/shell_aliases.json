@@ -1,0 +1,16 @@
+{
+  "type":"fish-package",
+  "functions": [
+    { "function_name": "f", "function_body": "functions ${1}" },
+    { "function_name": "l", "function_body": "builtin ls -CF" },
+    { "function_name": "ll", "function_body": "builtin ls -lhA" },
+    { "function_name": "lll", "function_body": "builtin ls -lhFA | less" },
+    { "function_name": "o", "function_body": "builtin open ." },
+    { "function_name": "c", "function_body": "code ." },
+    { "function_name": "cd..", "function_body": "cd .." },
+    { "function_name": "...", "function_body": "cd ../../" },
+    { "function_name": "....", "function_body": "cd ../../../" },
+    { "function_name": ".....", "function_body": "cd ../../../../" },
+    { "function_name": "evalinsubs", "function_body": "for d in (ls -d */ | cut -f1 -d\"/\")\n    cd $d\n    echo \"==> $d\"\n    eval ${@}\n    cd ..\n  end" }
+  ]
+}

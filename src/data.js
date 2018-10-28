@@ -1,7 +1,5 @@
 
-function addPackage(name) {
-  addToSource(eval(name));
-}
+
 
 const shell_aliases = {
   type:"fish-package",
