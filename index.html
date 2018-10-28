@@ -54,6 +54,7 @@
       <div class="col nopadding">
         
         <ul class="nav border">
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cubes"></i></a>
             <div class="dropdown-menu">
@@ -61,30 +62,30 @@
               <div class="dropdown-submenu">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Machine Script</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="addPackageFromFile('shell_aliases')">MacOs Developer</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('')">Manjaro Gnome3 Developer</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('')">Ubuntu Plex Server</a></li>
+                  <li><a class="dropdown-item" onclick="addMachineScript('macos_dev')">MacOs Developer</a></li>
+                  <li><a class="dropdown-item" onclick="addMachineScript('manjaro_dev')">Manjaro-Gnome3 Developer</a></li>
+                  <li><a class="dropdown-item" onclick="addMachineScript('ubuntu_plex')">Ubuntu Plex Server</a></li>
                 </ul>
               </div>
 
               <div class="dropdown-submenu">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">VM Script</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="addPackage('')">Manjaro Gnome3 Developer</a></li>
+                  <li><a class="dropdown-item" onclick="addVirtualMachineScript('manjaro_dev_vm')">Manjaro-Gnome3 Developer</a></li>
                 </ul>
               </div>
 
               <div class="dropdown-submenu">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Package</a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Scriptlet</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('haskell_stack_aliases')">Stack Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('git_workflow')">Git Workflow</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('git_aliases')">Git Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('git_globals')">Git Globals</a></li>
-                  <li><a class="dropdown-item" onclick="addPackage('vscode_extensions')">VSCode Extensions</a></li>
+                  <li><a class="dropdown-item" onclick="addScriptlet('shell_aliases')">Shell Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="addScriptlet('pulp_aliases')">Pulp Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="addScriptlet('npm_aliases')">Npm Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="addScriptlet('haskell_stack_aliases')">Stack Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="addScriptlet('git_workflow')">Git Workflow</a></li>
+                  <li><a class="dropdown-item" onclick="addScriptlet('git_aliases')">Git Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="addScriptlet('git_globals')">Git Globals</a></li>
+                  <li><a class="dropdown-item" onclick="addScriptlet('vscode_extensions')">VSCode Extensions</a></li>
                 </ul>
               </div>
               
@@ -109,30 +110,57 @@
                 </ul>
               </div>
 
+              <a class="dropdown-item" data-toggle="modal" data-target="#openUriModal">Remote Script</a>
             </div>
           </li>
           
           <li class="nav-item">
             <a class="nav-link disabled" id="copysource" onclick="copyArea('source')"><i class="fas fa-clipboard"></i></a>
           </li>
+
           <li class="nav-item">
             <a class="nav-link disabled" id="downloadsource" onclick="downloadArea('source')"><i class="fas fa-cloud-download-alt"></i></a>
           </li>
+
         </ul>
         <textarea autofocus id="source" class="md-textarea form-control" onkeyup="checkEditCompleteThenScript()"></textarea>
       </div>
       <div class="col nopadding">
           <ul class="nav border">
-              <li class="nav-item">
+
+            <li class="nav-item">
                 <a class="nav-link disabled" id="copytarget" onclick="copyArea('target')"><i class="fas fa-clipboard"></i></a>
               </li>
+
               <li class="nav-item">
                 <a class="nav-link disabled" id="downloadtarget" onclick="downloadArea('target')"><i class="fas fa-cloud-download-alt"></i></a>
               </li>
+
             </ul>
         <textarea readonly id="target" class="md-textarea form-control"></textarea>
       </div>
     </div>
+    
+    <div class="modal" id="openUriModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Remote Script</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input id="jsonUriText" type="text" class="form-control" placeholder="URI" aria-label="Uri">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="addFromUriModal()" data-dismiss="modal" >Ok</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
   </main>
 </body>
 

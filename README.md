@@ -37,7 +37,6 @@ echo "require('babel-register');\nrequire('./../src/index');" > ./bin/dev
 #Directories and Files
 mkdir src
 touch src/index.js
-touch src/data.js
 touch src/scripting.js
 mkdir css
 touch css/index.css

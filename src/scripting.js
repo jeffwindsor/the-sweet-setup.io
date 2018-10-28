@@ -36,6 +36,7 @@ function buildFishTarget(request){
     ? { operator: 'redirect', path: `~/.config/fish/functions/${request.function_name}.fish` }
     : target;
 }
+
 function buildBashFunction(request) {
   return `function ${request.function_name}(){\n  ${request.function_body}\n}`;
 }

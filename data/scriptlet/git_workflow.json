@@ -1,0 +1,17 @@
+{
+  "type":"fish-package",
+  "functions": [
+    { "function_name": "gpush", "function_body": "git push" },
+    { "function_name": "gpull", "function_body": "git pull --rebase --prune\n  git submodule update --init --recursive" },
+    { "function_name": "gundo", "function_body": "git reset HEAD~1 --mixed" },
+    { "function_name": "greset", "function_body": "git add -A\n  git commit -qm \"CLEAN POINT\"\n  git reset HEAD~1 --hard\n  git clean -f -d" },
+    { "function_name": "ginit", "function_body": "git init\n  gi osx >> .gitignore\n  echo \"READ.ME\" >> README.md\n  gcommit \"Initial\"\n  if test -n ${@}\n    gconnect $repo_uri\n    git push -u origin master\n  end" },
+    { "function_name": "gbranch", "function_body": "git checkout -b ${@}" },
+    { "function_name": "gcommit", "function_body": "git add -A\n  if test -n \"${@}\"\n        git commit -m \"${@}\"\n    else\n        git commit -m \"WIP\"\n    end" },
+    { "function_name": "gmerge", "function_body": "set merge_branch (git symbolic-ref HEAD | sed -e \"s,.*/\\(.*\\),\\1,\")\n  git checkout master\n  gpull\n  git rebase -i master\n  git merge $merge_branch" },
+    { "function_name": "gtrack", "function_body": "git checkout --track origin/${@}" },
+    { "function_name": "gforget", "function_body": "git rm -r --cached .\n  git add .\n  git commit -am \"Remove ignored files\"" },
+    { "function_name": "gmerge-ours", "function_body": "set merge_branch (git symbolic-ref HEAD | sed -e \"s,.*/\\(.*\\),\\1,\")\n git merge -s ours master\n  git checkout master\n  git merge $merge_branch" },
+    { "function_name": "gi", "function_body": "curl -L -s https://www.gitignore.io/api/${1}" }
+  ]
+}

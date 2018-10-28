@@ -1,0 +1,22 @@
+{
+  "type":"vscode-package",
+  "extensions": [
+    { "extension_name": "aaron-bond.better-comments" },
+    { "extension_name": "andys8.jest-snippets" },
+    { "extension_name": "dcasella.monokai-plusplus" },
+    { "extension_name": "dracula-theme.theme-dracula" },
+    { "extension_name": "eamodio.gitlens" },
+    { "extension_name": "file-icons.file-icons" },
+    { "extension_name": "ginfuru.ginfuru-better-solarized-dark-theme" },
+    { "extension_name": "justusadam.language-haskell" },
+    { "extension_name": "ms-python.python" },
+    { "extension_name": "nwolverson.language-purescript" },
+    { "extension_name": "Orta.vscode-jest" },
+    { "extension_name": "PKief.material-icon-theme" },
+    { "extension_name": "Prisma.vscode-graphql" },
+    { "extension_name": "skyapps.fish-vscode" },
+    { "extension_name": "streetsidesoftware.code-spell-checker" },
+    { "extension_name": "tomoki1207.pdf" },
+    { "extension_name": "wmaurer.change-case" }
+  ]
+}

@@ -1,5 +1,8 @@
+
+var dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data'
+
 /**************************************************************
-  EVENT HANDLERS
+  Page Functions
 **************************************************************/
 var timeout = null;
 function checkEditCompleteThenScript() {
@@ -11,6 +14,7 @@ function checkEditCompleteThenScript() {
 
 function scriptSourceToTarget() {
   let input = document.getElementById('source').value.trim();
+  //remove any trailing comma from content and place in array
   let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
   let results = script('MacOs', 'Shell', JSON.parse(values));
   document.getElementById('target').value = _.join(results, '\n');
@@ -61,19 +65,25 @@ function add(type) {
   }
 }
 
-function addPackage(name) {
-  addToSource(eval(name));
+function addScript(filename){
+  addFromUri(`${dataUri}/${filename}.json`);
 }
 
-function addPackageFromFile(jsonFile) {
-  loadJSON(jsonFile, function(response) {
-   // Parse JSON string into object
-    alert(response);
+function addScriptlet(filename){
+  addFromUri(`${dataUri}/scriptlet/${filename}.json`);
+}
+
+function addFromUriModal() {
+  var uri = document.getElementById('jsonUriText').value;
+  addFromUri(uri);
+}
+
+function addFromUri(uri) {
+  loadJSON(uri, function(response) {
     var json = JSON.parse(response);
-    alert(json);
     addToSource(json);
   });
- }
+}
 
 /**************************************************************
   HELPERS
@@ -93,17 +103,18 @@ function addToSource(addition) {
   scriptSourceToTarget();
 }
 
-function loadJSON(jsonFile, callback) {
+function loadJSON(uri, callback) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
-  xobj.open('GET', `https://jeffwindsor.github.io/the-sweet-setup.io/data/${jsonFile}.json`, true); // Replace 'my_data' with the path to your file
+  xobj.open('GET', uri, true); // Replace 'my_data' with the path to your file
   xobj.onreadystatechange = function () {
-        alert(xobj.readyState + " " + xobj.status )
+        if (xobj.readyState == 4 && xobj.status == "404") {
+          alert(`${uri} not found, try again.`)
+        }
         if (xobj.readyState == 4 && xobj.status == "200") {
           // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
           callback(xobj.responseText);
         }
   };
-  xobj.send(null); 
-  alert(complete); 
+  xobj.send(null);
 }

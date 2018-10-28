@@ -1,0 +1,18 @@
+{
+  "type":"gitconfig-package",
+  "globals": [
+    { "name": "alias.s", "value": "status -sb --ignore-submodules" },
+    { "name": "alias.d", "value": "diff" },
+    { "name": "alias.aa", "value": "add --all" },
+    { "name": "alias.cm", "value": "commit -m" },
+    { "name": "alias.cma", "value": "commit -a -m" },
+    { "name": "alias.b", "value": "branch" },
+    { "name": "alias.co", "value": "checkout" },
+    { "name": "alias.cob", "value": "checkout -b" },
+    { "name": "alias.pff", "value": "pull --ff-only" },
+    { "name": "alias.mff", "value": "merge --ff-only" },
+    { "name": "alias.size", "value": "count-objects -vH" },
+    { "name": "alias.remove", "value": "rm -r --cached ." },
+    { "name": "alias.hist", "value": "log --graph --max-count=100 --pretty=format:\"%C(green)%h%C(reset) | %C(yellow)%d%C(reset) %s %C(cyan)%an : %C(dim)%cr%C(reset)\" --abbrev-commit" }
+  ]
+}
