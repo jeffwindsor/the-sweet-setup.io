@@ -66,7 +66,7 @@ function addPackage(name) {
 }
 
 function addPackageFromFile(jsonFile) {
-  loadJSON(function(response) {
+  loadJSON(jsonFile, function(response) {
    // Parse JSON string into object
     alert(response);
     var json = JSON.parse(response);
@@ -93,10 +93,10 @@ function addToSource(addition) {
   scriptSourceToTarget();
 }
 
-function loadJSON(callback) {
+function loadJSON(jsonFile, callback) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
-  xobj.open('GET', `./shell_aliases.json`, false); // Replace 'my_data' with the path to your file
+  xobj.open('GET', `${jsonFile}.json`, true); // Replace 'my_data' with the path to your file
   xobj.onreadystatechange = function () {
         alert(xobj.readyState + " " + xobj.status )
         if (xobj.readyState == 4 && xobj.status == "200") {
