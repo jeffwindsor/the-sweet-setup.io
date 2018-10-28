@@ -13,32 +13,38 @@ function script(os, language, requests) {
 	TOKENIZE
 ***************************************************/
 function tokenize(request) {
+
+  //scriptlet format (plural type)
+  if(request.type.toLowerCase().endsWith("s")){
+    return _.map(request.items, item => {
+      return tokenize(mergeScriptletItem(request, item));
+    });
+  }
+
+  //command format (non-plural type)
   switch (request.type.toLowerCase()) {
     case 'header': return { type: 'comment', comment: '!/bin/sh' };
-    case 'fish': return { type: 'file', content: buildFishFunction(request), target: request.target };
-    case 'bash': return { type: 'file', content: buildBashFunction(request), target: request.target };
-    case 'vscode-package': return _.map(request.extensions, i => {
-      return { type: 'code', extension_name: i.extension_name }; });
-    case 'fish-package':
-      return _.map(request.functions, i => {
-        return { type: 'file', content: buildFishFunction(i), target: buildFishTarget(i) };
-      });
-    case 'bash-package': return _.map(request.functions, i => {
-      return { type: 'file', content: buildBashFunction(i), target: request.target }; });
-    case 'gitconfig-package': return _.map(request.globals, i => {
-      return { type: 'gitconfig', name: i.name, value: i.value }; });
+    case 'fish-function': return { type: 'file', content: buildFishFunction(request), target: buildFishTarget(request)  };
+    case 'bash-function': return { type: 'file', content: buildBashFunction(request), target: buildBashTarget(request) };
+    case 'vscode-extension': return { type: 'code', extension_name: i.extension_name }; 
     default: return request;
   }
 }
 
-function buildFishTarget(request){
-  return (request.target == null)
-    ? { operator: 'redirect', path: `~/.config/fish/functions/${request.function_name}.fish` }
-    : target;
+function mergeScriptletItem(request, item){
+  //transfer type as singular and copy target if present
+  return (request.target==null) 
+    ? { type:request.type.toLowerCase().slice(0, -1), ...item } 
+    : { type:request.type.toLowerCase().slice(0, -1), ...item, target:{...request.target} };
 }
 
 function buildBashFunction(request) {
   return `function ${request.function_name}(){\n  ${request.function_body}\n}`;
+}
+function buildBashTarget(request){
+  return (request.target == null)
+    ? { operator: 'redirectappend', path: `~/.bashrc` }
+    : {...request.target};
 }
 
 function buildFishFunction(request) {
@@ -46,6 +52,11 @@ function buildFishFunction(request) {
     .replace(/\{@\}/gim, 'argv')
     .replace(/\{(\d+)\}/gim, 'argv[$1]');
   return `function ${request.function_name}\n  ${body}\nend`;
+}
+function buildFishTarget(request){
+  return (request.target == null)
+    ? { operator: 'redirect', path: `~/.config/fish/functions/${request.function_name}.fish` }
+    : {...request.target};
 }
 
 /***************************************************

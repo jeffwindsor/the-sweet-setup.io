@@ -1,6 +1,6 @@
 {
-  "type":"fish-package",
-  "functions": [
+  "type":"fish-functions",
+  "items": [
     { "function_name": "gpush", "function_body": "git push" },
     { "function_name": "gpull", "function_body": "git pull --rebase --prune\n  git submodule update --init --recursive" },
     { "function_name": "gundo", "function_body": "git reset HEAD~1 --mixed" },

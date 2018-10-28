@@ -248,15 +248,15 @@ function <span class="fstat-no" title="function not covered" >tokenize(request) 
     case 'header': <span class="cstat-no" title="statement not covered" >return { type: 'comment', comment: '!/bin/sh' };</span>
     case 'fish': <span class="cstat-no" title="statement not covered" >return { type: 'file', content: buildFishFunction(request), target: request.target };</span>
     case 'bash': <span class="cstat-no" title="statement not covered" >return { type: 'file', content: buildBashFunction(request), target: request.target };</span>
-    case 'vscode-package': <span class="cstat-no" title="statement not covered" >return _.map(request.extensions, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
+    case 'vscode-extensions': <span class="cstat-no" title="statement not covered" >return _.map(request.extensions, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
 <span class="cstat-no" title="statement not covered" >      return { type: 'code', extension_name: i.extension_name }; });</span>
-    case 'fish-package':
+    case 'fish-functions':
 <span class="cstat-no" title="statement not covered" >      return _.map(request.functions, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
 <span class="cstat-no" title="statement not covered" >        return { type: 'file', content: buildFishFunction(i), target: buildFishTarget(i) };</span>
       });
-    case 'bash-package': <span class="cstat-no" title="statement not covered" >return _.map(request.functions, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
+    case 'bash-functions': <span class="cstat-no" title="statement not covered" >return _.map(request.functions, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
 <span class="cstat-no" title="statement not covered" >      return { type: 'file', content: buildBashFunction(i), target: request.target }; });</span>
-    case 'gitconfig-package': <span class="cstat-no" title="statement not covered" >return _.map(request.globals, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
+    case 'gitconfigs': <span class="cstat-no" title="statement not covered" >return _.map(request.globals, <span class="fstat-no" title="function not covered" >i =&gt; </span>{</span>
 <span class="cstat-no" title="statement not covered" >      return { type: 'gitconfig', name: i.name, value: i.value }; });</span>
     default: <span class="cstat-no" title="statement not covered" >return request;</span>
   }

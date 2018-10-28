@@ -1,6 +1,6 @@
 {
-  "type":"gitconfig-package",
-  "globals": [
+  "type":"gitconfigs",
+  "items": [
     { "name": "alias.s", "value": "status -sb --ignore-submodules" },
     { "name": "alias.d", "value": "diff" },
     { "name": "alias.aa", "value": "add --all" },

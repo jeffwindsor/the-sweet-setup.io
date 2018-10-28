@@ -313,7 +313,7 @@ function <span class="fstat-no" title="function not covered" >addScriptlet(name)
 }
 &nbsp;
 const shell_aliases = <span class="cstat-no" title="statement not covered" >{</span>
-  type:"fish-package",
+  type:"fish-functions",
   functions: [
     { function_name: "f", function_body: "functions" },
     { function_name: "l", function_body: "builtin ls -CF" },
@@ -330,7 +330,7 @@ const shell_aliases = <span class="cstat-no" title="statement not covered" >{</s
 }
 &nbsp;
 const pulp_aliases = <span class="cstat-no" title="statement not covered" >{</span>
-  type:"fish-package",
+  type:"fish-functions",
   functions: [
     { function_name: "pi", function_body: "pulp init" },
     { function_name: "pb", function_body: "pulp build" },
@@ -340,7 +340,7 @@ const pulp_aliases = <span class="cstat-no" title="statement not covered" >{</sp
 }
 &nbsp;
 const npm_aliases = <span class="cstat-no" title="statement not covered" >{</span>
-  type:"fish-package",
+  type:"fish-functions",
   functions: [
     { function_name: "ni", function_body: "npm install ${@}" },
     { function_name: "ns", function_body: "npm run start" },
@@ -349,7 +349,7 @@ const npm_aliases = <span class="cstat-no" title="statement not covered" >{</spa
 }
 &nbsp;
 const haskell_stack_aliases = <span class="cstat-no" title="statement not covered" >{</span>
-  type:"fish-package",
+  type:"fish-functions",
   functions: [
     { function_name: "sb", function_body: "stack clean\n  stack build" },
     { function_name: "st", function_body: "stack test --file-watch" },
@@ -359,7 +359,7 @@ const haskell_stack_aliases = <span class="cstat-no" title="statement not covere
 }
 &nbsp;
 const git_workflow = <span class="cstat-no" title="statement not covered" >{</span>
-  type:"fish-package",
+  type:"fish-functions",
   functions: [
     { function_name: "gpush", function_body: "git push" },
     { function_name: "gpull", function_body: "git pull --rebase --prune\n  git submodule update --init --recursive" },
@@ -377,7 +377,7 @@ const git_workflow = <span class="cstat-no" title="statement not covered" >{</sp
 }
 &nbsp;
 const git_aliases = <span class="cstat-no" title="statement not covered" >{</span>
-  type:"fish-package",
+  type:"fish-functions",
   functions: [
     { function_name: "gs", function_body: "git status -sb --ignore-submodules" },
     { function_name: "gd", function_body: "git diff" },
@@ -400,7 +400,7 @@ const git_aliases = <span class="cstat-no" title="statement not covered" >{</spa
 }
 &nbsp;
 const git_globals = <span class="cstat-no" title="statement not covered" >{</span>
-  type:"gitconfig-package",
+  type:"gitconfigs",
   globals: [
     { name: "alias.s", value: "status -sb --ignore-submodules" },
     { name: "alias.d", value: "diff" },
@@ -419,7 +419,7 @@ const git_globals = <span class="cstat-no" title="statement not covered" >{</spa
 }
 &nbsp;
 const vscode_extensions = <span class="cstat-no" title="statement not covered" >{</span>
-  type:"vscode-package",
+  type:"vscode-extensions",
   extensions: [
     { extension_name: "aaron-bond.better-comments" },
     { extension_name: "andys8.jest-snippets" },

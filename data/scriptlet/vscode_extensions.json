@@ -1,6 +1,6 @@
 {
   "type":"vscode-package",
-  "extensions": [
+  "items": [
     { "extension_name": "aaron-bond.better-comments" },
     { "extension_name": "andys8.jest-snippets" },
     { "extension_name": "dcasella.monokai-plusplus" },

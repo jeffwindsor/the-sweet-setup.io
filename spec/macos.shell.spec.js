@@ -18,10 +18,6 @@ function executeScript(request) {
 
 describe('Given a request when scripted for MacOS and SH ', () => {
 
-  test('Header gives she-bang bin sh', () => run(
-    [{ type: "Header" }],
-    ["#!/bin/sh"]));
-
   test('Comment gives a # comment', () => run(
     [{ type: "Comment", comment: "comment" }],
     ["#comment"]));
@@ -110,85 +106,122 @@ describe('Given a request when scripted for MacOS and SH ', () => {
     ["echo 'some content for a file' > ~/.ghci"]));
 });
 
-describe('Given a package request when scripted', () => {
+describe('Given a scriptlet (defined by a type which is plural)', () => {
 
-  test('vscode-package returns code items with ext name', () => {
+  test('each item has all properties transfered', () => {
     let items = [
-      {extension_name:"one"},
-      {extension_name:"two"},
-      {extension_name:"three"}
-    ];
+      {name:"one", other:"1"},
+      {name:"two", other:"2"},
+      {name:"three", other:"3"}
+    ];     
     let expected = [
-      {type:'code', extension_name:"one"},
-      {type:'code', extension_name:"two"},
-      {type:'code', extension_name:"three"}
+      {type:"", name:"one", other:"1"},
+      {type:"", name:"two", other:"2"},
+      {type:"", name:"three", other:"3"}
     ]
-    let actual = tokenize({type: "vscode-package", extensions:items});
-
+    let actual = tokenize({type: "s", items:items});
     expect(actual).toEqual(expected);
   });
 
-  test('fish-package returns file items with serialized body', () => {
-    let items = [
-      {function_name:"one", function_body:"body body"},
-      {function_name:"two", function_body:"body body body body"},
-      {function_name:"three", function_body:"body body body body body body"}
-    ];
-    let expected = [
-      {type:'file', content:"function one\n  body body\nend", target:{"operator": "redirect", "path": "~/.config/fish/functions/one.fish"}},
-      {type:'file', content:"function two\n  body body body body\nend", target:{"operator": "redirect", "path": "~/.config/fish/functions/two.fish"}},
-      {type:'file', content:"function three\n  body body body body body body\nend", target:{"operator": "redirect", "path": "~/.config/fish/functions/three.fish"}}
-    ]
-    let actual = tokenize({type: "fish-package", functions: items});
-
+  test('each item has a type equal to singular version of type', () => {
+    let expected = [ {type:"fake"}, {type:"fake"}, {type:"fake"} ];
+    let actual = tokenize({type: "fakes", items:[ {}, {}, {} ]});
+    expect(actual).toEqual(expected);
+  });
+  
+  test('target is copied if present', () => {
+    let expected = [ {type: "", target:{ prop:"something"}}, {type: "", target:{ prop:"something"}}, {type: "", target:{ prop:"something"}} ]
+    let actual = tokenize({type: "s", target:{ prop:"something"}, items:[ {}, {}, {} ]});
     expect(actual).toEqual(expected);
   });
 
-  test('bash-package returns file items with serialized body', () => {
-    let items = [
-      {function_name:"one", function_body:"body body"},
-      {function_name:"two", function_body:"body body body body"},
-      {function_name:"three", function_body:"body body body body body body"}
-    ];
-    let expected = [
-      {type:'file', content:"function one(){\n  body body\n}", target:{operator:"RedirectAppend", path:"/user/home/.fish_git_aliases"}},
-      {type:'file', content:"function two(){\n  body body body body\n}", target:{operator:"RedirectAppend", path:"/user/home/.fish_git_aliases"}},
-      {type:'file', content:"function three(){\n  body body body body body body\n}", target:{operator:"RedirectAppend", path:"/user/home/.fish_git_aliases"}}
-    ]
-    let actual = tokenize({type: "bash-package", functions: items, target:{operator:"RedirectAppend", path:"/user/home/.fish_git_aliases"}});
+  test('target is copied not assigned by reference', () => {
+    let expected = [ {type: "", target:{ prop:"something"}}, {type: "", target:{ prop:"something"}} ]
+    let actual = tokenize({type: "s", target:{ prop:"something"}, items:[ {}, {} ]});
+    actual[0].target.prop="something_else";
 
-    expect(actual).toEqual(expected);
+    expect(actual[0].target.prop).toEqual("something_else");
+    expect(actual[1].target.prop).toEqual("something");
   });
 
-  test('gitconfig-package returns git config items with target', () => {
-    let items = [
-      {name:"one", value:"body body"},
-      {name:"two", value:"body body body body"},
-      {name:"three", value:"body body body body body body"}
-    ];
-    let expected = [
-      {type:'gitconfig', name:"one", value:"body body"},
-      {type:'gitconfig', name:"two", value:"body body body body"},
-      {type:'gitconfig', name:"three", value:"body body body body body body"}
-    ]
-    let actual = tokenize({type: "gitconfig-package", globals: items});
-
+  test('transformation is recursive ensuring procesing to base type', () => {
+    //known single is further transformed to is mosst base level, header -> comment
+    let expected = [ {type:"comment", comment: "!/bin/sh"}, {type:"comment", comment: "!/bin/sh"} ];
+    let actual = tokenize({type: "headers", items:[ {}, {} ]});
     expect(actual).toEqual(expected);
   });
 
 });
 
-describe('Given a Fish Shell Function when scripted', () => {
+describe('Header scripting', () => {
+  test('transformed into comment of bash script sha-bang', () => run(
+      [{ type: "Header" }],
+      ["#!/bin/sh"]  
+    ));
+  });
 
-  test('Then all ${@} are replaced with $argv', () => {
-    let actual = tokenize({type: "fish", function_name:"myfunction", function_body:"somestuff with ${@}"});
-    let expected = {type: "file", content:"function myfunction\n  somestuff with $argv\nend"};
+describe('Fish Function scripting', () => {
+  test('transformed to file type with content in fish function body outputted to fish function in config', () => {
+    let actual = tokenize({type: "fish-function", function_name:"myfunction", function_body:"somestuff"});
+    let expected = {type: "file", content:"function myfunction\n  somestuff\nend", "target": {"operator": "redirect", "path": "~/.config/fish/functions/myfunction.fish"}};
     expect(actual).toEqual(expected);
   });
 
-  test('Then all ${#} are replaced with $argv[#]', () => {
-    let actual = tokenize({type: "fish", function_name:"myfunction", function_body:"somestuff with ${1} ${2} ${999}"});
-    let expected = {type: "file", content:"function myfunction\n  somestuff with $argv[1] $argv[2] $argv[999]\nend"};
+  test('target is transferred if given', () => {
+    let actual = tokenize({type: "fish-function", function_name:"myfunction", function_body:"somestuff", target:{other:"something"} });
+    let expected = {type: "file", content:"function myfunction\n  somestuff\nend", target: {other:"something"}};
     expect(actual).toEqual(expected);
+  });
+
+  test('target is copied, not by reference', () => {
+    let original = {type: "fish-function", function_name:"myfunction", function_body:"somestuff", target:{other:"something"} };
+    let actual = tokenize(original);
+    original.target.other = "something_else";
+    expect(actual.target.other).toEqual("something");
+  });
+  
+  test('args are $argv', () => {
+    let actual = tokenize({type: "fish-function", function_name:"myfunction", function_body:"somestuff with ${@}"});
+    expect(actual.content).toContain("$argv");
+  });
+
+  test('numbered args $argv[#]', () => {
+    let actual = tokenize({type: "fish-function", function_name:"myfunction", function_body:"somestuff with ${1} ${2} ${999}"});
+    expect(actual.content).toContain("$argv[1]");
+    expect(actual.content).toContain("$argv[2]");
+    expect(actual.content).toContain("$argv[999]");
+  });
+});
+
+describe('Bash Function scripting', () => {
+  test('transformed to file type with content in bash function body appeneded to bashrc', () => {
+    let actual = tokenize({type: "bash-function", function_name:"myfunction", function_body:"somestuff"});
+    let expected = {type: "file", content:"function myfunction(){\n  somestuff\n}", "target": {"operator": "redirectappend", "path": "~/.bashrc"}};
+    expect(actual).toEqual(expected);
+  });
+
+  test('target is transferred if given', () => {
+    let actual = tokenize({type: "bash-function", function_name:"myfunction", function_body:"somestuff", target:{other:"something"} });
+    let expected = {type: "file", content:"function myfunction(){\n  somestuff\n}", target: {other:"something"}};
+    expect(actual).toEqual(expected);
+  });
+
+  test('target is copied, not by reference', () => {
+    let original = {type: "bash-function", function_name:"myfunction", function_body:"somestuff", target:{other:"something"} };
+    let actual = tokenize(original);
+    original.target.other = "something_else";
+    expect(actual.target.other).toEqual("something");
+  });
+  
+  test('args are ${@}', () => {
+    let actual = tokenize({type: "bash-function", function_name:"myfunction", function_body:"somestuff with ${@}"});
+    expect(actual.content).toContain("${@}");
+  });
+
+  test('all numbered are ${#}', () => {
+    let actual = tokenize({type: "bash-function", function_name:"myfunction", function_body:"somestuff with ${1} ${2} ${999}"});
+    expect(actual.content).toContain("${1}");
+    expect(actual.content).toContain("${2}");
+    expect(actual.content).toContain("${999}");
   });
 });

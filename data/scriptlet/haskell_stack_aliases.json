@@ -1,6 +1,6 @@
 {
-  "type":"fish-package",
-  "functions": [
+  "type":"fish-functions",
+  "items": [
     { "function_name": "s", "function_body": "stack repl" },
     { "function_name": "sb", "function_body": "stack build" },
     { "function_name": "sbc", "function_body": "stack clean\n  stack build" },
