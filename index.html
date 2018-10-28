@@ -14,8 +14,7 @@
   <script src="src/index.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono"> -->
   <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
   <link rel="stylesheet" href="css/index.css">
@@ -51,41 +50,60 @@
     </div>
     <div class="row h-100">
       <div class="col nopadding">
+        
         <ul class="nav border">
-          <li class="nav-item active dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">add</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Templates</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases Package</a>
-              <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases Package</a>
-              <a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases Package</a>
-              <a class="dropdown-item" onclick="addPackage('haskell_stack_aliases')">Stack Aliases Package</a>
-              <a class="dropdown-item" onclick="addPackage('git_workflow')">Git Workflow Package</a>
-              <a class="dropdown-item" onclick="addPackage('git_aliases')">Git Aliases Package</a>
-              <a class="dropdown-item" onclick="addPackage('git_globals')">Git Globals Package</a>
-              <a class="dropdown-item" onclick="addPackage('vscode_extensions')">VSCode Extensions Package</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" onclick="add('pacman')">Pacman</a>
-              <a class="dropdown-item" onclick="add('yay')">Yay</a>
-              <a class="dropdown-item" onclick="add('brew')">Brew</a>
-              <a class="dropdown-item" onclick="add('cask')">Cask</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" onclick="add('comment')">Comment</a>
-              <a class="dropdown-item" onclick="add('echo')">Echo</a>
-              <a class="dropdown-item" onclick="add('variable')">Variable</a>
-              <a class="dropdown-item" onclick="add('npm')">Npm</a>
-              <a class="dropdown-item" onclick="add('code')">Code</a>
-              <a class="dropdown-item" onclick="add('stack')">Stack</a>
-              <a class="dropdown-item" onclick="add('file')">File</a>
-              <a class="dropdown-item" onclick="add('gitconfig')">Git Config</a>
-              <a class="dropdown-item" onclick="add('gitclone')">Git Clone</a>
-              <a class="dropdown-item" onclick="add('curl')">Curl</a>
+
+              <div class="dropdown-submenu">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Packages</a>
+                <ul class="dropdown-menu">
+                  <a class="dropdown-item" onclick="addPackage('shell_aliases')">Shell Aliases Package</a>
+                  <a class="dropdown-item" onclick="addPackage('pulp_aliases')">Pulp Aliases Package</a>
+                  <a class="dropdown-item" onclick="addPackage('npm_aliases')">Npm Aliases Package</a>
+                  <a class="dropdown-item" onclick="addPackage('haskell_stack_aliases')">Stack Aliases Package</a>
+                  <a class="dropdown-item" onclick="addPackage('git_workflow')">Git Workflow Package</a>
+                  <a class="dropdown-item" onclick="addPackage('git_aliases')">Git Aliases Package</a>
+                  <a class="dropdown-item" onclick="addPackage('git_globals')">Git Globals Package</a>
+                  <a class="dropdown-item" onclick="addPackage('vscode_extensions')">VSCode Extensions Package</a>
+                </ul>
+              </div>
+              
+              <div class="dropdown-submenu">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Installers</a>
+                <ul class="dropdown-menu">
+                  <a class="dropdown-item" onclick="add('pacman')">Pacman</a>
+                  <a class="dropdown-item" onclick="add('yay')">Yay</a>
+                  <a class="dropdown-item" onclick="add('brew')">Brew</a>
+                  <a class="dropdown-item" onclick="add('cask')">Cask</a>
+                </ul>
+              </div>
+
+              <div class="dropdown-submenu">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Items</a>
+                <ul class="dropdown-menu">
+                  <a class="dropdown-item" onclick="add('comment')">Comment</a>
+                  <a class="dropdown-item" onclick="add('echo')">Echo</a>
+                  <a class="dropdown-item" onclick="add('variable')">Variable</a>
+                  <a class="dropdown-item" onclick="add('npm')">Npm</a>
+                  <a class="dropdown-item" onclick="add('code')">Code</a>
+                  <a class="dropdown-item" onclick="add('stack')">Stack</a>
+                  <a class="dropdown-item" onclick="add('file')">File</a>
+                  <a class="dropdown-item" onclick="add('gitconfig')">Git Config</a>
+                  <a class="dropdown-item" onclick="add('gitclone')">Git Clone</a>
+                  <a class="dropdown-item" onclick="add('curl')">Curl</a>
+                </ul>
+              </div>
+
             </div>
           </li>
+          
           <li class="nav-item">
-            <a class="nav-link disabled" id="copysource" onclick="copyArea('source')">copy</a>
+            <a class="nav-link disabled" id="copysource" onclick="copyArea('source')"><i class="fas fa-clipboard"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" id="downloadsource" onclick="downloadArea('source')">download</a>
+            <a class="nav-link disabled" id="downloadsource" onclick="downloadArea('source')"><i class="fas fa-cloud-download-alt"></i></a>
           </li>
         </ul>
         <textarea autofocus id="source" class="md-textarea form-control" onkeyup="checkEditCompleteThenScript()"></textarea>
@@ -93,10 +111,10 @@
       <div class="col nopadding">
           <ul class="nav border">
               <li class="nav-item">
-                <a class="nav-link disabled" id="copytarget" onclick="copyArea('target')">copy</a>
+                <a class="nav-link disabled" id="copytarget" onclick="copyArea('target')"><i class="fas fa-clipboard"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" id="downloadtarget" onclick="downloadArea('target')">download</a>
+                <a class="nav-link disabled" id="downloadtarget" onclick="downloadArea('target')"><i class="fas fa-cloud-download-alt"></i></a>
               </li>
             </ul>
         <textarea readonly id="target" class="md-textarea form-control"></textarea>

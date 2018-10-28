@@ -6,24 +6,27 @@ A queryable and compose-able setup script generator.  A conversion of [the sweet
 
 <a href="https://codeclimate.com/github/jeffwindsor/the-sweet-setup.io/maintainability"><img src="https://api.codeclimate.com/v1/badges/ab3d23ae4d50118d95ac/maintainability" /></a> <a href="https://codeclimate.com/github/jeffwindsor/the-sweet-setup.io/test_coverage"><img src="https://api.codeclimate.com/v1/badges/ab3d23ae4d50118d95ac/test_coverage" /></a>
 
-## Dependencies
+## Credits :pray:
 
-|Name|Notes|
-|---|---|
-|`babel` | for testing [github](https://github.com/babel/babel)|
-|`jest` | for testing [github](https://github.com/facebook/jest)|
-|`gitignore.io` | [gitignore.io](https://www.gitignore.io/)|
+* Front End Icons : [font awesome](https://fontawesome.com/)
+* Front End Components : [bootstrap](https://getbootstrap.com/)
+* Multilevel Drop Downs : [W3 School](https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_dropdown_multilevel_css&stacked=h)
+* JS Compiler : [babel](https://github.com/babel/babel)
+* Testing : [jest](https://github.com/facebook/jest)
+* Git Ignore Templates : [gitignore.io](https://www.gitignore.io/)
+* Insights : [Code Climate](www.codeclimate.com)
+* Choosing a License : [Choose a License](https://choosealicense.com/)
+* License : [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-<hr/>
-
-## Create Project
-
-`start-from-scratch.sh`
+## How to create this project from scratch
 
 ```sh
 #Project Directory
 mkdir the-sweet-setup.io
 cd the-sweet-setup.io
+
+#License (GPLv3)
+curl -L -s https://www.gnu.org/licenses/gpl.txt >> LICENSE
 
 #Npm Packages
 npm i Babel babel-jest jest
@@ -32,8 +35,13 @@ mkdir bin
 echo "require('babel-register');\nrequire('./../src/index');" > ./bin/dev
 
 #Directories and Files
-mkdir server
-touch server/index.js
+mkdir src
+touch src/index.js
+touch src/data.js
+touch src/scripting.js
+mkdir css
+touch css/index.css
+mkdir spec
 
 #Git
 curl -L -s https://www.gitignore.io/api/node >> .gitignore
@@ -57,5 +65,3 @@ git commit -m 'Initial'
     ]
   },
 ```
-
-`LICENSE` : [GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/#license-text)
