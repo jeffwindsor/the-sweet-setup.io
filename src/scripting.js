@@ -13,7 +13,6 @@ function script(os, language, requests) {
 	TOKENIZE
 ***************************************************/
 function tokenize(request) {
-
   //scriptlet format (plural type)
   if(request.type.toLowerCase().endsWith("s")){
     return _.map(request.items, item => {
@@ -26,7 +25,7 @@ function tokenize(request) {
     case 'header': return { type: 'comment', comment: '!/bin/sh' };
     case 'fish-function': return { type: 'file', content: buildFishFunction(request), target: buildFishTarget(request)  };
     case 'bash-function': return { type: 'file', content: buildBashFunction(request), target: buildBashTarget(request) };
-    case 'vscode-extension': return { type: 'code', extension_name: i.extension_name }; 
+    case 'vscode-extension': return { type: 'code', extension_name: request.extension_name }; 
     default: return request;
   }
 }

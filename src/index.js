@@ -43,34 +43,20 @@ function downloadArea(elemId) {
   document.body.removeChild(element);
 }
 
-function add(type) {
-  switch (type) {
-    case 'comment': addToSource({ type: 'comment', comment: 'comment' }); break;
-    case 'echo': addToSource({ type: 'echo', message: 'message' }); break;
-    case 'variable': addToSource({ type: 'variable', name: 'name', value: 'variable' }); break;
-    case 'pacman': addToSource({ type: 'pacman', package_name: 'package' }); break;
-    case 'yay': addToSource({ type: 'yay', package_name: 'package' }); break;
-    case 'brew': addToSource({ type: 'brew', package_name: 'package' }); break;
-    case 'cask': addToSource({ type: 'cask', package_name: 'package' }); break;
-    case 'npm': addToSource({ type: 'npm', package_name: 'package' }); break;
-    case 'code': addToSource({ type: 'code', extension_name: 'extension' }); break;
-    case 'stack': addToSource({ type: 'stack', package_name: 'package' }); break;
-    case 'file': addToSource({ type: 'file', content: 'content', target: { operator: 'redirect', path: 'path' } }); break;
-    case 'gitconfig': addToSource({ type: 'gitconfig', name: 'name', value: 'value' }); break;
-    case 'gitclone': addToSource({ type: 'gitclone', uri: 'uri', args: 'args', output_dir: 'dir' }); break;
-    case 'curl': addToSource({ type: 'curl', uri: 'uri', args: 'args', target: { operator: 'redirect', path: 'path' } }); break;
-
-    default:
-      break;
-  }
+function addCommand(name) {
+  addFromDataUri(`command/${name}`);
 }
 
-function addScript(filename){
-  addFromUri(`${dataUri}/${filename}.json`);
+function addScript(name){
+  addFromDataUri(`script/${name}`);
 }
 
-function addScriptlet(filename){
-  addFromUri(`${dataUri}/scriptlet/${filename}.json`);
+function addScriptlet(name){
+  addFromDataUri(`scriptlet/${name}`);
+}
+
+function addFromDataUri(name) {
+  addFromUri(`${dataUri}/${name}.json`);
 }
 
 function addFromUriModal() {

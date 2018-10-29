@@ -4,9 +4,7 @@
 
 A queryable and compose-able setup script generator.  A conversion of [the sweet setup](https://github.com/jeffwindsor/the-sweet-setup) into web based solution, while learning graphql.
 
-<a href="https://codeclimate.com/github/jeffwindsor/the-sweet-setup.io/maintainability"><img src="https://api.codeclimate.com/v1/badges/ab3d23ae4d50118d95ac/maintainability" /></a> <a href="https://codeclimate.com/github/jeffwindsor/the-sweet-setup.io/test_coverage"><img src="https://api.codeclimate.com/v1/badges/ab3d23ae4d50118d95ac/test_coverage" /></a>
-
-## Credits :pray:
+## Credits (:pray:)
 
 * Front End Icons : [font awesome](https://fontawesome.com/)
 * Front End Components : [bootstrap](https://getbootstrap.com/)
@@ -14,7 +12,6 @@ A queryable and compose-able setup script generator.  A conversion of [the sweet
 * JS Compiler : [babel](https://github.com/babel/babel)
 * Testing : [jest](https://github.com/facebook/jest)
 * Git Ignore Templates : [gitignore.io](https://www.gitignore.io/)
-* Insights : [Code Climate](www.codeclimate.com)
 * Choosing a License : [Choose a License](https://choosealicense.com/)
 * License : [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
@@ -52,15 +49,6 @@ git commit -m 'Initial'
 
 ```json
   "scripts": {
-    "test": "jest --coverage"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "coverageReporters": [
-      "lcov"
-    ],
-    "collectCoverageFrom": [
-      "src/*.js"
-    ]
+    "test": "jest"
   },
 ```

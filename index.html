@@ -62,16 +62,11 @@
               <div class="dropdown-submenu">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Machine Script</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="addMachineScript('macos_dev')">MacOs Developer</a></li>
-                  <li><a class="dropdown-item" onclick="addMachineScript('manjaro_dev')">Manjaro-Gnome3 Developer</a></li>
-                  <li><a class="dropdown-item" onclick="addMachineScript('ubuntu_plex')">Ubuntu Plex Server</a></li>
-                </ul>
-              </div>
-
-              <div class="dropdown-submenu">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">VM Script</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="addVirtualMachineScript('manjaro_dev_vm')">Manjaro-Gnome3 Developer</a></li>
+                  <li><a class="dropdown-item" onclick="addScript('macos_dev')">MacOs Developer</a></li>
+                  <li><a class="dropdown-item" onclick="addScript('manjaro_dev')">Manjaro-Gnome3 Developer</a></li>
+                  <li><a class="dropdown-item" onclick="addScript('ubuntu_plex')">Ubuntu Plex Server</a></li>
+                  <li><div class="dropdown-divider"></div></li>
+                  <li><a class="dropdown-item" onclick="addScript('manjaro_dev_vm')">VM Manjaro-Gnome3 Developer</a></li>
                 </ul>
               </div>
 
@@ -92,21 +87,21 @@
               <div class="dropdown-submenu">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Command</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="add('comment')">Comment</a></li>
-                  <li><a class="dropdown-item" onclick="add('echo')">Echo</a></li>
-                  <li><a class="dropdown-item" onclick="add('variable')">Variable</a></li>
-                  <li><a class="dropdown-item" onclick="add('npm')">Npm</a></li>
-                  <li><a class="dropdown-item" onclick="add('code')">Code</a></li>
-                  <li><a class="dropdown-item" onclick="add('stack')">Stack</a></li>
-                  <li><a class="dropdown-item" onclick="add('file')">File</a></li>
-                  <li><a class="dropdown-item" onclick="add('gitconfig')">Git Config</a></li>
-                  <li><a class="dropdown-item" onclick="add('gitclone')">Git Clone</a></li>
-                  <li><a class="dropdown-item" onclick="add('curl')">Curl</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('comment')">Comment</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('echo')">Echo</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('variable')">Variable</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('npm')">Npm</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('code')">Code</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('stack')">Stack</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('file')">File</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('gitconfig')">Git Config</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('gitclone')">Git Clone</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('curl')">Curl</a></li>
                   <li><div class="dropdown-divider"></div></li>
-                  <li><a class="dropdown-item" onclick="add('pacman')">Pacman</a></li>
-                  <li><a class="dropdown-item" onclick="add('yay')">Yay</a></li>
-                  <li><a class="dropdown-item" onclick="add('brew')">Brew</a></li>
-                  <li><a class="dropdown-item" onclick="add('cask')">Cask</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('pacman')">Pacman</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('yay')">Yay</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('brew')">Brew</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('cask')">Cask</a></li>
                 </ul>
               </div>
 

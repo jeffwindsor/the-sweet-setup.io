@@ -1,0 +1,8 @@
+{
+  "type":"script",
+  "items": [
+    { "type":"scriptlet", "scriplet_name":"npm_aliases"},
+    { "type":"scriptlet", "scriplet_name":"pulp_aliases"},
+    { "type":"scriptlet", "scriplet_name":"haskell_stack_aliases"}
+  ]
+}
