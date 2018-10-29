@@ -1,6 +1,13 @@
 /***************************************************
 	SCRIPT
 ***************************************************/
+function scriptInput(os, language, input) {
+  //remove any trailing comma from content and place in array
+  let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
+  let results = script(os, language, JSON.parse(values));
+  return _.join(results, '\n');
+};
+
 function script(os, language, requests) {
   let header = [{ type: 'header', value: '#!/bin/sh' }];
   let list = header.concat(requests);

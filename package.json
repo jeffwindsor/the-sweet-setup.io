@@ -4,7 +4,19 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/*.js"
+    ],
+    "coverageReporters": [
+      "text"
+    ],
+    "reporters": [
+      "default"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -14,8 +26,10 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.6.0",
+    "babel-plugin-istanbul": "^5.1.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "istanbul": "^0.4.5",
     "lodash": "^4.17.11",
     "rewire": "^4.0.1"
   },

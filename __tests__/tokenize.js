@@ -7,7 +7,17 @@ const tokenize = scripting.__get__('tokenize');
 scripting.__set__("_", _);
 //=================================================
 
+describe('Tokenize Script', () => {
+  test('script is tokenized', () => {
+    expect(true).toEqual(false);
+  });
+});
+
 describe('Tokenize Scriptlet (defined by a type which is plural)', () => {
+
+  test('scriptlet type loads scriptlet by name', () => {
+    expect(true).toEqual(false);
+  });
 
   test('each item has all properties transfered', () => {
     let items = [

@@ -51,4 +51,13 @@ git commit -m 'Initial'
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov"
+    ],
+    "collectCoverageFrom": [
+      "src/*.js"
+    ]
+  },
 ```
