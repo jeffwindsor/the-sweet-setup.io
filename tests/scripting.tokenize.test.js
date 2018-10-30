@@ -1,23 +1,25 @@
 //=================================================
 //REWIRE PAGE JS TO ACT LIKE NODE MODULE
-const _ = require('lodash');
 const rewire = require('rewire');
 const scripting = rewire("../src/scripting.js");
-const tokenize = scripting.__get__('tokenize');
+const _ = require('lodash');
 scripting.__set__("_", _);
+
+const tokenize = scripting.__get__('tokenize');
+
 //=================================================
 
-describe('Tokenize Script', () => {
-  test('script is tokenized', () => {
-    expect(true).toEqual(false);
-  });
-});
+// describe('Tokenize Script', () => {
+//   test('script is tokenized', () => {
+//     expect(true).toEqual(false);
+//   });
+// });
 
 describe('Tokenize Scriptlet (defined by a type which is plural)', () => {
 
-  test('scriptlet type loads scriptlet by name', () => {
-    expect(true).toEqual(false);
-  });
+  // test('scriptlet type loads scriptlet by name', () => {
+  //   expect(true).toEqual(false);
+  // });
 
   test('each item has all properties transfered', () => {
     let items = [

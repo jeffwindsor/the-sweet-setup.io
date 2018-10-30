@@ -1,90 +1,74 @@
-let dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data'
-var timeout = null;
+var dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data'
 
-/**************************************************************
-  Non Deterministic Document Functions
-**************************************************************/
-function getElement(id){ return document.getElementById(id); }
-function getElementValue(id){return getElement(id).value.trim();}
-function setElementValue(id, text){ getElement(id).value = text;}
-function addToElementValue(id, text){ getElement(id).value += text;}
-function createElement(type){ return document.createElement(type); }
-function executeCommand(command){ document.execCommand(command); }
+function resetSourceTarget(dom) {
+  dom.getElementById('source').value = '';
+  dom.getElementById('target').value = '';
+};
 
-/**************************************************************
-  Non Deterministic Page Functions
-**************************************************************/
-function addToSourceThenScript(text) {
-  addToElementValue('source', text);
-  scriptSourceToTarget();
+function addCommand(name)  { addDataUri(`command/${name}`); }
+function addScript(name)   { addDataUri(`script/${name}`); }
+function addScriptlet(name){ addDataUri(`scriptlet/${name}`);}
+function addDataUri(name)  { addFromUri(`${dataUri}/${name}.json`);}
+function addModalUri()     { addFromUri(document.getElementById('jsonUriText').value);}
+function addFromUri(uri)   { loadJSON(uri, addToSource);}
+function addToSource(response) {
+    document.getElementById('source').value += JSON.stringify(JSON.parse(response), undefined, 2) + ',\n';
+    scriptSourceToTarget();
 }
-function scriptSourceToTarget(){ scriptText('MacOs', 'Shell', getElementValue('source'), (text) => addToElementValue('target', text)); }
-function resetSourceTarget()  { resetTextAreas(setElementValue);}
-function addFromUriModal()    { addFromUri( getElementValue('jsonUriText'), addToSourceThenScript); }
-function addCommand(name)     { addFromUri(getCommandUri(name), addToSourceThenScript);}
-function addScript(name)      { addFromUri(getScriptUri(name), addToSourceThenScript);}
-function addScriptlet(name)   { addFromUri(getScriptletUri(name), addToSourceThenScript); }
+function scriptSourceToTarget() {
+  let input = document.getElementById('source').value.trim();
+  //remove any trailing comma from content and place in array
+  let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
+  let results = script('MacOs', 'Shell', JSON.parse(values));
+  document.getElementById('target').value = _.join(results, '\n');
+};
 
+function downloadFileName(elemId){
+  switch (elemId) {
+    case 'target': return 'setup.sh';
+    case 'source': return 'source.json';
+    default: return '';
+  }
+}
+
+//=================================================================
+var timeout = null;
 function checkEditCompleteThenScript() {
   clearTimeout(timeout);
-  timeout = setTimeout(function () { scriptSourceToTarget(); }, 500);
-}
-function copyArea(id) {
-  var copyText = getElement(id);
+  timeout = setTimeout(function () {
+    scriptSourceToTarget();
+  }, 500);
+};
+
+function copyArea(elemId) {
+  var copyText = document.getElementById(elemId);
   copyText.select();
-  execCommand("copy");
-}
-function downloadArea(id) {
-  let data = getElementValue(id);
-  let element = createElement('a');
+  document.execCommand("copy");
+};
+
+function downloadArea(elemId) {
+  let data = document.getElementById(elemId).value;
+  let element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
-  element.setAttribute('download', downloadFileName(id));
+  element.setAttribute('download', downloadFileName(elemId));
   element.style.display = 'none';
+
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
 }
 
-/**************************************************************
-  Deterministic Page Functions
-**************************************************************/
-function scriptText(os, language, text, callback) {
-  callback(scriptInput(os, language, text));
-};
-function resetTextAreas(callback) {
-  callback('source','');
-  callback('target','');
-}
-function getCommandUri(name) { return getDataUri(`command/${name}`);}
-function getScriptUri(name){ return getDataUri(`script/${name}`);}
-function getScriptletUri(name){ return getDataUri(`scriptlet/${name}`); }
-function getDataUri(name) { return `${dataUri}/${name}.json`; }
-function addFromUri(uri, callback) {
-  loadJSON(uri, function(response) {
-    let json = JSON.parse(response);
-    let text = JSON.stringify(json, undefined, 2) + ',\n';
-    callback(text);
-  });
-}
 function loadJSON(uri, callback) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
-  xobj.open('GET', uri, true); // Replace 'my_data' with the path to your file
+  xobj.open('GET', uri, true);
   xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "404") {
           alert(`${uri} not found, try again.`)
         }
         if (xobj.readyState == 4 && xobj.status == "200") {
-          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
           callback(xobj.responseText);
         }
   };
   xobj.send(null);
-}
-function downloadFileName(id){
-  switch (id) {
-    case 'target': return 'setup.sh';
-    case 'source': return 'source.json';
-    default: return '';
-  }
 }
