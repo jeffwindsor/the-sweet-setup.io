@@ -1,10 +1,11 @@
 //=================================================
 //REWIRE PAGE JS TO ACT LIKE NODE MODULE
-const _ = require('lodash');
 const rewire = require('rewire');
 const scripting = rewire("../src/scripting.js");
-const script = scripting.__get__('script');
+const _ = require('lodash');
 scripting.__set__("_", _);
+
+const script = scripting.__get__('script');
 //=================================================
 
 describe('Script for MacOS running Shell', () => {
