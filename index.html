@@ -51,7 +51,7 @@
     </div>
     <div class="row h-100">
       <div class="col nopadding">
-        
+
         <ul class="nav border">
 
           <li class="nav-item dropdown">
@@ -82,13 +82,14 @@
                   <li><a class="dropdown-item" onclick="addScriptlet('vscode_extensions')">VSCode Extensions</a></li>
                 </ul>
               </div>
-              
+
               <div class="dropdown-submenu">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Command</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" onclick="addCommand('comment')">Comment</a></li>
                   <li><a class="dropdown-item" onclick="addCommand('echo')">Echo</a></li>
                   <li><a class="dropdown-item" onclick="addCommand('variable')">Variable</a></li>
+                  <li><a class="dropdown-item" onclick="addCommand('command')">Command</a></li>
                   <li><a class="dropdown-item" onclick="addCommand('npm')">Npm</a></li>
                   <li><a class="dropdown-item" onclick="addCommand('code')">Code</a></li>
                   <li><a class="dropdown-item" onclick="addCommand('stack')">Stack</a></li>
@@ -107,7 +108,7 @@
               <a class="dropdown-item" data-toggle="modal" data-target="#openUriModal">Remote Script</a>
             </div>
           </li>
-          
+
           <li class="nav-item">
             <a class="nav-link disabled" id="copysource" onclick="copyArea('source')"><i class="fas fa-clipboard"></i></a>
           </li>
@@ -134,7 +135,7 @@
         <textarea readonly id="target" class="md-textarea form-control"></textarea>
       </div>
     </div>
-    
+
     <div class="modal" id="openUriModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">

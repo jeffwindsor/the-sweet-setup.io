@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --watch",
+    "cycle":"jest --watch"
   },
   "jest": {
     "collectCoverage": true,

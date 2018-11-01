@@ -19,29 +19,19 @@ function script(os, language, requests) {
 /***************************************************
 	TOKENIZE
 ***************************************************/
-function tokenize(request) {
-  //scriptlet format (plural type)
-  if(request.type.toLowerCase().endsWith("s")){
-    return _.map(request.items, item => {
-      return tokenize(mergeScriptletItem(request, item));
+function tokenize(o) {
+  switch (o.type.toLowerCase()) {
+    case 'group':  return _.map(o.items, i => {
+      return (o.target==null)
+        ? { type:o.itemType, ...i }
+        : { type:o.itemType, ...i, target:{...o.target} };
     });
-  }
-
-  //command format (non-plural type)
-  switch (request.type.toLowerCase()) {
     case 'header': return { type: 'comment', comment: '!/bin/sh' };
-    case 'fish-function': return { type: 'file', content: buildFishFunction(request), target: buildFishTarget(request)  };
-    case 'bash-function': return { type: 'file', content: buildBashFunction(request), target: buildBashTarget(request) };
-    case 'vscode-extension': return { type: 'code', extension_name: request.extension_name }; 
-    default: return request;
+    case 'fish-function': return { type: 'file', content: buildFishFunction(o), target: buildFishTarget(o)  };
+    case 'bash-function': return { type: 'file', content: buildBashFunction(o), target: buildBashTarget(o) };
+    case 'vscode-extension': return { type: 'code', extension_name: o.extension_name };
+    default: return o;
   }
-}
-
-function mergeScriptletItem(request, item){
-  //transfer type as singular and copy target if present
-  return (request.target==null) 
-    ? { type:request.type.toLowerCase().slice(0, -1), ...item } 
-    : { type:request.type.toLowerCase().slice(0, -1), ...item, target:{...request.target} };
 }
 
 function buildBashFunction(request) {
