@@ -1,5 +1,6 @@
 {
-  "type":"fish-functions",
+  "type":"group",
+  "itemType":"fish-function",
   "items": [
     { "function_name": "gpush", "function_body": "git push" },
     { "function_name": "gpull", "function_body": "git pull --rebase --prune\n  git submodule update --init --recursive" },

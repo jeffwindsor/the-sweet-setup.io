@@ -1,5 +1,6 @@
 {
-  "type":"gitconfigs",
+  "type":"group",
+  "itemType":"gitconfig",
   "items": [
     { "name": "alias.s", "value": "status -sb --ignore-submodules" },
     { "name": "alias.d", "value": "diff" },

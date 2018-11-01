@@ -1,19 +1,18 @@
 /***************************************************
+	ITEMIZE
+***************************************************/
+function itemize(content){
+  
+}
+
+/***************************************************
 	SCRIPT
 ***************************************************/
-function scriptInput(os, language, input) {
-  //remove any trailing comma from content and place in array
-  let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
-  let results = script(os, language, JSON.parse(values));
-  return _.join(results, '\n');
-};
-
-function script(os, language, requests) {
-  let header = [{ type: 'header', value: '#!/bin/sh' }];
-  let list = header.concat(requests);
-  let tokens = _.flatMap(list, request => tokenize(request));
-  let outputs = tokens.map(token => generate(os, language, token));
-  return outputs;
+function script(content) {
+  //add a she-bang
+  let content = [{ type: 'header', value: '#!/bin/sh' }].concat(content);
+  let tokens   = _.flatMap(content, request => tokenize(request));
+  return _.map(tokens, token => generate(token));
 }
 
 /***************************************************
@@ -58,7 +57,7 @@ function buildFishTarget(input) {
 }
 
 /***************************************************
-	GENERATE
+	GENERATE SHELL
 ***************************************************/
 function generate(token) {
   switch (token.type.toLowerCase()) {

@@ -6,18 +6,6 @@
   "scripts": {
     "test": "jest --watch"
   },
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/*.js"
-    ],
-    "coverageReporters": [
-      "text"
-    ],
-    "reporters": [
-      "default"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

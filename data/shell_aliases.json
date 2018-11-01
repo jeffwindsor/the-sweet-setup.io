@@ -1,5 +1,6 @@
 {
-  "type":"fish-functions",
+  "type":"group",
+  "itemType":"fish-function",
   "items": [
     { "function_name": "f", "function_body": "functions ${1}" },
     { "function_name": "l", "function_body": "builtin ls -CF" },

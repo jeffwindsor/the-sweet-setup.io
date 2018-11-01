@@ -1,5 +1,6 @@
 {
-  "type":"fish-functions",
+  "type":"group",
+  "itemType":"fish-function",
   "items": [
     { "function_name": "gs", "function_body": "git status -sb --ignore-submodules" },
     { "function_name": "gd", "function_body": "git diff" },

@@ -1,5 +1,6 @@
 {
-  "type":"fish-functions",
+  "type":"group",
+  "itemType":"fish-function",
   "items": [
     { "function_name": "ni", "function_body": "npm install ${@}" },
     { "function_name": "ns", "function_body": "npm run start" },

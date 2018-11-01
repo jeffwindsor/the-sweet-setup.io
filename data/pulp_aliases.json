@@ -1,5 +1,6 @@
 {
-  "type":"fish-functions",
+  "type":"group",
+  "itemType":"fish-function",
   "items": [
     { "function_name": "pi", "function_body": "pulp init" },
     { "function_name": "pb", "function_body": "pulp build" },
