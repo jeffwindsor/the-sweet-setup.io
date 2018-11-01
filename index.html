@@ -17,8 +17,6 @@
   <link rel="stylesheet" href="css/index.css">
   <script src="src/scripting.js"></script>
   <script src="src/index.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="src/index.wiring.js"></script>
 </head>
 
 <body>
@@ -36,7 +34,7 @@
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" id="reset" href="#">reset</a>
+                    <a class="nav-link" id="reset" onclick="reset()" href="#">reset</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="help.html">docs</a>
@@ -73,36 +71,36 @@
               <div class="dropdown-submenu">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Scriptlet</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="addScriptlet('shell_aliases')">Shell Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addScriptlet('pulp_aliases')">Pulp Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addScriptlet('npm_aliases')">Npm Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addScriptlet('haskell_stack_aliases')">Stack Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addScriptlet('git_workflow')">Git Workflow</a></li>
-                  <li><a class="dropdown-item" onclick="addScriptlet('git_aliases')">Git Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="addScriptlet('git_globals')">Git Globals</a></li>
-                  <li><a class="dropdown-item" onclick="addScriptlet('vscode_extensions')">VSCode Extensions</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('shell_aliases')">Shell Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('pulp_aliases')">Pulp Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('npm_aliases')">Npm Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('haskell_stack_aliases')">Stack Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_workflow')">Git Workflow</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_aliases')">Git Aliases</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_globals')">Git Globals</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('vscode_extensions')">VSCode Extensions</a></li>
                 </ul>
               </div>
 
               <div class="dropdown-submenu">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Command</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="addCommand('comment')">Comment</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('echo')">Echo</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('variable')">Variable</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('command')">Command</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('npm')">Npm</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('code')">Code</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('stack')">Stack</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('file')">File</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('gitconfig')">Git Config</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('gitclone')">Git Clone</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('curl')">Curl</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('comment')">Comment</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('echo')">Echo</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('variable')">Variable</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('command')">Command</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('npm')">Npm</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('code')">Code</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('stack')">Stack</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('file')">File</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('gitconfig')">Git Config</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('gitclone')">Git Clone</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('curl')">Curl</a></li>
                   <li><div class="dropdown-divider"></div></li>
-                  <li><a class="dropdown-item" onclick="addCommand('pacman')">Pacman</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('yay')">Yay</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('brew')">Brew</a></li>
-                  <li><a class="dropdown-item" onclick="addCommand('cask')">Cask</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('pacman')">Pacman</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('yay')">Yay</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('brew')">Brew</a></li>
+                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('cask')">Cask</a></li>
                 </ul>
               </div>
 
@@ -111,25 +109,25 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link disabled" id="copysource" onclick="copyArea('source')"><i class="fas fa-clipboard"></i></a>
+            <a class="nav-link disabled" id="copysource" onclick="copy('source')"><i class="fas fa-clipboard"></i></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link disabled" id="downloadsource" onclick="downloadArea('source')"><i class="fas fa-cloud-download-alt"></i></a>
+            <a class="nav-link disabled" id="downloadsource" onclick="download('source')"><i class="fas fa-cloud-download-alt"></i></a>
           </li>
 
         </ul>
-        <textarea autofocus id="source" class="md-textarea form-control" onkeyup="checkEditCompleteThenScript()"></textarea>
+        <textarea autofocus id="source" class="md-textarea form-control" onkeyup="onSourceKeyUp()"></textarea>
       </div>
       <div class="col nopadding">
           <ul class="nav border">
 
             <li class="nav-item">
-                <a class="nav-link disabled" id="copytarget" onclick="copyArea('target')"><i class="fas fa-clipboard"></i></a>
+                <a class="nav-link disabled" id="copytarget" onclick="copy('target')"><i class="fas fa-clipboard"></i></a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link disabled" id="downloadtarget" onclick="downloadArea('target')"><i class="fas fa-cloud-download-alt"></i></a>
+                <a class="nav-link disabled" id="downloadtarget" onclick="download('target')"><i class="fas fa-cloud-download-alt"></i></a>
               </li>
 
             </ul>
@@ -150,7 +148,7 @@
               <input id="jsonUriText" type="text" class="form-control" placeholder="URI" aria-label="Uri">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" onclick="addFromUriModal()" data-dismiss="modal" >Ok</button>
+              <button type="button" class="btn btn-primary" onclick="onAddRemoteUriClick()" data-dismiss="modal" >Ok</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
           </div>

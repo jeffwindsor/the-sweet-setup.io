@@ -1,37 +1,42 @@
+let dataUri  = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
+let targetId = 'target';
+let sourceId = 'source';
+let empty    = '';
+var timeout  = null;
 
-var dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data'
+//=======================================================
+//  Events
 
-/**************************************************************
-  Page Functions
-**************************************************************/
-var timeout = null;
-function checkEditCompleteThenScript() {
+function onAddLocalUriClick(name) { addUriContent(`${dataUri}/${name}.json`); }
+function onAddRemoteUriClick() { addUriContent(document.getElementById('jsonUriText').value); }
+function onSourceChange(){ setTargetJson(script(getSourceJson())); }
+function onSourceKeyUp() {
+  //on each keyup restart timer
   clearTimeout(timeout);
-  timeout = setTimeout(function () {
-    scriptSourceToTarget();
-  }, 500);
+  //when timer expires, signal source content change
+  timeout = setTimeout(onSourceChange, 500);
 };
 
-function scriptSourceToTarget() {
-  let input = document.getElementById('source').value.trim();
-  //remove any trailing comma from content and place in array
-  let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
-  let results = script('MacOs', 'Shell', JSON.parse(values));
-  document.getElementById('target').value = _.join(results, '\n');
+//=======================================================
+//  Functions
+
+function addContentToTarget(content) {
+  let json = JSON.stringify(JSON.parse(content), undefined, 2) + ',\n';
+  document.getElementById(sourceId).value += json;
+  onSourceChange();
 };
 
-function resetAreas() {
-  document.getElementById('source').value = '';
-  document.getElementById('target').value = '';
-};
+function addUriContent(uri) { 
+  getUriContentAsync(uri, addContentToTarget); 
+}
 
-function copyArea(elemId) {
+function copy(elemId) {
   var copyText = document.getElementById(elemId);
   copyText.select();
   document.execCommand("copy");
 };
 
-function downloadArea(elemId) {
+function download(elemId) {
   let data = document.getElementById(elemId).value;
   let element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
@@ -43,53 +48,15 @@ function downloadArea(elemId) {
   document.body.removeChild(element);
 }
 
-function addCommand(name) {
-  addFromDataUri(`command/${name}`);
-}
-
-function addScript(name){
-  addFromDataUri(`script/${name}`);
-}
-
-function addScriptlet(name){
-  addFromDataUri(`scriptlet/${name}`);
-}
-
-function addFromDataUri(name) {
-  addFromUri(`${dataUri}/${name}.json`);
-}
-
-function addFromUriModal() {
-  var uri = document.getElementById('jsonUriText').value;
-  addFromUri(uri);
-}
-
-function addFromUri(uri) {
-  loadJSON(uri, function(response) {
-    var json = JSON.parse(response);
-    addToSource(json);
-  });
-}
-
-/**************************************************************
-  HELPERS
-**************************************************************/
 function downloadFileName(elemId){
   switch (elemId) {
-    case 'target': return 'setup.sh';
-    case 'source': return 'source.json';
-    default: return '';
+    case targetId: return 'setup.sh';
+    case sourceId: return 'source.json';
+    default: return empty;
   }
 }
 
-// ?  ADD ABILITY TO PULL IN PACKAGE FILE FROM LOCAL OR URI
-function addToSource(addition) {
-  let add = JSON.stringify(addition, undefined, 2) + ',\n';
-  document.getElementById('source').value += add;
-  scriptSourceToTarget();
-}
-
-function loadJSON(uri, callback) {
+function getUriContentAsync(uri, callback) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
   xobj.open('GET', uri, true); // Replace 'my_data' with the path to your file
@@ -104,3 +71,21 @@ function loadJSON(uri, callback) {
   };
   xobj.send(null);
 }
+
+function getSourceJson(){
+  let input = document.getElementById(sourceId).value.trim();
+  //remove any trailing comma from content and place in array
+  let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
+  return JSON.parse(values);
+}
+
+function reset() {
+  document.getElementById(sourceId).value = empty;
+  document.getElementById(targetId).value = empty;
+};
+
+function setTargetJson(json){
+  document.getElementById(targetId).value = _.join(json, '\n');
+}
+
+
