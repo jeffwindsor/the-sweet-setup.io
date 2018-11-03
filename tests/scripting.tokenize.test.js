@@ -11,6 +11,12 @@ const tokenize = scripting_module.__get__('tokenize');
 
 describe('Scripting', () => {
   describe('Tokenize', () => {
+    describe('List', () => {
+      test('items are extracted ', () => {
+
+      });
+    });
+
     describe('Group', () => {
       test('all item properties are copied', () => {
         let input = {type: "group", itemType:"", items:[
@@ -20,7 +26,7 @@ describe('Scripting', () => {
         ]};
 
         let actual = tokenize(input);
-        
+
         let expected = [
           {type:"", name:"one", other:"1"},
           {type:"", name:"two", other:"2"},
@@ -31,25 +37,25 @@ describe('Scripting', () => {
 
       test('each item has a type equal to singular version of type', () => {
         let input = {type: "group", itemType:"fake", items:[ {name:"one"}, {name:"two"} ]};
-        
+
         let actual = tokenize(input);
-        
+
         let expected = [ {type:"fake", name:"one"}, {type:"fake", name:"two"} ];
         expect(actual).toEqual(expected);
       });
-      
+
       test('target is copied if present', () => {
         let input = {type: "group", itemType:"", target:{ prop:"something"}, items:[ {}, {} ]};
-        
+
         let actual = tokenize(input);
-        
+
         let expected = [ {type: "", target:{ prop:"something"}}, {type: "", target:{ prop:"something"}} ]
         expect(actual).toEqual(expected);
       });
 
       test('target is copied by value not by reference', () => {
         let input = {type: "group", itemType:"", target:{ prop:"something"}, items:[ {}, {} ]};
-  
+
         let actual = tokenize(input);
         actual[0].target.prop="something_else";
 
@@ -66,13 +72,13 @@ describe('Scripting', () => {
         let expected = [ {type:"comment", comment: "!/bin/sh"}, {type:"comment", comment: "!/bin/sh"} ];
         expect(actual).toEqual(expected);
       });
-      
+
     });
 
     describe('Header', () => {
       test('is a comment of bash script sha-bang', () => {
           let actual = tokenize({ type: "Header" });
-          let expected = {type:"comment", comment:"!/bin/sh"};  
+          let expected = {type:"comment", comment:"!/bin/sh"};
           expect(actual).toEqual(expected);
       });
     });
@@ -96,7 +102,7 @@ describe('Scripting', () => {
         original.target.other = "something_else";
         expect(actual.target.other).toEqual("something");
       });
-      
+
       test('args are $argv', () => {
         let actual = tokenize({type: "fish-function", function_name:"myfunction", function_body:"somestuff with ${@}"});
         expect(actual.content).toContain("$argv");
@@ -129,7 +135,7 @@ describe('Scripting', () => {
         original.target.other = "something_else";
         expect(actual.target.other).toEqual("something");
       });
-      
+
       test('args are ${@}', () => {
         let actual = tokenize({type: "bash-function", function_name:"myfunction", function_body:"somestuff with ${@}"});
         expect(actual.content).toContain("${@}");

@@ -1,5 +1,5 @@
 {
-  "type":"script",
+  "type":"list",
   "items":[
     {"type":"localUri", "uri":""},
     {"type":"localUri", "uri":"ascii_art_macos"},

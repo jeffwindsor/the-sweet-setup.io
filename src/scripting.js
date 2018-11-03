@@ -1,17 +1,9 @@
 /***************************************************
-	ITEMIZE
-***************************************************/
-function itemize(content){
-  
-}
-
-/***************************************************
 	SCRIPT
 ***************************************************/
 function script(content) {
-  //add a she-bang
-  let content = [{ type: 'header', value: '#!/bin/sh' }].concat(content);
-  let tokens   = _.flatMap(content, request => tokenize(request));
+  let contentWithHeader = [{ type: 'header', value: '#!/bin/sh' }].concat(content);
+  let tokens   = _.flatMap(contentWithHeader, request => tokenize(request));
   return _.map(tokens, token => generate(token));
 }
 
@@ -28,6 +20,7 @@ function tokenize(input) {
         : tokenize({ type: input.itemType, ...i, target: { ...input.target } });
     });
     case 'header': return { type: 'comment', comment: '!/bin/sh' };
+    case 'script': return _.flatMap(input.items, i => tokenize(i));
     case 'vscode-extension': return { type: 'code', extension_name: input.extension_name };
     default: return input;
   }

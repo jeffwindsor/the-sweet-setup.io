@@ -1,16 +1,22 @@
 //=======================================================
 let dataUri  = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
-let targetId = 'target';
-let sourceId = 'source';
 let empty    = '';
 var timeout  = null;
+//=======================================================
+// PROPERTIES
+function element(id){return document.getElementById(id);}
+function source(){ return element('source'); }
+function target(){ return element('target'); }
+function modal(){ return element('jsonUriText'); }
 
 //=======================================================
+//  Events
 function onAddLocalUriClick(name) { addUriContent(`${dataUri}/${name}.json`); }
-function onAddRemoteUriClick() { addUriContent(document.getElementById('jsonUriText').value); }
-function onSourceChange(){ 
-  let shell = script(getSourceJson())
-  setTargetShell(shell); 
+function onAddRemoteUriClick() { addUriContent(modal.value); }
+function onSourceChange(){
+  let source = getSourceJson();
+  let shell = script(source);
+  setTargetValue(shell);
 }
 function onSourceKeyUp() {
   //on each keyup restart timer
@@ -20,24 +26,28 @@ function onSourceKeyUp() {
 };
 
 //=======================================================
+// METHODS AND FUNCTIONS
 function addContentToSource(content) {
-  let json = JSON.stringify(JSON.parse(content), undefined, 2) + ',\n';
-  document.getElementById(sourceId).value += json;
+  let add = JSON.parse(content);
+  let current = JSON.parse()
+
+  let json = JSON.stringify(array, undefined, 2) + ',\n';
+  source.value += json;
   onSourceChange();
 };
 
-function addUriContent(uri) { 
-  getUriContentAsync(uri, addContentToSource); 
+function addUriContent(uri) {
+  getUriContentAsync(uri, addContentToSource);
 }
 
 function copy(elemId) {
-  var copyText = document.getElementById(elemId);
+  var copyText = element(elemId);
   copyText.select();
   document.execCommand('copy');
 };
 
 function download(elemId) {
-  let data = document.getElementById(elemId).value;
+  let data = element(elemId).value;
   let element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
   element.setAttribute('download', downloadFileName(elemId));
@@ -72,19 +82,19 @@ function getUriContentAsync(uri, callback) {
 }
 
 function getSourceJson(){
-  let input = document.getElementById(sourceId).value.trim();
+  let input = source.value.trim();
   //remove any trailing comma from content and place in array
   let values = '[' + ((input.slice(-1) == ',') ? input.slice(0, -1) : input) + ']';
   return JSON.parse(values);
 }
 
 function reset() {
-  document.getElementById(sourceId).value = empty;
-  document.getElementById(targetId).value = empty;
+  source.value = empty;
+  target.value = empty;
 };
 
-function setTargetShell(json){
-  document.getElementById(targetId).value = _.join(json, '\n');
+function setTargetValue(json){
+  target.value = _.join(json, '\n');
 }
 
 
