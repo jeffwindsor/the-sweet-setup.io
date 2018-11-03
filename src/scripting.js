@@ -26,6 +26,13 @@ function tokenize(input) {
   }
 }
 
+function getUriContent(uri) {
+  return fetch(uri)
+    .then(function (response) {
+      return response.text();
+    });
+}
+
 function buildBashFunction(input) {
   return `function ${input.function_name}(){\n  ${input.function_body}\n}`;
 }

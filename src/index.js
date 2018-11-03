@@ -1,12 +1,12 @@
-function mergeContent(a, b){
+function mergeContent(a, b) {
   let as = toArray(a);
   let bs = toArray(b);
   let merged = _.concat(as, bs)
   return toString(merged);
 }
 
-function toArray(content){
-  if(content == '' || content == null){
+function toArray(content) {
+  if (content == '' || content == null) {
     return [];
   }
   else {
@@ -15,18 +15,18 @@ function toArray(content){
   }
 }
 
-function toString(object){
-  return JSON.stringify(object, undefined, 2) ;
+function toString(object) {
+  return JSON.stringify(object, undefined, 2);
 }
 
-function removeTrailingComma(content){
+function removeTrailingComma(content) {
   let text = content.trim();
-  return (text.slice(-1) == ',') 
-    ? text.slice(0, -1) 
+  return (text.slice(-1) == ',')
+    ? text.slice(0, -1)
     : text
 }
 
-function downloadFileName(elemId){
+function downloadFileName(elemId) {
   switch (elemId) {
     case targetId: return 'setup.sh';
     case sourceId: return 'source.json';
@@ -36,9 +36,9 @@ function downloadFileName(elemId){
 
 //=======================================================
 // Feilds and Properties
-let dataUri  = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
-let empty    = '';
-var timeout  = null;
+let dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
+let empty = '';
+var timeout = null;
 //=======================================================
 //  Event Handlers
 function onAddLocalUriClick(name) { addUriContent(`${dataUri}/${name}.json`); }
@@ -52,22 +52,19 @@ function onSourceKeyUp() {
 
 //=======================================================
 // METHODS AND FUNCTIONS
-function scriptContent(){
+function scriptContent() {
   let object = toArray(document.getElementById('source').value);
   document.getElementById('target').value = _.join(script(object), '\n');
 }
 
 function addUriContent(uri) {
-  fetch(uri)
-  .then(function(response) {
-    return response.text();
-  })
-  .then(function(content) {
-    let current = document.getElementById('source').value;
-    let merged = mergeContent(current, content);
-    document.getElementById('source').value = merged;
-    scriptContent();
-  }); 
+  getUriContent(uri)
+    .then(function (content) {
+      let current = document.getElementById('source').value;
+      let merged = mergeContent(current, content);
+      document.getElementById('source').value = merged;
+      scriptContent();
+    });
 }
 
 function reset() {
