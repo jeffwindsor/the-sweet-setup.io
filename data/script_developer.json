@@ -1,8 +1,5 @@
-{
-  "type":"list",
-  "items":[
+[
     {"type":"localUri", "uri":""},
     {"type":"localUri", "uri":"ascii_art_macos"},
     {"type":"uri", "uri":""}
-  ]
-}
+]

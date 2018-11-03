@@ -17,8 +17,8 @@ describe('Scripting', () => {
     test('Comment gives a # comment', () => run(
       { type: "Comment", comment: "comment" },"#comment"));
 
-    test('Echo gives a ==> message', () => run(
-      { type: "Echo", message: "Test Section" },"echo '==> Test Section'"));
+    test('Echo gives a message', () => run(
+      { type: "Echo", message: "Test Section" },"echo 'Test Section'"));
 
     test('Variable gives a name=value', () => run(
       { type: "Variable", name: "name", value: "value" },"name=value"));

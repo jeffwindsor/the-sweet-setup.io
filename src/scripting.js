@@ -60,7 +60,7 @@ function generate(token) {
     case 'comment': return `#${token.comment}`;
     case 'curl': return joinNotNull(`curl`, token.args, token.uri,
       generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
-    case 'echo': return `echo '==> ${token.message}'`;
+    case 'echo': return `echo '${token.message}'`;
     case 'file': return joinNotNull(`echo '${token.content}'`,
       generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
     case 'gitclone': return joinNotNull(`git clone ${token.uri}`, token.output_dir, token.args);
