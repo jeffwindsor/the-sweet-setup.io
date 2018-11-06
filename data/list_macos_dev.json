@@ -1,0 +1,38 @@
+[
+  { "desc":"install brew", "type": "command", "command": "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\";"},
+  { "desc":"install cask", "type": "cask", "package_name": "caskroom/cask" },
+  { "desc":"install cask versions", "type": "cask", "package_name": "caskroom/versions" },
+  { "type": "cask", "package_name": "brave" },
+  { "type": "cask", "package_name": "google-chrome" },
+  { "type": "cask", "package_name": "tor" },
+  { "type": "cask", "package_name": "visual-studio-code" },
+  { "type": "cask", "package_name": "iterm" },
+  { "type": "brew", "package_name": "bash" },
+  { "type": "brew", "package_name": "fish" },
+  { "type": "brew", "package_name": "oh-my-fish" },
+  { "type": "brew", "package_name": "coreutils" },
+  { "type": "brew", "package_name": "wget" },
+  { "type": "brew", "package_name": "vim" },
+  { "type": "brew", "package_name": "tree" },
+  { "type": "brew", "package_name": "haskell-stack" },
+  { "type": "cask", "package_name": "python3" },
+  { "type": "cask", "package_name": "pylint" },
+  { "type": "cask", "package_name": "node" },
+
+  { "desc":"vscode extensions", "type":"uri", "uri":"https://jeffwindsor.github.io/the-sweet-setup.io/data/vscode_extensions.json"},
+  { "desc":"GHCI Timer", "type": "echo", "message": ":set +s", "target": { "operator": "redirect", "path": ".ghci" }},
+  { "desc":"GHCI Prompt", "type": "echo", "message": ":set prompt \"\\ESC[38;5;45mλ \\ESC[0m\"", "target": { "operator": "redirectappend", "path": ".ghci" }},
+  { "desc":"brew aliases", "type":"uri", "uri":"https://jeffwindsor.github.io/the-sweet-setup.io/data/brew_aliases.json"},
+  { "type": "gitclone", "uri": "https://github.com/google/fonts.git", "args": "--depth=1", "output_dir": "~/src/sys/google/fonts" },
+  { "type": "gitclone", "uri": "https://github.com/powerline/fonts.git", "args": "--depth=1", "output_dir": "~/src/sys/powerline/fonts" }
+]
+
+// Fantastical
+// Keybase
+// iTerm2
+// LastPass
+// Google Backup Sync
+// Be Focused Pro
+// Kindle
+// Slack
+// Spotify
