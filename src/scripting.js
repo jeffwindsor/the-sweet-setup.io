@@ -11,19 +11,13 @@ function script(content) {
 	TOKENIZE
 ***************************************************/
 function tokenize(input) {
-  switch (input.type.toLowerCase()) {
-    case 'bash-function': return { type: 'file', content: buildBashFunction(input), target: buildBashTarget(input) };
-    case 'fish-function': return { type: 'file', content: buildFishFunction(input), target: buildFishTarget(input) };
-    case 'group': return _.flatMap(input.items, i => {
-      return (input.target == null)
-        ? tokenize({ type: input.itemType, ...i })
-        : tokenize({ type: input.itemType, ...i, target: { ...input.target } });
-    });
-    case 'header': return { type: 'comment', comment: '!/bin/sh' };
-    //case 'uri': return _.flatMap(input.items, i => tokenize(i));
-    case 'vscode-extension': return { type: 'code', extension_name: input.extension_name };
-    default: return input;
-  }
+    if(input.hasOwnProperty('bashfunction')){
+      return { file: buildBashFunction(input.bashfunction, input.function_body), target: buildBashTarget(input.target) };}
+    if(input.hasOwnProperty('fishfunction')){
+      return { file: buildFishFunction(input.fishfunction, input.function_body), target: buildFishTarget(input.fishfunction, input.target) };}
+    if(input.hasOwnProperty('header')){
+      return { comment: '!/bin/sh' };}
+    return input;
 }
 
 function getUriContent(uri) {
@@ -33,52 +27,51 @@ function getUriContent(uri) {
     });
 }
 
-function buildBashFunction(input) {
-  return `function ${input.function_name}(){\n  ${input.function_body}\n}`;
+function buildBashFunction(fishfunction, function_body) {
+  return `function ${fishfunction}(){\n  ${function_body}\n}`;
 }
 
-function buildBashTarget(input) {
-  return (input.target == null)
+function buildBashTarget(target) {
+  return (target == null)
     ? { operator: 'redirectappend', path: `~/.bashrc` }
-    : { ...input.target };
+    : { ...target };
 }
 
-function buildFishFunction(input) {
-  var body = input.function_body
+function buildFishFunction(fishfunction, function_body) {
+  var body = function_body
     .replace(/\{@\}/gim, 'argv')
     .replace(/\{(\d+)\}/gim, 'argv[$1]');
-  return `function ${input.function_name}\n  ${body}\nend`;
+  return `function ${fishfunction}\n  ${body}\nend`;
 }
 
-function buildFishTarget(input) {
-  return (input.target == null)
-    ? { operator: 'redirect', path: `~/.config/fish/functions/${input.function_name}.fish` }
-    : { ...input.target };
+function buildFishTarget(fishfunction, target) {
+  return (target == null)
+    ? { operator: 'redirect', path: `~/.config/fish/functions/${fishfunction}.fish` }
+    : { ...target };
 }
 
 /***************************************************
 	GENERATE SHELL
 ***************************************************/
 function generate(token) {
-  switch (token.type.toLowerCase()) {
-    case 'brew': return `brew install ${token.package_name}`;
-    case 'cask': return `brew cask install ${token.package_name}`;
-    case 'code': return `code --install-extension ${token.extension_name}`;
-    case 'comment': return `#${token.comment}`;
-    case 'curl': return joinNotNull(`curl`, token.args, token.uri,
-      generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
-    case 'echo': return `echo '${token.message}'`;
-    case 'file': return joinNotNull(`echo '${token.content}'`,
-      generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target));
-    case 'gitclone': return joinNotNull(`git clone ${token.uri}`, token.output_dir, token.args);
-    case 'gitconfig': return `git config --global ${token.name} '${token.value}'`;
-    case 'npm': return `npm install ${token.package_name}`;
-    case 'pacman': return `sudo pacman -S --noconfirm ${token.package_name}`;
-    case 'stack': return `stack install ${token.package_name}`;
-    case 'variable': return `${token.name}=${token.value}`
-    case 'yay': return `yay -S --noconfirm ${token.package_name}`;
-    default: return '# ? TYPE UNKNOWN ' + token;
-  }
+  if(token.hasOwnProperty('brew')) { return `brew install ${token.brew}`; }
+  if(token.hasOwnProperty('cask')) { return `brew cask install ${token.cask}`; }
+  if(token.hasOwnProperty('codeext')) { return `code --install-extension ${token.codeext}`; }
+  if(token.hasOwnProperty('comment')) { return `#${token.comment}`; }
+  if(token.hasOwnProperty('curl')) { return joinNotNull(`curl`, token.args, token.curl,
+    generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target)); }
+  if(token.hasOwnProperty('echo')) { return `echo '${token.echo}'`; }
+  if(token.hasOwnProperty('file')) { return joinNotNull(`echo '${token.file}'`,
+    generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target)); }
+  if(token.hasOwnProperty('gitclone')) { return joinNotNull(`git clone ${token.gitclone}`, token.output_dir, token.args); }
+  if(token.hasOwnProperty('gitconfig')) { return `git config --global ${token.gitconfig} '${token.value}'`; }
+  if(token.hasOwnProperty('npm')) { return `npm install ${token.npm}`; }
+  if(token.hasOwnProperty('pacman')) { return `sudo pacman -S --noconfirm ${token.pacman}`; }
+  if(token.hasOwnProperty('stack')) { return `stack install ${token.stack}`; }
+  if(token.hasOwnProperty('variable')) { return `${token.variable}=${token.value}`;}
+  if(token.hasOwnProperty('yay')) { return `yay -S --noconfirm ${token.yay}`;}
+
+  return '# COULD NOT GENERATE: ' + token;
 }
 function generateTargetOperatorSH(operator) {
   switch (operator.toLowerCase()) {

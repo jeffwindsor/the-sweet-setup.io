@@ -1,13 +1,9 @@
-{
-  "type":"group",
-  "itemType":"fish-function",
-  "items": [
-    { "function_name": "s", "function_body": "stack repl" },
-    { "function_name": "sb", "function_body": "stack build" },
-    { "function_name": "sbc", "function_body": "stack clean\n  stack build" },
-    { "function_name": "st", "function_body": "stack test" },
-    { "function_name": "stf", "function_body": "stack test --file-watch" },
-    { "function_name": "sd", "function_body": "stack list-dependencies" },
-    { "function_name": "ghci_prompt_l", "function_body": "echo \":set prompt \"\\ESC[38;5;${1}m%s\\n\\ESC[38;5;${2}m❯\\ESC[38;5;${3}mλ= \\ESC[0m\"", "target":{"operation":"redirect", "path":"~./ghci"}}
-  ]
-}
+[
+  { "fishfunction": "s", "function_body": "stack repl" },
+  { "fishfunction": "sb", "function_body": "stack build" },
+  { "fishfunction": "sbc", "function_body": "stack clean\n  stack build" },
+  { "fishfunction": "st", "function_body": "stack test" },
+  { "fishfunction": "stf", "function_body": "stack test --file-watch" },
+  { "fishfunction": "sd", "function_body": "stack list-dependencies" },
+  { "fishfunction": "ghci_prompt_l", "function_body": "echo \":set prompt \"\\ESC[38;5;${1}m%s\\n\\ESC[38;5;${2}m❯\\ESC[38;5;${3}mλ= \\ESC[0m\"", "target":{"operation":"redirect", "path":"~./ghci"}}
+]

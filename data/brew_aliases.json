@@ -1,7 +1,3 @@
-{
-  "type":"group",
-  "itemType":"fish-function",
-  "items": [
-    { "function_name": "bup", "function_body": "brew update; brew upgrade; brew prune; brew cleanup; brew doctor;" }
-  ]
-}
+[
+  { "fishfunction": "bup", "function_body": "brew update; brew upgrade; brew prune; brew cleanup; brew doctor; brew cask upgrade; brew cask doctor;" }
+]

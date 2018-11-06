@@ -1,1 +1,1 @@
-{ "type": "curl", "uri": "uri", "args": "args", "target": { "operator": "redirect", "path": "path" } }
+{ "curl": "uri", "args": "args", "target": { "operator": "redirect", "path": "path" } }

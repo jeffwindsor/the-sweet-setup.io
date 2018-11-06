@@ -1,1 +1,1 @@
-{ "type": "gitconfig", "name": "name", "value": "value" }
+{ "gitconfig": "name", "value": "value" }

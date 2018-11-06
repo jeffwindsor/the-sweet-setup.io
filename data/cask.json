@@ -1,1 +1,1 @@
-{ "type": "cask", "package_name": "package" }
+{ "cask" : "package" }

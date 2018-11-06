@@ -1,1 +1,1 @@
-{ "type": "file", "content": "content", "target": { "operator": "redirect", "path": "path" } }
+{ "file": "content", "target": { "operator": "redirect", "path": "path" } }

@@ -1,1 +1,1 @@
-{ "type": "command", "command": "ls -a" }
+{ "command": "ls -a" }

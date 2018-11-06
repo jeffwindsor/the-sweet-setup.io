@@ -1,23 +1,19 @@
-{
-  "type":"group",
-  "itemType":"vscode-package",
-  "items": [
-    { "extension_name": "aaron-bond.better-comments" },
-    { "extension_name": "andys8.jest-snippets" },
-    { "extension_name": "dcasella.monokai-plusplus" },
-    { "extension_name": "dracula-theme.theme-dracula" },
-    { "extension_name": "eamodio.gitlens" },
-    { "extension_name": "file-icons.file-icons" },
-    { "extension_name": "ginfuru.ginfuru-better-solarized-dark-theme" },
-    { "extension_name": "justusadam.language-haskell" },
-    { "extension_name": "ms-python.python" },
-    { "extension_name": "nwolverson.language-purescript" },
-    { "extension_name": "Orta.vscode-jest" },
-    { "extension_name": "PKief.material-icon-theme" },
-    { "extension_name": "Prisma.vscode-graphql" },
-    { "extension_name": "skyapps.fish-vscode" },
-    { "extension_name": "streetsidesoftware.code-spell-checker" },
-    { "extension_name": "tomoki1207.pdf" },
-    { "extension_name": "wmaurer.change-case" }
-  ]
-}
+[
+  { "codeext": "aaron-bond.better-comments" },
+  { "codeext": "andys8.jest-snippets" },
+  { "codeext": "dcasella.monokai-plusplus" },
+  { "codeext": "dracula-theme.theme-dracula" },
+  { "codeext": "eamodio.gitlens" },
+  { "codeext": "file-icons.file-icons" },
+  { "codeext": "ginfuru.ginfuru-better-solarized-dark-theme" },
+  { "codeext": "justusadam.language-haskell" },
+  { "codeext": "ms-python.python" },
+  { "codeext": "nwolverson.language-purescript" },
+  { "codeext": "Orta.vscode-jest" },
+  { "codeext": "PKief.material-icon-theme" },
+  { "codeext": "Prisma.vscode-graphql" },
+  { "codeext": "skyapps.fish-vscode" },
+  { "codeext": "streetsidesoftware.code-spell-checker" },
+  { "codeext": "tomoki1207.pdf" },
+  { "codeext": "wmaurer.change-case" }
+]

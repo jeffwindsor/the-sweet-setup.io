@@ -49,7 +49,7 @@ describe('Script for MacOS running Shell', () => {
 //     ["npm install npm"]));
 
 //   test('VS code install extension', () => run(
-//     [{ type: "code", extension_name: "vsc" }],
+//     [{ type: "codeext", extension_name: "vsc" }],
 //     ["code --install-extension vsc"]));
 
 //   test('Haskell Stack Install', () => run(

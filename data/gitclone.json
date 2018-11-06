@@ -1,1 +1,1 @@
-{ "type": "gitclone", "uri": "uri", "args": "args", "output_dir": "dir" }
+{ "gitclone": "uri", "args": "args", "output_dir": "dir" }

@@ -1,1 +1,1 @@
-{ "type": "pacman", "package_name": "package" }
+{ "pacman": "package" }

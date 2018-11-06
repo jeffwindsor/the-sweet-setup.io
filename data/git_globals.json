@@ -1,19 +1,15 @@
-{
-  "type":"group",
-  "itemType":"gitconfig",
-  "items": [
-    { "name": "alias.s", "value": "status -sb --ignore-submodules" },
-    { "name": "alias.d", "value": "diff" },
-    { "name": "alias.aa", "value": "add --all" },
-    { "name": "alias.cm", "value": "commit -m" },
-    { "name": "alias.cma", "value": "commit -a -m" },
-    { "name": "alias.b", "value": "branch" },
-    { "name": "alias.co", "value": "checkout" },
-    { "name": "alias.cob", "value": "checkout -b" },
-    { "name": "alias.pff", "value": "pull --ff-only" },
-    { "name": "alias.mff", "value": "merge --ff-only" },
-    { "name": "alias.size", "value": "count-objects -vH" },
-    { "name": "alias.remove", "value": "rm -r --cached ." },
-    { "name": "alias.hist", "value": "log --graph --max-count=100 --pretty=format:\"%C(green)%h%C(reset) | %C(yellow)%d%C(reset) %s %C(cyan)%an : %C(dim)%cr%C(reset)\" --abbrev-commit" }
-  ]
-}
+[
+  { "gitconfig": "alias.s", "value": "status -sb --ignore-submodules" },
+  { "gitconfig": "alias.d", "value": "diff" },
+  { "gitconfig": "alias.aa", "value": "add --all" },
+  { "gitconfig": "alias.cm", "value": "commit -m" },
+  { "gitconfig": "alias.cma", "value": "commit -a -m" },
+  { "gitconfig": "alias.b", "value": "branch" },
+  { "gitconfig": "alias.co", "value": "checkout" },
+  { "gitconfig": "alias.cob", "value": "checkout -b" },
+  { "gitconfig": "alias.pff", "value": "pull --ff-only" },
+  { "gitconfig": "alias.mff", "value": "merge --ff-only" },
+  { "gitconfig": "alias.size", "value": "count-objects -vH" },
+  { "gitconfig": "alias.remove", "value": "rm -r --cached ." },
+  { "gitconfig": "alias.hist", "value": "log --graph --max-count=100 --pretty=format:\"%C(green)%h%C(reset) | %C(yellow)%d%C(reset) %s %C(cyan)%an : %C(dim)%cr%C(reset)\" --abbrev-commit" }
+]
