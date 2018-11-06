@@ -10,7 +10,7 @@
   { "brew": "bash" },
   { "brew": "fish" },
   { "brew": "oh-my-fish" },
-  { "brew": "coreutils" },
+  { "brew": "coreutils" },s
   { "brew": "wget" },
   { "brew": "vim" },
   { "brew": "tree" },
@@ -19,10 +19,10 @@
   { "cask": "pylint" },
   { "cask": "node" },
 
-  { "list":"https://jeffwindsor.github.io/the-sweet-setup.io/data/vscode_extensions.json" },
+  { "link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/vscode_extensions.json" },
   { "desc":"GHCI Timer", "echo": ":set +s", "target": { "operator": "redirect", "path": ".ghci" }},
   { "desc":"GHCI Prompt", "echo": ":set prompt \"\\ESC[38;5;45mλ \\ESC[0m\"", "target": { "operator": "redirectappend", "path": ".ghci" }},
-  { "list":"https://jeffwindsor.github.io/the-sweet-setup.io/data/brew_aliases.json"},
+  { "link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/brew_aliases.json"},
   { "gitclone": "https://github.com/google/fonts.git", "args": "--depth=1", "output_dir": "~/src/sys/google/fonts" },
   { "gitclone": "https://github.com/powerline/fonts.git", "args": "--depth=1", "output_dir": "~/src/sys/powerline/fonts" }
 ]

@@ -12,11 +12,14 @@ function script(content) {
 ***************************************************/
 function tokenize(input) {
     if(input.hasOwnProperty('bashfunction')){
-      return { file: buildBashFunction(input.bashfunction, input.function_body), target: buildBashTarget(input.target) };}
+      return { file: buildBashFunction(input.bashfunction, input.function_body), target: buildBashTarget(input.target) };
+    }
     if(input.hasOwnProperty('fishfunction')){
-      return { file: buildFishFunction(input.fishfunction, input.function_body), target: buildFishTarget(input.fishfunction, input.target) };}
+      return { file: buildFishFunction(input.fishfunction, input.function_body), target: buildFishTarget(input.fishfunction, input.target) };
+    }
     if(input.hasOwnProperty('header')){
-      return { comment: '!/bin/sh' };}
+      return { comment: '!/bin/sh' };
+    }
     return input;
 }
 

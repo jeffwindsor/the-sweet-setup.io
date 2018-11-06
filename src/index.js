@@ -1,10 +1,3 @@
-function mergeContent(a, b) {
-  let as = toArray(a);
-  let bs = toArray(b);
-  let merged = _.concat(as, bs)
-  return toString(merged);
-}
-
 function toArray(content) {
   if (content == '' || content == null) {
     return [];
@@ -41,8 +34,8 @@ let empty = '';
 var timeout = null;
 //=======================================================
 //  Event Handlers
-function onAddLocalUriClick(name) { addUriContent(`${dataUri}/${name}.json`); }
-function onAddRemoteUriClick() { addUriContent(document.getElementById('jsonUriText').value); }
+function onAddLocalUriClick(name) { addUriContentToSource(`${dataUri}/${name}.json`); }
+function onAddRemoteUriClick() { addUriContentToSource(document.getElementById('jsonUriText').value); }
 function onSourceKeyUp() {
   //on each keyup restart timer
   clearTimeout(timeout);
@@ -57,15 +50,29 @@ function scriptContent() {
   document.getElementById('target').value = _.join(script(object), '\n');
 }
 
-function addUriContent(uri) {
-  getUriContent(uri)
-    .then(function (content) {
-      let current = document.getElementById('source').value;
-      let merged = mergeContent(current, content);
+function addUriContentToSource(uri) {
+  fetch(uri)
+    .then((content) => {
+      let one = toArray(document.getElementById('source').value);
+      let two = toArray(content);
+      let merged = _.concat(one, two);
       document.getElementById('source').value = merged;
       scriptContent();
     });
 }
+
+function replaceUriContentInSource(uri, original){
+  fetch(uri)
+  .then((content) => {
+    let current = toArray(document.getElementById('source').value);
+    let left    = _.takeWhile(current, (item) => item != original);
+    let right   = _.takeRightWhile(current, (item) => item != original);
+    let merged  = _.concat(_.concat(left, content), right);
+    document.getElementById('source').value = merged;
+    scriptContent();
+  });
+}
+
 
 function reset() {
   document.getElementById('source').value = empty;
