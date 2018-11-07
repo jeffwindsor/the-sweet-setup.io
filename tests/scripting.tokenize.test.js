@@ -9,7 +9,7 @@ scripting_module.__set__("_", _);
 const tokenize = scripting_module.__get__('tokenize');
 //=================================================
 
-describe('Scripting', () => {
+describe('Scripting JS', () => {
   describe('Tokenize', () => {
     describe('List', () => {
       test('items are extracted ', () => {

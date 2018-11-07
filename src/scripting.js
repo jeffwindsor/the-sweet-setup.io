@@ -23,13 +23,6 @@ function tokenize(input) {
     return input;
 }
 
-function getUriContent(uri) {
-  return fetch(uri)
-    .then(function (response) {
-      return response.text();
-    });
-}
-
 function buildBashFunction(fishfunction, function_body) {
   return `function ${fishfunction}(){\n  ${function_body}\n}`;
 }
@@ -73,7 +66,7 @@ function generate(token) {
   if(token.hasOwnProperty('stack')) { return `stack install ${token.stack}`; }
   if(token.hasOwnProperty('variable')) { return `${token.variable}=${token.value}`;}
   if(token.hasOwnProperty('yay')) { return `yay -S --noconfirm ${token.yay}`;}
-
+  if(token.hasOwnProperty('link')) { return `# LINK NOT FOUND ==> ${token.link}`;}
   return '# COULD NOT GENERATE: ' + token;
 }
 function generateTargetOperatorSH(operator) {

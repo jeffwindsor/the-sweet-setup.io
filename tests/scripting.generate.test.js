@@ -9,7 +9,7 @@ scripting_module.__set__("_", _);
 const generate = scripting_module.__get__('generate');
 //=================================================
 
-describe('Scripting', () => {
+describe('Scripting JS', () => {
   describe('Generate', () => {
 
     function run(token, expected) { expect(generate(token)).toEqual(expected); }

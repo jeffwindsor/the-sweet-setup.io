@@ -1,16 +1,17 @@
 [
   { "desc":"install brew", "command": "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\";"},
+  { "brew":"brew cask tap homebrew/cask"},
   { "cask": "caskroom/cask" },
   { "cask": "caskroom/versions" },
   { "cask": "brave" },
   { "cask": "google-chrome" },
   { "cask": "tor" },
   { "cask": "visual-studio-code" },
-  { "cask": "iterm" },
+  { "cask": "iterm2" },
   { "brew": "bash" },
   { "brew": "fish" },
   { "brew": "oh-my-fish" },
-  { "brew": "coreutils" },s
+  { "brew": "coreutils" },
   { "brew": "wget" },
   { "brew": "vim" },
   { "brew": "tree" },
@@ -18,7 +19,6 @@
   { "cask": "python3" },
   { "cask": "pylint" },
   { "cask": "node" },
-
   { "link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/vscode_extensions.json" },
   { "desc":"GHCI Timer", "echo": ":set +s", "target": { "operator": "redirect", "path": ".ghci" }},
   { "desc":"GHCI Prompt", "echo": ":set prompt \"\\ESC[38;5;45mλ \\ESC[0m\"", "target": { "operator": "redirectappend", "path": ".ghci" }},
@@ -26,13 +26,3 @@
   { "gitclone": "https://github.com/google/fonts.git", "args": "--depth=1", "output_dir": "~/src/sys/google/fonts" },
   { "gitclone": "https://github.com/powerline/fonts.git", "args": "--depth=1", "output_dir": "~/src/sys/powerline/fonts" }
 ]
-
-// Fantastical
-// Keybase
-// iTerm2
-// LastPass
-// Google Backup Sync
-// Be Focused Pro
-// Kindle
-// Slack
-// Spotify
