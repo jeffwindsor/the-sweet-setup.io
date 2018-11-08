@@ -1,22 +1,24 @@
-function toArray(content) {
-  if (content == '' || content == null) {
-    return [];
-  }
-  else {
-    let object = JSON.parse(removeTrailingComma(content));
-    return (Array.isArray(object)) ? object : [object];
-  }
-}
-
-function toString(object) {
-  return JSON.stringify(object, undefined, 2);
+function jsonToObjectArray(content) {
+  content = content.trim()
+  content = removeTrailingComma(content)
+  content = wrapInBrackets(content);
+  return JSON.parse(content);
 }
 
 function removeTrailingComma(content) {
-  let text = content.trim();
-  return (text.slice(-1) == ',')
-    ? text.slice(0, -1)
-    : text
+  return (content.slice(-1) == ',')
+    ? content.slice(0, -1)
+    : content;
+};
+
+function wrapInBrackets(content){
+  if(content.slice(0,1) != '['){ content = '[' + content;}
+  if(content.slice(-1) != ']'){ content = content + ']';}
+  return content;
+};
+
+function objectToJson(json) {
+  return JSON.stringify(json, undefined, 2);
 }
 
 function downloadFileName(elemId) {
@@ -27,24 +29,38 @@ function downloadFileName(elemId) {
   }
 }
 
+function mergeContent(s1, s2) {
+  const a1 = jsonToObjectArray(s1);
+  const a2 = jsonToObjectArray(s2);
+  const am = _.concat(a1, a2);
+  return objectToJson(am);
+}
+
+function replaceInContent(content, replaceThis, withThat) {
+  return _.map(content, (o) => (o === replaceThis) ? withThat : o);
+}
+
 //=======================================================
 // Feilds and Properties
-let dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
-let empty = [];
+const dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
+const toEmpty = () => '';
+const sourceId = 'source';
+const targetId = 'target';
 var timeout = null;
-function getSource(){
-  let sourceAsText = document.getElementById('source').value
-  return toArray(sourceAsText);
-}
-function setSource(obj){
-  let content = (obj) ? JSON.stringify(obj, undefined, 2) : "";
-  document.getElementById('source').value = content;
-  onSourceChanged();
-}
-function setTarget(obj){
-  let content = (Array.isArray(obj)) ? _.join(obj, '\n') : "";
-  document.getElementById('target').value = content;
-}
+// function getSource(){
+//   const sourceAsText = document.getElementById('source').value
+//   return jsonToObjectArray(sourceAsText);
+// }
+// function setSource(obj){
+//   const content = (obj) ? JSON.stringify(obj, undefined, 2) : "";
+//   document.getElementById('source').value = content;
+//   onSourceMutated();
+// }
+// function setTarget(obj){
+//   const content = (Array.isArray(obj)) ? _.join(obj, '\n') : "";
+//   document.getElementById('target').value = content;
+// }
+
 //=======================================================
 //  Event Handlers
 function onAddLocalUriClick(name) { addUriContentToSource(`${dataUri}/${name}.json`); }
@@ -53,46 +69,52 @@ function onSourceKeyUp() {
   //on each keyup restart timer
   clearTimeout(timeout);
   //when timer expires, signal document.getElementById(sourceId) content change
-  timeout = setTimeout(onSourceChanged, 500);
+  timeout = setTimeout(onSourceMutated, 500);
 };
-function onSourceChanged(){
-  let source = getSource();
-  setTarget(script(source));
-  let links = _.filter(source, (token) => token.hasOwnProperty('link'));
+function onSourceMutated() {
+  const scripted = script(getSource());
+  setTarget(scripted);
+  const links = _.filter(source, (token) => token.hasOwnProperty('link'));
   _.each(links, r => replaceUriContentInSource(r.link, r))
 }
 
 //=======================================================
 // METHODS AND FUNCTIONS
-function addUriContentToSource(uri) {
+function getUriText(uri, callback) {
   fetch(uri)
     .then(response => response.text())
     .then((content) => {
-      let merged = _.concat(getSource(), toArray(content));
-      setSource(merged);
+      callback(content);
     });
 }
 
-function replaceUriContentInSource(uri, original){
-  console.log(uri.link);
-  console.log(original);
-  fetch(uri)
-  .then(response => response.text())
-  .then((content) => {
-    console.log(content);
-    let current = getSource();
-    let left    = _.takeWhile(current, (item) => item != original);
-    let right   = _.takeRightWhile(current, (item) => item != original);
-    let merged  = _.concat(_.concat(left, content), right);
-    //setSource(merged);
-    //console.log(merged);
-  });
+function mutateElemValue(id, withF) {
+  const elem = document.getElementById(id);
+  elem.value = withF(elem.value);
+}
+function mutateTargetValue(withF) {
+  mutateElemValue(targetId, withF);
+}
+function mutateSourceValue(withF) {
+  mutateElemValue(sourceId, withF);
+  onSourceMutated();
 }
 
+function addUriContentToSource(uri) {
+  getUriText(uri,
+    (uriContent) => mutateSourceValue(
+      (current) => mergeContent(current, uriContent)));
+}
+
+function replaceUriContentInSource(uri, replaceThis) {
+  getUriText(uri,
+    (uriContent) => mutateSourceValue(
+      (current) => replaceInContent(current, replaceThis, uriContent)));
+}
 
 function reset() {
-  setSource([empty]);
-  setTarget(empty);
+  mutateSourceValue(toEmpty);
+  mutateTargetValue(toEmpty);
 };
 
 function copy(elemId) {
@@ -102,8 +124,8 @@ function copy(elemId) {
 };
 
 function download(elemId) {
-  let data = element(elemId).value;
-  let element = document.createElement('a');
+  const data = element(elemId).value;
+  const element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
   element.setAttribute('download', downloadFileName(elemId));
   element.style.display = 'none';

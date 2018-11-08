@@ -2,4 +2,5 @@
   { "fishfunction": "ni", "function_body": "npm install ${@}" },
   { "fishfunction": "ns", "function_body": "npm run start" },
   { "fishfunction": "nt", "function_body": "npm run test" }
+  { "fishfunction": "nreset", "function_body": "npm install; npm prune; npm doctor;" }
 ]
