@@ -23,14 +23,14 @@ function downloadFileName(elemId) {
   switch (elemId) {
     case targetId: return 'setup.sh';
     case sourceId: return 'source.json';
-    default: return empty;
+    default: return 'unknown.dat';
   }
 }
 
 //=======================================================
 // Feilds and Properties
 let dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
-let empty = '';
+let empty = [];
 var timeout = null;
 function getSource(){
   let sourceAsText = document.getElementById('source').value
@@ -41,7 +41,10 @@ function setSource(obj){
   document.getElementById('source').value = content;
   onSourceChanged();
 }
-function setTarget(content){ document.getElementById('target').value = content; }
+function setTarget(obj){
+  let content = (Array.isArray(obj)) ? _.join(obj, '\n') : "";
+  document.getElementById('target').value = content;
+}
 //=======================================================
 //  Event Handlers
 function onAddLocalUriClick(name) { addUriContentToSource(`${dataUri}/${name}.json`); }
@@ -54,22 +57,13 @@ function onSourceKeyUp() {
 };
 function onSourceChanged(){
   let source = getSource();
-  scriptContentToTarget(source);
-  //resolveLinksInSourceAsync(source);
+  setTarget(script(source));
+  let links = _.filter(source, (token) => token.hasOwnProperty('link'));
+  _.each(links, r => replaceUriContentInSource(r.link, r))
 }
 
 //=======================================================
 // METHODS AND FUNCTIONS
-function scriptContentToTarget(contentArray) {
-  let content = _.join(script(contentArray), '\n');
-  setTarget(content);
-}
-
-function resolveLinksInSourceAsync(array){
-  let links = _.filter(array, (token) => token.hasOwnProperty('link'));
-  _.map(links, r => replaceUriContentInSource(r.link, r))
-}
-
 function addUriContentToSource(uri) {
   fetch(uri)
     .then(response => response.text())
@@ -80,20 +74,24 @@ function addUriContentToSource(uri) {
 }
 
 function replaceUriContentInSource(uri, original){
+  console.log(uri.link);
+  console.log(original);
   fetch(uri)
   .then(response => response.text())
   .then((content) => {
+    console.log(content);
     let current = getSource();
     let left    = _.takeWhile(current, (item) => item != original);
     let right   = _.takeRightWhile(current, (item) => item != original);
     let merged  = _.concat(_.concat(left, content), right);
-    setSource(merged);
+    //setSource(merged);
+    //console.log(merged);
   });
 }
 
 
 function reset() {
-  setSource(empty);
+  setSource([empty]);
   setTarget(empty);
 };
 
