@@ -13,7 +13,6 @@ function toString(object) {
 }
 
 function removeTrailingComma(content) {
-  alert(content);
   let text = content.trim();
   return (text.slice(-1) == ',')
     ? text.slice(0, -1)
@@ -33,6 +32,16 @@ function downloadFileName(elemId) {
 let dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
 let empty = '';
 var timeout = null;
+function getSource(){
+  let sourceAsText = document.getElementById('source').value
+  return toArray(sourceAsText);
+}
+function setSource(obj){
+  let content = (obj) ? JSON.stringify(obj, undefined, 2) : "";
+  document.getElementById('source').value = content;
+  onSourceChanged();
+}
+function setTarget(content){ document.getElementById('target').value = content; }
 //=======================================================
 //  Event Handlers
 function onAddLocalUriClick(name) { addUriContentToSource(`${dataUri}/${name}.json`); }
@@ -40,21 +49,20 @@ function onAddRemoteUriClick() { addUriContentToSource(document.getElementById('
 function onSourceKeyUp() {
   //on each keyup restart timer
   clearTimeout(timeout);
-  //when timer expires, signal document.getElementById('source') content change
+  //when timer expires, signal document.getElementById(sourceId) content change
   timeout = setTimeout(onSourceChanged, 500);
 };
 function onSourceChanged(){
-  let sourceAsText = document.getElementById('source').value
-  let sourceAsArray = toArray(sourceAsText);
-  scriptContentToTarget(sourceAsArray);
-  resolveLinksInSourceAsync(sourceAsArray);
+  let source = getSource();
+  scriptContentToTarget(source);
+  //resolveLinksInSourceAsync(source);
 }
 
 //=======================================================
 // METHODS AND FUNCTIONS
 function scriptContentToTarget(contentArray) {
-  let targetText = _.join(script(contentArray), '\n');
-  document.getElementById('target').value = targetText;
+  let content = _.join(script(contentArray), '\n');
+  setTarget(content);
 }
 
 function resolveLinksInSourceAsync(array){
@@ -66,11 +74,8 @@ function addUriContentToSource(uri) {
   fetch(uri)
     .then(response => response.text())
     .then((content) => {
-      let one = toArray(document.getElementById('source').value);
-      let two = toArray(content);
-      let merged = _.concat(one, two);
-      document.getElementById('source').value = merged;
-      onSourceChanged();
+      let merged = _.concat(getSource(), toArray(content));
+      setSource(merged);
     });
 }
 
@@ -78,19 +83,18 @@ function replaceUriContentInSource(uri, original){
   fetch(uri)
   .then(response => response.text())
   .then((content) => {
-    let current = toArray(document.getElementById('source').value);
+    let current = getSource();
     let left    = _.takeWhile(current, (item) => item != original);
     let right   = _.takeRightWhile(current, (item) => item != original);
     let merged  = _.concat(_.concat(left, content), right);
-    document.getElementById('source').value = merged;
-    onSourceChanged();
+    setSource(merged);
   });
 }
 
 
 function reset() {
-  document.getElementById('source').value = empty;
-  document.getElementById('target').value = empty;
+  setSource(empty);
+  setTarget(empty);
 };
 
 function copy(elemId) {
