@@ -20,9 +20,8 @@
 </head>
 
 <body>
-  <!-- CONTENTS -->
-  <main class="container-fluid h-100" id="script-container">
-    <div class="row">
+
+    <div id="main-menu">
         <div class="col nopadding">
 
           <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -48,123 +47,137 @@
 
         </div>
     </div>
-    <div class="row h-100">
-      <div class="col nopadding">
 
-        <ul class="nav border">
+    <div class="container-fluid h-100">
+      <div class="row h-100">
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cubes"></i></a>
-            <div class="dropdown-menu">
-
-              <div class="dropdown-submenu">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Machine Script</a>
-                <ul class="dropdown-menu">
+        <div id="main-body-source" class="col-md nopadding">
+          <div id="main-body-source">
+            <ul id="main-body-source-menu" class="nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">snippets</a>
+                <div class="dropdown-menu">
 
                   <div class="dropdown-submenu">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">MacOs</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Machine Script</a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" id="macos_dev" onclick="onAddLocalUriClick('list_macos')">Standard</a></li>
-                      <li><a class="dropdown-item" id="macos_dev" onclick="onAddLocalUriClick('list_macos_dev')">Dev</a></li>
+
+                      <div class="dropdown-submenu">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">MacOs</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" id="macos" >Standard</a></li>
+                          <li><a class="dropdown-item" id="macos_dev" >Dev</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="dropdown-submenu">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Manjaro</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" id="manjaro_macbook11" >MacbookPro 11</a></li>
+                          <li><a class="dropdown-item" id="manjaro_vm" >VM</a></li>
+                          <li><a class="dropdown-item" id="manjaro_dev" >Dev</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="dropdown-submenu">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Ubuntu</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" id="manjaro_macbook11" >MacbookPro 11</a></li>
+                          <li><a class="dropdown-item" id="manjaro_lenovo" >Lenovo</a></li>
+                          <li><a class="dropdown-item" id="ubuntu_vm" >VM</a></li>
+                          <li><a class="dropdown-item" id="ubuntu_dev" >Dev</a></li>
+                        </ul>
+                      </div>
                     </ul>
                   </div>
 
+                  <div class="dropdown-submenu">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Scriptlet</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('shell_aliases')">Shell Aliases</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('pulp_aliases')">Pulp Aliases</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('npm_aliases')">Npm Aliases</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('haskell_stack_aliases')">Stack Aliases</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_workflow')">Git Workflow</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_aliases')">Git Aliases</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_globals')">Git Globals</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('vscode_extensions')">VSCode Extensions</a></li>
+                    </ul>
+                  </div>
 
-                  <!-- <li><a class="dropdown-item" id="manjaro_dev">Manjaro-Gnome3 Developer</a></li>
-                  <li><a class="dropdown-item" id="ubuntu_plex">Ubuntu Plex Server</a></li>
-                  <li><div class="dropdown-divider"></div></li>
-                  <li><a class="dropdown-item" id="manjaro_dev_vm">VM Manjaro-Gnome3 Developer</a></li> -->
-                </ul>
-              </div>
+                  <div class="dropdown-submenu">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Command</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('comment')">Comment</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('echo')">Echo</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('variable')">Variable</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('command')">Command</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('npm')">Npm</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('code')">Code</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('stack')">Stack</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('file')">File</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('gitconfig')">Git Config</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('gitclone')">Git Clone</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('curl')">Curl</a></li>
+                      <li><div class="dropdown-divider"></div></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('pacman')">Pacman</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('yay')">Yay</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('brew')">Brew</a></li>
+                      <li><a class="dropdown-item" onclick="onAddLocalUriClick('cask')">Cask</a></li>
+                    </ul>
+                  </div>
 
-              <div class="dropdown-submenu">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Scriptlet</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('shell_aliases')">Shell Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('pulp_aliases')">Pulp Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('npm_aliases')">Npm Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('haskell_stack_aliases')">Stack Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_workflow')">Git Workflow</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_aliases')">Git Aliases</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_globals')">Git Globals</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('vscode_extensions')">VSCode Extensions</a></li>
-                </ul>
-              </div>
-
-              <div class="dropdown-submenu">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Command</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('comment')">Comment</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('echo')">Echo</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('variable')">Variable</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('command')">Command</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('npm')">Npm</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('code')">Code</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('stack')">Stack</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('file')">File</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('gitconfig')">Git Config</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('gitclone')">Git Clone</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('curl')">Curl</a></li>
-                  <li><div class="dropdown-divider"></div></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('pacman')">Pacman</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('yay')">Yay</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('brew')">Brew</a></li>
-                  <li><a class="dropdown-item" onclick="onAddLocalUriClick('cask')">Cask</a></li>
-                </ul>
-              </div>
-
-              <a class="dropdown-item" data-toggle="modal" data-target="#openUriModal">Remote Script</a>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link disabled" id="copysource" onclick="copy('source')"><i class="fas fa-clipboard"></i></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link disabled" id="downloadsource" onclick="download('source')"><i class="fas fa-cloud-download-alt"></i></a>
-          </li>
-
-        </ul>
-        <textarea autofocus id="source" class="md-textarea form-control" onkeyup="onSourceKeyUp()"></textarea>
-      </div>
-      <div class="col nopadding">
-          <ul class="nav border">
-
-            <li class="nav-item">
-                <a class="nav-link disabled" id="copytarget" onclick="copy('target')"><i class="fas fa-clipboard"></i></a>
+                  <a class="nav-link dropdown-item" data-toggle="modal" data-target="#main-modal-openi-uri">Remote Script</a>
+                </div>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link disabled" id="downloadtarget" onclick="download('target')"><i class="fas fa-cloud-download-alt"></i></a>
+                <a class="nav-link disabled" id="copysource" onclick="copy('source')"><i class="fas fa-clipboard"></i></a>
               </li>
 
+              <li class="nav-item">
+                <a class="nav-link disabled" id="downloadsource" onclick="download('source')"><i class="fas fa-cloud-download-alt"></i></a>
+              </li>
             </ul>
-        <textarea readonly id="target" class="md-textarea form-control"></textarea>
+          </div>
+         <textarea id="main-body-source-textarea" autofocus onkeyup="onSourceKeyUp()"></textarea>
+        </div>
+
+        <div id="main-body-target" class="col-md nopadding">
+          <ul id="main-body-target-menu" class="nav">
+            <li class="nav-item">
+              <a class="nav-link disabled" id="copytarget" onclick="copy('target')"><i class="fas fa-clipboard"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" id="downloadtarget" onclick="download('target')"><i class="fas fa-cloud-download-alt"></i></a>
+            </li>
+          </ul>
+          <textarea id="main-body-target-textarea" readonly></textarea>
+        </div>
+
       </div>
     </div>
-
-    <div class="modal" id="openUriModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Add Remote Script</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <input id="jsonUriText" type="text" class="form-control" placeholder="URI" aria-label="Uri">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" onclick="onAddRemoteUriClick()" data-dismiss="modal" >Ok</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            </div>
+<!--
+  <div id="main-modal-openi-uri"  class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Remote Script</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input id="jsonUriText" type="text" class="form-control" placeholder="URI" aria-label="Uri">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="onAddRemoteUriClick()" data-dismiss="modal" >Ok</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
+  </div> -->
 
-  </main>
 </body>
 
 <!-- lodash -->

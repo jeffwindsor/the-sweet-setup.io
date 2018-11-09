@@ -1,21 +1,6 @@
 function jsonToObjectArray(content) {
-  content = content.trim()
-  content = removeTrailingComma(content)
-  content = wrapInBrackets(content);
   return JSON.parse(content);
 }
-
-function removeTrailingComma(content) {
-  return (content.slice(-1) == ',')
-    ? content.slice(0, -1)
-    : content;
-};
-
-function wrapInBrackets(content){
-  if(content.slice(0,1) != '['){ content = '[' + content;}
-  if(content.slice(-1) != ']'){ content = content + ']';}
-  return content;
-};
 
 function objectToJson(json) {
   return JSON.stringify(json, undefined, 2);
@@ -44,9 +29,10 @@ function replaceInContent(content, replaceThis, withThat) {
 // Feilds and Properties
 const dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
 const toEmpty = () => '';
-const sourceId = 'source';
-const targetId = 'target';
+const sourceId = 'main-body-source-textarea';
+const targetId = 'main-body-target-textarea';
 var timeout = null;
+
 // function getSource(){
 //   const sourceAsText = document.getElementById('source').value
 //   return jsonToObjectArray(sourceAsText);
