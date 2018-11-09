@@ -1,66 +1,36 @@
-html {
-    position: relative;
-    height: 100%;
-}
+/* color: #33FF33; APPLE IIe */
+/* color: #66FF66; APPLE IIc */
+/* color: #FFB000; AMBER */
+/* color: #FFCC00; COMPAQ AMBER */
 
+html {
+  position: relative;
+  height: 100%;
+}
 body {
-    font-family: 'Inconsolata', monospace !important;
-    height: 100%;
+  height: 100%;
 }
 
 textarea {
-    font-size: 85%;
-    height: 100%;
-    width: 100%;
-    padding: 15px;
-    outline: none;
-    border: 1px solid black;
+  font-size: 85%;
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  outline: none;
+  /* border: 1px solid black; */
+  background-color:rgb(0, 37, 0);
+  color: #33FF33;
 }
 
-.nav-item a:hover {
-  color: #be8f00 !important;
-}
-.nav-item a:visited {
-  color: #140f00 !important;
-}
-.nav-item a:active {
-  color: #140f00 !important;
-}
-
-.nopadding {
+.no-margin {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-#main-body-source-menu{
-  background-color: #c2c2c2;
-  border: 1px solid #101010;
-}
-
-#main-body-target-menu{
-  background-color: #c2c2c2;
-  border: 1px solid #101010;
-}
-
-#main-body-source-textarea {
-  background-color: #140f00;
-  color: #be8f00;
-}
-
-#main-body-target-textarea {
-  background-color: #140f00;
-  color: #be8f00;
-}
-
-
+/* multi drop down menu */
 .dropdown-submenu {
     position: relative;
 }
-
-.dropdown-submenu a:hover {
-  color: #be8f00 !important;
-}
-
 .dropdown-submenu>.dropdown-menu {
     top: 0;
     left: 100%;
@@ -70,11 +40,9 @@ textarea {
     -moz-border-radius: 0 6px 6px;
     border-radius: 0 6px 6px 6px;
 }
-
 .dropdown-submenu:hover>.dropdown-menu {
     display: block;
 }
-
 .dropdown-submenu>a:after {
     display: block;
     content: " ";
@@ -88,15 +56,12 @@ textarea {
     margin-top: 5px;
     margin-right: -10px;
 }
-
 .dropdown-submenu:hover>a:after {
     border-left-color: #fff;
 }
-
 .dropdown-submenu.pull-left {
     float: none;
 }
-
 .dropdown-submenu.pull-left>.dropdown-menu {
     left: -100%;
     margin-left: 10px;
