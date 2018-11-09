@@ -18,13 +18,13 @@ textarea {
 }
 
 .nav-item a:hover {
-  color: goldenrod !important;
+  color: #be8f00 !important;
 }
 .nav-item a:visited {
-  color: black !important;
+  color: #140f00 !important;
 }
 .nav-item a:active {
-  color: black !important;
+  color: #140f00 !important;
 }
 
 .nopadding {
@@ -33,12 +33,12 @@ textarea {
 }
 
 #main-body-source-menu{
-  background-color: #b4b4b4;
+  background-color: #c2c2c2;
   border: 1px solid #101010;
 }
 
 #main-body-target-menu{
-  background-color: #b4b4b4;
+  background-color: #c2c2c2;
   border: 1px solid #101010;
 }
 
@@ -58,7 +58,7 @@ textarea {
 }
 
 .dropdown-submenu a:hover {
-  color: goldenrod !important;
+  color: #be8f00 !important;
 }
 
 .dropdown-submenu>.dropdown-menu {

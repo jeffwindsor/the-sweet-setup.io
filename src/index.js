@@ -37,11 +37,15 @@ function mergeContent(s1, s2) {
 }
 
 function replaceInContent(content, replaceThis, withThat) {
-  return _.map(content, (o) => (o === replaceThis) ? withThat : o);
+  console.log(replaceThis);
+  console.log(withThat);
+
+  return content.replace(replaceThis, withThat);
+  //return _.map(content, (o) => (o === replaceThis) ? withThat : o);
 }
 
 //=======================================================
-// Feilds and Properties
+// Fields and Properties
 const dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
 const toEmpty = () => '';
 const sourceId = 'main-body-source-textarea';
@@ -97,9 +101,9 @@ function addUriContentToSource(uri) {
 }
 
 function replaceUriContentInSource(uri, replaceThis) {
-  getUriText(uri,
-    (uriContent) => mutateSourceValue(
-      (current) => replaceInContent(current, replaceThis, uriContent)));
+  // getUriText(uri,
+  //   (uriContent) => mutateSourceValue(
+  //     (current) => replaceInContent(current, replaceThis, uriContent)));
 }
 
 function reset() {

@@ -10,6 +10,7 @@ index_module.__set__("_", _);
 const removeTrailingComma = index_module.__get__('removeTrailingComma');
 const jsonToObjectArray = index_module.__get__('jsonToObjectArray');
 const wrapInBrackets = index_module.__get__('wrapInBrackets');
+const replaceInContent = index_module.__get__('replaceInContent');
 
 //=================================================
 
@@ -41,7 +42,15 @@ describe("Index", () => {
     it('', () => {});
   });
   describe("Replace in Content", () => {
-    it('', () => {});
+
+    it('text is replaced', () => {
+      const content = '[{},{},{"link":"http://somethinghere"},{},{}]';
+      const replaceThis = '{"link":"http://somethinghere"}';
+      const withThat = '{"comment":"this"}';
+
+      const actual = replaceInContent(content, replaceThis, withThat);
+      expect(actual).toEqual('[{},{},{"comment":"this"},{},{}]');
+    });
   });
   describe("Object to JSON", () => {
     it('', () => {});

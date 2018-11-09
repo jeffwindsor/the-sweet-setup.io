@@ -21,33 +21,6 @@
 
 <body>
 
-    <div id="main-menu">
-        <div class="col nopadding">
-
-          <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-              <a class="navbar-brand" href="#"><i class="fas fa-desktop mr-3"></i>The Sweet Setup</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link" id="reset" onclick="reset()" href="#">reset</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="help.html">docs</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/jeffwindsor/the-sweet-setup.io">github</a>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-
-        </div>
-    </div>
-
     <div class="container-fluid h-100">
       <div class="row h-100">
 
@@ -65,8 +38,8 @@
                       <div class="dropdown-submenu">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">MacOs</a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" id="macos" >Standard</a></li>
-                          <li><a class="dropdown-item" id="macos_dev" >Dev</a></li>
+                          <li><a class="dropdown-item" id="macos" onclick="onAddLocalUriClick('list_macos')">Standard</a></li>
+                          <li><a class="dropdown-item" id="macos_dev" onclick="onAddLocalUriClick('list_macos_dev')">Dev</a></li>
                         </ul>
                       </div>
 
@@ -130,13 +103,23 @@
                   <a class="nav-link dropdown-item" data-toggle="modal" data-target="#main-modal-openi-uri">Remote Script</a>
                 </div>
               </li>
-
               <li class="nav-item">
-                <a class="nav-link disabled" id="copysource" onclick="copy('source')"><i class="fas fa-clipboard"></i></a>
+                <a class="nav-link" id="reset" onclick="reset()" href="#">reset</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link disabled" id="downloadsource" onclick="download('source')"><i class="fas fa-cloud-download-alt"></i></a>
+                <a class="nav-link disabled" id="copysource" onclick="copy('source')">copy</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link disabled" id="downloadsource" onclick="download('source')">download</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="help.html">docs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://github.com/jeffwindsor/the-sweet-setup.io">github</a>
               </li>
             </ul>
           </div>
@@ -157,7 +140,7 @@
 
       </div>
     </div>
-<!--
+
   <div id="main-modal-openi-uri"  class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -176,7 +159,7 @@
           </div>
         </div>
       </div>
-  </div> -->
+  </div>
 
 </body>
 
