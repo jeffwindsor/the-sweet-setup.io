@@ -10,11 +10,11 @@ body {
 
 textarea {
     font-size: 85%;
-    height: 95%;
+    height: 100%;
     width: 100%;
     padding: 15px;
     outline: none;
-    border: 1px solid #b4b4b4;
+    border: 1px solid black;
 }
 
 .nav-item a:hover {
@@ -41,17 +41,17 @@ textarea {
   background-color: #b4b4b4;
   border: 1px solid #101010;
 }
-/*
+
 #main-body-source-textarea {
-  background-color: #101010;
-  color: #00ff00;
+  background-color: #140f00;
+  color: #be8f00;
 }
 
 #main-body-target-textarea {
-  background-color: #101010;
-  color: #ffbf00;
+  background-color: #140f00;
+  color: #be8f00;
 }
-*/
+
 
 .dropdown-submenu {
     position: relative;

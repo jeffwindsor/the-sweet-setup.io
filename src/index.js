@@ -1,6 +1,21 @@
 function jsonToObjectArray(content) {
+  content = content.trim()
+  content = removeTrailingComma(content)
+  content = wrapInBrackets(content);
   return JSON.parse(content);
 }
+
+function removeTrailingComma(content) {
+  return (content.slice(-1) == ',')
+    ? content.slice(0, -1)
+    : content;
+};
+
+function wrapInBrackets(content){
+  if(content.slice(0,1) != '['){ content = '[' + content;}
+  if(content.slice(-1) != ']'){ content = content + ']';}
+  return content;
+};
 
 function objectToJson(json) {
   return JSON.stringify(json, undefined, 2);
@@ -33,20 +48,6 @@ const sourceId = 'main-body-source-textarea';
 const targetId = 'main-body-target-textarea';
 var timeout = null;
 
-// function getSource(){
-//   const sourceAsText = document.getElementById('source').value
-//   return jsonToObjectArray(sourceAsText);
-// }
-// function setSource(obj){
-//   const content = (obj) ? JSON.stringify(obj, undefined, 2) : "";
-//   document.getElementById('source').value = content;
-//   onSourceMutated();
-// }
-// function setTarget(obj){
-//   const content = (Array.isArray(obj)) ? _.join(obj, '\n') : "";
-//   document.getElementById('target').value = content;
-// }
-
 //=======================================================
 //  Event Handlers
 function onAddLocalUriClick(name) { addUriContentToSource(`${dataUri}/${name}.json`); }
@@ -58,8 +59,11 @@ function onSourceKeyUp() {
   timeout = setTimeout(onSourceMutated, 500);
 };
 function onSourceMutated() {
-  const scripted = script(getSource());
-  setTarget(scripted);
+  const source   = jsonToObjectArray(document.getElementById(sourceId).value);
+  const scripted = script(source);
+  const output   = (Array.isArray(scripted)) ? _.join(scripted, '\n') : "";
+  document.getElementById(targetId).value = output;
+
   const links = _.filter(source, (token) => token.hasOwnProperty('link'));
   _.each(links, r => replaceUriContentInSource(r.link, r))
 }

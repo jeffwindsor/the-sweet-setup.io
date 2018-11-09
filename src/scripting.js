@@ -2,7 +2,7 @@
 	SCRIPT
 ***************************************************/
 function script(content) {
-  let contentWithHeader = [{ type: 'header', value: '#!/bin/sh' }].concat(content);
+  let contentWithHeader = [{ header: '#!/bin/sh' }].concat(content);
   let tokens   = _.flatMap(contentWithHeader, request => tokenize(request));
   return _.map(tokens, token => generate(token));
 }
