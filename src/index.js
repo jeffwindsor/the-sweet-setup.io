@@ -110,15 +110,18 @@ function reset() {
   mutateSourceValue(toEmpty);
   mutateTargetValue(toEmpty);
 };
-
+function copySource() {copy(sourceId);}
+function copyTarget() {copy(targetId);}
 function copy(elemId) {
-  var copyText = element(elemId);
-  copyText.select();
+  var elem = document.getElementById(elemId);
+  elem.select();
   document.execCommand('copy');
 };
 
+function downloadSource() {download(sourceId);}
+function downloadTarget() {download(targetId);}
 function download(elemId) {
-  const data = element(elemId).value;
+  const data =  document.getElementById(elemId).value;
   const element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
   element.setAttribute('download', downloadFileName(elemId));

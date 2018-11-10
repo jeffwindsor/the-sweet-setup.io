@@ -11,10 +11,16 @@ const removeTrailingComma = index_module.__get__('removeTrailingComma');
 const jsonToObjectArray = index_module.__get__('jsonToObjectArray');
 const wrapInBrackets = index_module.__get__('wrapInBrackets');
 const replaceInContent = index_module.__get__('replaceInContent');
+const mergeContent = index_module.__get__('mergeContent');
+const objectToJson = index_module.__get__('objectToJson');
 
 //=================================================
 
 describe("Index", () => {
+  function squash(content){
+    return content.replace(/(\r\n|\n|\r|\s)/gm,"")
+  }
+
   describe("Json to Array", () => {
     it('converts JSON to an object array', () => {
       const actual = jsonToObjectArray('[{"one":"1","two":"2"}, {"three":"3","four":"4"}]');
@@ -39,7 +45,26 @@ describe("Index", () => {
   });
 
   describe("Merge Content", () => {
-    it('', () => {});
+    it('merged left and right in that order', () => {
+      const left = '[{"one":"1"}]';
+      const right = '[{"two":"2"}]';
+      const actual = mergeContent(left,right);
+      expect(squash(actual)).toEqual('[{"one":"1"},{"two":"2"}]');
+    });
+
+    it('empty right returns left', () => {
+      const left = '[]';
+      const right = '[{"two":"2"}]';
+      const actual = mergeContent(left,right);
+      expect(squash(actual)).toEqual('[{"two":"2"}]');
+    });
+
+    it('empty left returns right', () => {
+      const left = '[{"one":"1"}]';
+      const right = '[]';
+      const actual = mergeContent(left,right);
+      expect(squash(actual)).toEqual('[{"one":"1"}]');
+    });
   });
   describe("Replace in Content", () => {
 
@@ -53,7 +78,11 @@ describe("Index", () => {
     });
   });
   describe("Object to JSON", () => {
-    it('', () => {});
+    it('converts to JSON', () => {
+      const obj = [{"one":"1"}];
+      const actual = objectToJson(obj);
+      expect(squash(actual)).toEqual('[{"one":"1"}]');
+    });
   });
 
   describe("Remove Trailing Comma", () => {
