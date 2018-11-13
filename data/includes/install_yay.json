@@ -1,0 +1,5 @@
+[
+  { "gitclone": "https://aur.archlinux.org/yay.git", "output_dir": "~/src/yay" },
+  { "command":"cd ~/src/yay"},
+  { "command":"makepkg -i"}
+]

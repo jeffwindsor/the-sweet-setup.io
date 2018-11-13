@@ -13,23 +13,17 @@
   {"cask":"node" },
   
   {"brew":"git"},
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/git_globals.json"},
+  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/includes/add_git_globals.json"},
 
   {"brew":"haskell-stack" },
   {"desc":"GHCI Timer","file":":set +s","target": {"operator":"redirect","path":".ghci" }},
   {"desc":"GHCI Prompt","file":":set prompt \"\\ESC[38;5;45mλ \\ESC[0m\"","target": {"operator":"redirectappend","path":".ghci" }},
   
   {"cask":"visual-studio-code" },
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/vscode_extensions.json" },
+  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/includes/add_vscode_extensions.json" },
   
   {"gitclone":"https://github.com/google/fonts.git","args":"--depth=1","output_dir":"~/src/sys/google/fonts" },
   {"gitclone":"https://github.com/powerline/fonts.git","args":"--depth=1","output_dir":"~/src/sys/powerline/fonts" },
   
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/aliases_brew.json"},
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/aliases_git.json"},
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/aliases_git_workflow.json"},
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/aliases_haskell_stack.json"},
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/aliases_npm.json"},
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/aliases_pulp.json"},
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/aliases_shell.json"}
+  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/includes/add_dev_aliases.json"}
 ]
