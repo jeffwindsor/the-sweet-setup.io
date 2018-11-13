@@ -1,0 +1,11 @@
+[
+  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/homebrew.json"},
+  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/brew_aliases.json"},
+
+  {"cask":"keybase"},
+  {"cask":"kindle"},
+  {"cask":"slack"},
+  {"cask":"spotify"},
+  {"cask":"brave"},
+  {"cask":"chromeium"}
+]

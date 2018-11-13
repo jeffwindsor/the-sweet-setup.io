@@ -31,71 +31,74 @@
           <div class="dropdown-menu">
 
             <div class="dropdown-submenu">
-              <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">machine script</a>
+              <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">scripts</a>
               <ul class="dropdown-menu">
 
                 <div class="dropdown-submenu">
                   <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">macos</a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="macos" onclick="onAddLocalUriClick('list_macos')">daily driver</a></li>
-                    <li><a class="dropdown-item" id="macos_dev" onclick="onAddLocalUriClick('list_macos_dev')">developer</a></li>
+                    <li><a class="dropdown-item" id="macos" onclick="onAddLocalUriClick('macos')">base</a></li>
+                    <li><a class="dropdown-item" id="macos_dev" onclick="onAddLocalUriClick('macos_dev')">developer</a></li>
                   </ul>
                 </div>
 
                 <div class="dropdown-submenu">
                   <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">manjaro</a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="manjaro_macbook11" >macbook pro 11</a></li>
-                    <li><a class="dropdown-item" id="manjaro_vm" >vm</a></li>
-                    <li><a class="dropdown-item" id="manjaro_dev" >developer</a></li>
+                      <li><a class="dropdown-item" id="manjaro" onclick="onAddLocalUriClick('manjaro')">base</a></li>
+                      <li><a class="dropdown-item" id="manjaro_dev" onclick="onAddLocalUriClick('manjaro_dev')">developer</a></li>
                   </ul>
                 </div>
 
                 <div class="dropdown-submenu">
                   <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">ubuntu</a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="manjaro_macbook11" >macbook pro 11</a></li>
-                    <li><a class="dropdown-item" id="manjaro_lenovo" >lenovo</a></li>
-                    <li><a class="dropdown-item" id="ubuntu_vm" >vm</a></li>
-                    <li><a class="dropdown-item" id="ubuntu_plex" >plex</a></li>
+                      <li><a class="dropdown-item" id="ubuntu" onclick="onAddLocalUriClick('ubuntu')">base</a></li>
+                    <li><a class="dropdown-item" id="ubuntu_plex" onclick="onAddLocalUriClick('ubuntu_plex')">plex</a></li>
                   </ul>
                 </div>
               </ul>
             </div>
 
             <div class="dropdown-submenu">
-              <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">scriptlet</a>
+              <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">favorites</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('shell_aliases')">shell aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('pulp_aliases')">sulp aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('npm_aliases')">npm aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('haskell_stack_aliases')">stack aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_workflow')">git workflow</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_aliases')">git aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('git_globals')">git globals</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('vscode_extensions')">vs code extensions</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/install_homebrew')">install homebrew</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/install_yay')">install yay</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/install_yay')">set fish as default</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/add_git_globals')">git globals</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/add_vscode_extensions')">vs code extensions</a></li>
+                <li><div class="dropdown-divider"></div></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/shell')">shell aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/pulp')">pulp aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/npm')">npm aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/haskell_stack')">stack aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/git_workflow')">git workflow aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/git')">git aliases</a></li>
               </ul>
             </div>
 
             <div class="dropdown-submenu">
-              <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">command</a>
+              <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">commands</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('comment')">comment</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('echo')">echo</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('variable')">variable</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command')">command</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('npm')">npm</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('code')">code</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('stack')">stack</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('file')">file</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('gitconfig')">git config</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('gitclone')">git clone</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('curl')">curl</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/command')">command</a></li>
                 <li><div class="dropdown-divider"></div></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('pacman')">pacman</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('yay')">yay</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('brew')">brew</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('cask')">cask</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/pacman')">pacman</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/yay')">yay</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/brew')">brew</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/cask')">cask</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/npm')">npm</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/stack')">stack</a></li>
+                <li><div class="dropdown-divider"></div></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/comment')">comment</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/echo')">echo</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/variable')">variable</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/code')">code</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/file')">file</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/gitconfig')">git config</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/gitclone')">git clone</a></li>
+                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/curl')">curl</a></li>
+                
               </ul>
             </div>
 

@@ -1,3 +1,5 @@
 [
+  { "fishfunction": "bi", "function_body": "brew install {$1}" },
+  { "fishfunction": "bc", "function_body": "brew cask install {$1}" },
   { "fishfunction": "bup", "function_body": "brew update; brew upgrade; brew prune; brew cleanup; brew doctor; brew cask upgrade; brew cask doctor;" }
 ]

@@ -1,0 +1,14 @@
+[
+  { "link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/install_homebrew.json"},
+  { "link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/aliases_brew.json"},
+
+  { "cask":"fantastical"},
+  { "cask":"keybase"},
+  { "cask":"kindle"},
+  { "cask":"slack"},
+  { "cask":"spotify"},
+  { "cask":"google-hangouts"},
+  { "cask":"google-backup-and-sync"},
+  { "cask":"brave" },
+  { "cask":"google-chrome" }
+]
