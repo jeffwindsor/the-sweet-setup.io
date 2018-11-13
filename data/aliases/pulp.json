@@ -1,6 +1,0 @@
-[
-  { "fishfunction": "pi", "function_body": "pulp init" },
-  { "fishfunction": "pb", "function_body": "pulp build" },
-  { "fishfunction": "pt", "function_body": "pulp test" },
-  { "fishfunction": "padd", "function_body": "bower install ${1} --save" }
-]

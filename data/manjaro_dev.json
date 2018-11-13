@@ -1,9 +1,0 @@
-[
-  {"yay":"visual-studio-code" },
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/includes/add_vscode_extensions.json" },
-  
-  {"gitclone":"https://github.com/google/fonts.git","args":"--depth=1","output_dir":"~/src/sys/google/fonts" },
-  {"gitclone":"https://github.com/powerline/fonts.git","args":"--depth=1","output_dir":"~/src/sys/powerline/fonts" },
-
-  {"link":"https://jeffwindsor.github.io/the-sweet-setup.io/data/includes/add_dev_aliases.json"}
-]

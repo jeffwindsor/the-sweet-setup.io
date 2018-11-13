@@ -30,23 +30,17 @@ function downloadFileName(elemId) {
 }
 
 function mergeContent(s1, s2) {
+  return mergeContentWithArray(s1, jsonToObjectArray(s2));
+}
+
+function mergeContentWithArray(s1, a2) {
   const a1 = jsonToObjectArray(s1);
-  const a2 = jsonToObjectArray(s2);
   const am = _.concat(a1, a2);
   return objectToJson(am);
 }
 
-function replaceInContent(content, replaceThis, withThat) {
-  console.log(replaceThis);
-  console.log(withThat);
-
-  return content.replace(replaceThis, withThat);
-  //return _.map(content, (o) => (o === replaceThis) ? withThat : o);
-}
-
 //=======================================================
 // Fields and Properties
-const dataUri = 'https://jeffwindsor.github.io/the-sweet-setup.io/data';
 const toEmpty = () => '';
 const sourceId = 'main-body-source-textarea';
 const targetId = 'main-body-target-textarea';
@@ -54,8 +48,8 @@ var timeout = null;
 
 //=======================================================
 //  Event Handlers
-function onAddLocalUriClick(name) { addUriContentToSource(`${dataUri}/${name}.json`); }
-function onAddRemoteUriClick() { addUriContentToSource(document.getElementById('jsonUriText').value); }
+function onAdd(name) { addLocalContent(name); }
+function onAddRemoteUri() { addUriContentToSource(document.getElementById('jsonUriText').value); }
 function onSourceKeyUp() {
   //on each keyup restart timer
   clearTimeout(timeout);
@@ -86,12 +80,20 @@ function mutateElemValue(id, withF) {
   const elem = document.getElementById(id);
   elem.value = withF(elem.value);
 }
+
 function mutateTargetValue(withF) {
   mutateElemValue(targetId, withF);
 }
+
 function mutateSourceValue(withF) {
   mutateElemValue(sourceId, withF);
   onSourceMutated();
+}
+
+function addLocalContent(name){
+  let append = eval(name);
+  let appendArray = (Array.isArray(append)) ? append : [append];
+  mutateSourceValue((current) => mergeContentWithArray(current, appendArray));
 }
 
 function addUriContentToSource(uri) {
@@ -100,16 +102,11 @@ function addUriContentToSource(uri) {
       (current) => mergeContent(current, uriContent)));
 }
 
-function replaceUriContentInSource(uri, replaceThis) {
-  // getUriText(uri,
-  //   (uriContent) => mutateSourceValue(
-  //     (current) => replaceInContent(current, replaceThis, uriContent)));
-}
-
 function reset() {
   mutateSourceValue(toEmpty);
   mutateTargetValue(toEmpty);
 };
+
 function copySource() {copy(sourceId);}
 function copyTarget() {copy(targetId);}
 function copy(elemId) {

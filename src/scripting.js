@@ -12,10 +12,10 @@ function script(content) {
 ***************************************************/
 function tokenize(input) {
     if(input.hasOwnProperty('bashfunction')){
-      return { file: buildBashFunction(input.bashfunction, input.function_body), target: buildBashTarget(input.target) };
+      return { file: buildBashFunction(input.bashfunction, input.functionbody), target: buildBashTarget(input.target) };
     }
     if(input.hasOwnProperty('fishfunction')){
-      return { file: buildFishFunction(input.fishfunction, input.function_body), target: buildFishTarget(input.fishfunction, input.target) };
+      return { file: buildFishFunction(input.fishfunction, input.functionbody), target: buildFishTarget(input.fishfunction, input.target) };
     }
     if(input.hasOwnProperty('header')){
       return { comment: '!/bin/sh' };
@@ -23,8 +23,8 @@ function tokenize(input) {
     return input;
 }
 
-function buildBashFunction(fishfunction, function_body) {
-  return `function ${fishfunction}(){\n  ${function_body}\n}`;
+function buildBashFunction(fishfunction, functionbody) {
+  return `function ${fishfunction}(){\n  ${functionbody}\n}`;
 }
 
 function buildBashTarget(target) {
@@ -33,8 +33,8 @@ function buildBashTarget(target) {
     : { ...target };
 }
 
-function buildFishFunction(fishfunction, function_body) {
-  var body = function_body
+function buildFishFunction(fishfunction, functionbody) {
+  var body = functionbody
     .replace(/\{@\}/gim, 'argv')
     .replace(/\{(\d+)\}/gim, 'argv[$1]');
   return `function ${fishfunction}\n  ${body}\nend`;
@@ -53,6 +53,7 @@ function generate(token) {
   if(token.hasOwnProperty('brew')) { return `brew install ${token.brew}`; }
   if(token.hasOwnProperty('cask')) { return `brew cask install ${token.cask}`; }
   if(token.hasOwnProperty('codeext')) { return `code --install-extension ${token.codeext}`; }
+  if(token.hasOwnProperty('command')) { return `${token.command}`; }
   if(token.hasOwnProperty('comment')) { return `#${token.comment}`; }
   if(token.hasOwnProperty('curl')) { return joinNotNull(`curl`, token.args, token.curl,
     generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target)); }

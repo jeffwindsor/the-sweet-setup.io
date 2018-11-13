@@ -17,6 +17,9 @@ describe('Scripting JS', () => {
     test('Comment gives a # comment', () => run(
       { comment: "comment" },"#comment"));
 
+      test('Command is identity', () => run(
+        { command: "what is this" },"what is this"));
+
     test('Echo gives a message', () => run(
       { echo: "Test Section" },"echo 'Test Section'"));
 

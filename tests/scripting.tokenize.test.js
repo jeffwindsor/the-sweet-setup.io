@@ -27,31 +27,31 @@ describe('Scripting JS', () => {
 
     describe('Fish Function', () => {
       test('file type with content in fish function body outputted to fish function in config', () => {
-        let actual = tokenize({fishfunction:"myfunction", function_body:"somestuff"});
+        let actual = tokenize({fishfunction:"myfunction", functionbody:"somestuff"});
         let expected = {file:"function myfunction\n  somestuff\nend", "target": {"operator": "redirect", "path": "~/.config/fish/functions/myfunction.fish"}};
         expect(actual).toEqual(expected);
       });
 
       test('target is transferred if given', () => {
-        let actual = tokenize({fishfunction:"myfunction", function_body:"somestuff", target:{other:"something"} });
+        let actual = tokenize({fishfunction:"myfunction", functionbody:"somestuff", target:{other:"something"} });
         let expected = {file:"function myfunction\n  somestuff\nend", target: {other:"something"}};
         expect(actual).toEqual(expected);
       });
 
       test('target is copied by value not by reference', () => {
-        let original = {fishfunction:"myfunction", function_body:"somestuff", target:{other:"something"} };
+        let original = {fishfunction:"myfunction", functionbody:"somestuff", target:{other:"something"} };
         let actual = tokenize(original);
         original.target.other = "something_else";
         expect(actual.target.other).toEqual("something");
       });
 
       test('args are $argv', () => {
-        let actual = tokenize({fishfunction:"myfunction", function_body:"somestuff with ${@}"});
+        let actual = tokenize({fishfunction:"myfunction", functionbody:"somestuff with ${@}"});
         expect(actual.file).toContain("$argv");
       });
 
       test('numbered args $argv[#]', () => {
-        let actual = tokenize({fishfunction:"myfunction", function_body:"somestuff with ${1} ${2} ${999}"});
+        let actual = tokenize({fishfunction:"myfunction", functionbody:"somestuff with ${1} ${2} ${999}"});
         expect(actual.file).toContain("$argv[1]");
         expect(actual.file).toContain("$argv[2]");
         expect(actual.file).toContain("$argv[999]");
@@ -60,31 +60,31 @@ describe('Scripting JS', () => {
 
     describe('Bash Function', () => {
       test('transformed to file type with content in bash function body appeneded to bashrc', () => {
-        let actual = tokenize({bashfunction:"myfunction", function_body:"somestuff"});
+        let actual = tokenize({bashfunction:"myfunction", functionbody:"somestuff"});
         let expected = {file:"function myfunction(){\n  somestuff\n}", "target": {"operator": "redirectappend", "path": "~/.bashrc"}};
         expect(actual).toEqual(expected);
       });
 
       test('target is transferred if given', () => {
-        let actual = tokenize({bashfunction:"myfunction", function_body:"somestuff", target:{other:"something"} });
+        let actual = tokenize({bashfunction:"myfunction", functionbody:"somestuff", target:{other:"something"} });
         let expected = {file:"function myfunction(){\n  somestuff\n}", target: {other:"something"}};
         expect(actual).toEqual(expected);
       });
 
       test('target is copied, not by reference', () => {
-        let original = {bashfunction:"myfunction", function_body:"somestuff", target:{other:"something"} };
+        let original = {bashfunction:"myfunction", functionbody:"somestuff", target:{other:"something"} };
         let actual = tokenize(original);
         original.target.other = "something_else";
         expect(actual.target.other).toEqual("something");
       });
 
       test('args are ${@}', () => {
-        let actual = tokenize({bashfunction:"myfunction", function_body:"somestuff with ${@}"});
+        let actual = tokenize({bashfunction:"myfunction", functionbody:"somestuff with ${@}"});
         expect(actual.file).toContain("${@}");
       });
 
       test('all numbered are ${#}', () => {
-        let actual = tokenize({bashfunction:"myfunction", function_body:"somestuff with ${1} ${2} ${999}"});
+        let actual = tokenize({bashfunction:"myfunction", functionbody:"somestuff with ${1} ${2} ${999}"});
         expect(actual.file).toContain("${1}");
         expect(actual.file).toContain("${2}");
         expect(actual.file).toContain("${999}");

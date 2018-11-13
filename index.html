@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
   <link rel="stylesheet" href="css/index.css">
   <script src="src/scripting.js"></script>
+  <script src="src/data.js"></script>
   <script src="src/index.js"></script>
 </head>
 
@@ -37,67 +38,65 @@
                 <div class="dropdown-submenu">
                   <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">macos</a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="macos" onclick="onAddLocalUriClick('macos')">base</a></li>
-                    <li><a class="dropdown-item" id="macos_dev" onclick="onAddLocalUriClick('macos_dev')">developer</a></li>
+                    <li><a class="dropdown-item" onclick="onAdd('scriptmacos')">base</a></li>
+                    <li><a class="dropdown-item" onclick="onAdd('scriptmacosdev')">developer</a></li>
                   </ul>
                 </div>
 
                 <div class="dropdown-submenu">
                   <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">manjaro</a>
                   <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" id="manjaro" onclick="onAddLocalUriClick('manjaro')">base</a></li>
-                      <li><a class="dropdown-item" id="manjaro_dev" onclick="onAddLocalUriClick('manjaro_dev')">developer</a></li>
+                      <li><a class="dropdown-item" onclick="onAdd('scriptmanjaro')">base</a></li>
+                      <li><a class="dropdown-item" onclick="onAdd('scriptmanjarodev')">developer</a></li>
                   </ul>
                 </div>
 
-                <div class="dropdown-submenu">
-                  <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">ubuntu</a>
-                  <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" id="ubuntu" onclick="onAddLocalUriClick('ubuntu')">base</a></li>
-                    <li><a class="dropdown-item" id="ubuntu_plex" onclick="onAddLocalUriClick('ubuntu_plex')">plex</a></li>
-                  </ul>
-                </div>
+                <li><a class="dropdown-item" onclick="onAdd('scripti3')">i3</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('scriptgnome3')">gnome3</a></li>
               </ul>
             </div>
 
             <div class="dropdown-submenu">
               <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">favorites</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/install_homebrew')">install homebrew</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/install_yay')">install yay</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/install_yay')">set fish as default</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/add_git_globals')">git globals</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('includes/add_vscode_extensions')">vs code extensions</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('installhomebrew')">install homebrew</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('installyay')">install yay</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('install_yay')">set fish as default</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('addgitglobals')">git globals</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('addvscodeextensions')">vs code extensions</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('adddevaliases')">add all dev aliases</a></li>
                 <li><div class="dropdown-divider"></div></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/shell')">shell aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/pulp')">pulp aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/npm')">npm aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/haskell_stack')">stack aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/git_workflow')">git workflow aliases</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('alias/git')">git aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('aliasesshell')">shell aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('aliasespulp')">pulp aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('aliasesnpm')">npm aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('aliaseshaskellstack')">stack aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('aliasesgitworkflow')">git workflow aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('aliasesgit')">git aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('aliasesyay')">yay aliases</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('aliasesbrew')">brew aliases</a></li>
               </ul>
             </div>
 
             <div class="dropdown-submenu">
               <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#" role="button">commands</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/command')">command</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandcommand')">command</a></li>
                 <li><div class="dropdown-divider"></div></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/pacman')">pacman</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/yay')">yay</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/brew')">brew</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/cask')">cask</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/npm')">npm</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/stack')">stack</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandpacman')">pacman</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandyay')">yay</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandbrew')">brew</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandcask')">cask</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandnpm')">npm</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandstack')">stack</a></li>
                 <li><div class="dropdown-divider"></div></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/comment')">comment</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/echo')">echo</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/variable')">variable</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/code')">code</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/file')">file</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/gitconfig')">git config</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/gitclone')">git clone</a></li>
-                <li><a class="dropdown-item" onclick="onAddLocalUriClick('command/curl')">curl</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandcomment')">comment</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandecho')">echo</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandvariable')">variable</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandcode')">code</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandfile')">file</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandgitconfig')">git config</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandgitclone')">git clone</a></li>
+                <li><a class="dropdown-item" onclick="onAdd('commandcurl')">curl</a></li>
                 
               </ul>
             </div>
@@ -159,7 +158,7 @@
             <input id="jsonUriText" type="text" class="form-control" placeholder="URI" aria-label="Uri">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="onAddRemoteUriClick()" data-dismiss="modal" >Ok</button>
+            <button type="button" class="btn btn-primary" onclick="onAddRemoteUri()" data-dismiss="modal" >Ok</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
           </div>
         </div>

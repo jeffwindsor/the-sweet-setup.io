@@ -1,6 +1,0 @@
-[
-  { "desc":"install brew", "command": "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\";"},
-  { "command": "brew tap caskroom/cask"},
-  { "command": "brew tap caskroom/versions"},
-  { "command": "brew tap homebrew/cask"}
-]
