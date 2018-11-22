@@ -10,12 +10,15 @@ function script(content) {
 /***************************************************
 	TOKENIZE
 ***************************************************/
+var shell = 'fish'
 function tokenize(input) {
-    if(input.hasOwnProperty('bashfunction')){
-      return { file: buildBashFunction(input.bashfunction, input.functionbody), target: buildBashTarget(input.target) };
-    }
-    if(input.hasOwnProperty('fishfunction')){
-      return { file: buildFishFunction(input.fishfunction, input.functionbody), target: buildFishTarget(input.fishfunction, input.target) };
+    if(input.hasOwnProperty('name')){
+      switch(shell){
+        case 'fish':
+          return { file: buildFishFunction(input.name, input.body), target: buildFishTarget(input.name, input.target) };
+        case 'bash':
+          return { file: buildBashFunction(input.name, input.body), target: buildBashTarget(input.target) };
+      } 
     }
     if(input.hasOwnProperty('header')){
       return { comment: '!/bin/sh' };
@@ -23,8 +26,8 @@ function tokenize(input) {
     return input;
 }
 
-function buildBashFunction(fishfunction, functionbody) {
-  return `function ${fishfunction}(){\n  ${functionbody}\n}`;
+function buildBashFunction(name, body) {
+  return `function ${name}(){\n  ${body}\n}`;
 }
 
 function buildBashTarget(target) {
@@ -33,16 +36,16 @@ function buildBashTarget(target) {
     : { ...target };
 }
 
-function buildFishFunction(fishfunction, functionbody) {
-  var body = functionbody
+function buildFishFunction(name, body) {
+  var body = body
     .replace(/\{@\}/gim, 'argv')
     .replace(/\{(\d+)\}/gim, 'argv[$1]');
-  return `function ${fishfunction}\n  ${body}\nend`;
+  return `function ${name}\n  ${body}\nend`;
 }
 
-function buildFishTarget(fishfunction, target) {
+function buildFishTarget(name, target) {
   return (target == null)
-    ? { operator: 'redirect', path: `~/.config/fish/functions/${fishfunction}.fish` }
+    ? { operator: 'redirect', path: `~/.config/fish/functions/${name}.fish` }
     : { ...target };
 }
 
@@ -53,7 +56,7 @@ function generate(token) {
   if(token.hasOwnProperty('brew')) { return `brew install ${token.brew}`; }
   if(token.hasOwnProperty('cask')) { return `brew cask install ${token.cask}`; }
   if(token.hasOwnProperty('codeext')) { return `code --install-extension ${token.codeext}`; }
-  if(token.hasOwnProperty('command')) { return `${token.command}`; }
+  if(token.hasOwnProperty('$')) { return `${token.$}`; }
   if(token.hasOwnProperty('comment')) { return `#${token.comment}`; }
   if(token.hasOwnProperty('curl')) { return joinNotNull(`curl`, token.args, token.curl,
     generateTargetOperator(token.target, generateTargetOperatorSH), generateTargetPath(token.target)); }
