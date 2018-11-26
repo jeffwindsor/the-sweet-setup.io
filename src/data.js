@@ -142,8 +142,7 @@ const installhomebrew = [
   {$:"brew tap caskroom/cask"},
   {$:"brew tap caskroom/versions"},
   {$:"brew tap homebrew/cask"}
-]
-.concat(aliasesbrew);
+  ];
 
 const adddevaliases = aliasesgit
   .concat(aliasesgitworkflow)
