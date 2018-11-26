@@ -32,13 +32,6 @@ const addvscodeextensions = [
     {codeext:"tomoki1207.pdf"},
     {codeext:"wmaurer.change-case"}
   ];
-const installhomebrew = [
-    {$:"ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\";"},
-    {$:"brew tap caskroom/cask"},
-    {$:"brew tap caskroom/versions"},
-    {$:"brew tap homebrew/cask"}
-  ]
-  .concat(aliasesbrew);
 
 const installyay = [
     {gitclone:"https://aur.archlinux.org/yay.git",output_dir:"~/src/yay"},
@@ -144,6 +137,13 @@ const commandstack = {stack:"package"};
 const commandvariable = {variable:"name",value:"variable"};
 const commandyay = {yay:"package"};
 
+const installhomebrew = [
+  {$:"ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\";"},
+  {$:"brew tap caskroom/cask"},
+  {$:"brew tap caskroom/versions"},
+  {$:"brew tap homebrew/cask"}
+]
+.concat(aliasesbrew);
 
 const adddevaliases = aliasesgit
   .concat(aliasesgitworkflow)
