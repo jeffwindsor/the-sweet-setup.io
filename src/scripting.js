@@ -10,7 +10,7 @@ function script(content) {
 /***************************************************
 	TOKENIZE
 ***************************************************/
-var shell = 'bash'
+var shell = 'fish'
 function tokenize(input) {
     if(input.hasOwnProperty('name')){
       switch(shell){
@@ -18,7 +18,7 @@ function tokenize(input) {
           return { file: buildFishFunction(input.name, input.body), target: buildFishTarget(input.name, input.target) };
         case 'bash':
           return { file: buildBashFunction(input.name, input.body), target: buildBashTarget(input.target) };
-      } 
+      }
     }
     if(input.hasOwnProperty('header')){
       return { comment: '!/bin/sh' };
