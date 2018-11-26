@@ -37,7 +37,9 @@ const installhomebrew = [
     {$:"brew tap caskroom/cask"},
     {$:"brew tap caskroom/versions"},
     {$:"brew tap homebrew/cask"}
-  ];
+  ]
+  .concat(aliasesbrew);
+
 const installyay = [
     {gitclone:"https://aur.archlinux.org/yay.git",output_dir:"~/src/yay"},
     {$:"cd ~/src/yay"},
@@ -151,7 +153,6 @@ const adddevaliases = aliasesgit
   .concat(aliasesshell);
 
 const scriptmacos = installhomebrew
-  .concat(aliasesbrew)
   .concat([
     {cask:"fantastical"},
     {cask:"keybase"},

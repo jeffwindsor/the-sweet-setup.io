@@ -10,7 +10,7 @@ function script(content) {
 /***************************************************
 	TOKENIZE
 ***************************************************/
-var shell = 'fish'
+var shell = 'bash'
 function tokenize(input) {
     if(input.hasOwnProperty('name')){
       switch(shell){
