@@ -103,10 +103,10 @@ const aliasespulp = [
   ];
 const aliasesshell = [
     {name:"f",body:"functions ${1}"},
-    {name:"l",body:"builtin ls -CF"},
-    {name:"ll",body:"builtin ls -lhA"},
-    {name:"lll",body:"builtin ls -lhFA | less"},
-    {name:"o",body:"builtin open ."},
+    {name:"l",body:"ls -CF"},
+    {name:"ll",body:"ls -lhA"},
+    {name:"lll",body:"ls -lhFA | less"},
+    {name:"o",body:"open ."},
     {name:"c",body:"code ."},
     {name:"cd..",body:"cd .."},
     {name:"...",body:"cd ../../"},
