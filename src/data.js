@@ -42,10 +42,17 @@ const setfishasdefault = [];
 
 
 const aliasesbrew = [
-    {name:"b",body:"brew install {$1}"},
-    {name:"bi",body:"brew info {$1}"},
-    {name:"bc",body:"brew cask install {$1}"},
-    {name:"bup",body:"brew update; brew upgrade; brew prune; brew cleanup; brew doctor; brew cask upgrade; brew cask doctor;"}
+    {name:"b",body:"brew install ${1}"},
+    {name:"bi",body:"brew info ${1}"},
+    {name:"bc",body:"brew cask install ${1}"},
+    {name:"bl",body:"brew list ${1}"},
+    {name:"bs",body:"brew search ${1}"},     
+    {name:"bup",body:"brew update; brew upgrade; brew prune; brew cleanup; brew doctor; brew cask upgrade; brew cask doctor;"},
+    {name:"m",body:"mas install ${1}"},
+    {name:"mi",body:"mas info ${1}"},
+    {name:"ml",body:"mas list ${1}"},
+    {name:"ms",body:"mas search ${1}"},
+    {name:"mup",body:"mas update; mas upgrade;"}
   ];
 const aliasesgitworkflow = [
     {name:"gpush",body:"git push"},
@@ -115,9 +122,9 @@ const aliasesshell = [
     {name:"evalinsubs",body:"for d in (ls -d */ | cut -f1 -d\"/\")\n    cd $d\n    echo \"==> $d\"\n    eval ${@}\n    cd ..\n  end"}
   ];
 const aliasesyay= [
-    {name:"y",body:"yay -Ss {$1}"},
-    {name:"yi",body:"yay -Si --noconfirm {$1}"},
-    {name:"ys",body:"yay {$1}"},
+    {name:"y",body:"yay -Ss ${1}"},
+    {name:"yi",body:"yay -Si --noconfirm ${1}"},
+    {name:"ys",body:"yay ${1}"},
     {name:"yup",body:"yay -Syu; yay -Yc;"}
   ];
 
